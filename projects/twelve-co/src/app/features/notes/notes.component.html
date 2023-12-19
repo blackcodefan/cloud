@@ -1,0 +1,7 @@
+<div class="notes-container wrap">
+    <ng-container *ngFor="let note of notes">
+        <app-note [body]="note.content" [headerText]="note.title" style="height: 400px;width: fit-content">
+        </app-note>
+    </ng-container>
+
+</div>

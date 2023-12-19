@@ -1,0 +1,53 @@
+::ng-deep .new-label{
+    min-width: 480px;
+}
+
+.new-label-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    .new-label-header-title {
+        font-size: 24px;
+    }
+
+    mat-icon{
+        cursor: pointer;
+    }
+}
+
+.new-label-body {
+
+    ::ng-deep .mat-dialog-container {
+        border-radius: 0 !important;
+    }
+
+
+    ::ng-deep .mat-form-field {
+        border-radius: 0 !important;
+
+    }
+
+    ::ng-deep .mat-form-field-infix {
+        width: 432px !important;
+    }
+
+    .hint-counter {
+        font-size: 0.8rem;
+    }
+}
+
+.new-label-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* .button-save {
+       background-color: rgba(0,0,0,0.12);
+     }*/
+    ::ng-deep .mat-button-wrapper {
+        font-size: 0.8rem !important;
+        color: white;
+    }
+}

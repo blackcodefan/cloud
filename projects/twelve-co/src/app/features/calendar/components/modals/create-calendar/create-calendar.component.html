@@ -1,0 +1,19 @@
+<div [formGroup]="formGroup" class="add-field">
+    <div mat-dialog-content>
+        <h2>Create calendar</h2>
+        <mat-form-field>
+            <input [maxlength]="26" formControlName="calendarName" matInput ngDefaultControl placeholder="Calendar name"
+                   minlength="6"
+                   required
+                   type="text">
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+        <span class="right-align-next-element"></span>
+        <button (click)="closeModal()" class="secondary-btn" mat-button>Dismiss</button>
+        <button (click)="createCalendar()" [disabled]="formGroup.invalid" cdkFocusInitial class="primary-btn"
+                mat-button>Create calendar
+        </button>
+    </div>
+</div>

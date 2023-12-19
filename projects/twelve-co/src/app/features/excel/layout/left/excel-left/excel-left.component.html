@@ -1,0 +1,34 @@
+<input #inputElement (change)="fileChange($event)" accept=".ics" placeholder="Upload file" style="display: none"
+       type="file">
+<input #inputElement (change)="fileChange($event)" accept=".ics" placeholder="Upload file" style="display: none"
+       type="file">
+
+<div class="left-content">
+    <div class="inline-block-container">
+        <div class="left-content-top-buttons">
+            <button class="left-sidebar-button" mat-raised-button
+                    routerLink="/apps">
+                <label>{{"EMAIL.Home" | translate}}</label>
+            </button>
+            <button (click)="dispatchCreateCalendarEvent()" [matTooltipPosition]="'right'" class="left-sidebar-button"
+                    mat-raised-button
+                    matTooltip="Create spreadsheet"
+                    matTooltipClass='mat-tool-tip'>
+                <label>New</label>
+            </button>
+            <button (click)="inputElement.click()" [matTooltipPosition]="'right'" class="left-sidebar-button"
+                    mat-raised-button
+                    matTooltip="Import an existing spreadsheet"
+                    matTooltipClass='mat-tool-tip'>
+                <label>Import</label>
+            </button>
+            <button [matTooltipPosition]="'right'" class="left-sidebar-button" mat-raised-button
+                    matTooltip="Import an existing spreadsheet"
+                    matTooltipClass='mat-tool-tip'
+                    routerLink="apps/excel">
+                <label>Documents</label>
+            </button>
+
+        </div>
+    </div>
+</div>

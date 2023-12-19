@@ -1,0 +1,18 @@
+<div class="new-album-header">
+    <span class="new-album-header-title">New Album</span>
+    <mat-icon mat-dialog-close>close</mat-icon>
+</div>
+<form [formGroup]="newAlbumForm" (ngSubmit)="saveNewAlbum()">
+    <div class="new-album-body">
+        <mat-form-field appearance="standard">
+            <mat-label>Add a album</mat-label>
+            <input matInput
+                   #input minlength="1" maxlength="50" formControlName="album">
+            <mat-hint class="hint-counter" align="end">{{ input.value?.length || 0 }}/50</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="new-album-footer">
+        <button mat-flat-button color="primary" type="submit"
+                [disabled]="input.value?.length==0" >Save</button>
+    </div>
+</form>

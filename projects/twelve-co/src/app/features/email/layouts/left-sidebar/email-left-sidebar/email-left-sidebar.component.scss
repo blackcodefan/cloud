@@ -1,0 +1,79 @@
+.email-left-sidebar-item-active {
+    background-color: #F2F2F2 !important;
+    color: black;
+}
+
+
+.l{
+    margin-top: 36px;
+
+    .li {
+        /*    display: flex;
+            justify-content: space-between;
+            align-items: center;*/
+        width: 240px;
+        height: 36px !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        ::ng-deep .mat-list-item-content{
+            justify-content: space-between;
+        }
+        .i-cc{
+            .ni-c{
+                color: red;
+            }
+            .i-c{
+                margin-left: 8px;
+            }
+        }
+
+        label {
+            font-size: 12px;
+        }
+    }
+
+    .li:hover {
+        background-color: #F2F2F2;
+    }
+}
+
+.la-l{
+    max-height: calc(100vh - 620px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    .li {
+        width: 240px;
+        height: 36px !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        ::ng-deep .mat-list-item-content{
+            justify-content: space-between;
+        }
+        mat-icon{
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+            line-height: inherit;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        label {
+            font-size: 12px;
+        }
+    }
+    .li:hover mat-icon{
+        display: flex;
+    }
+}
+
+
+.ll {
+    max-height: calc(100vh - 570px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .ll1 {
+        //margin-right: 8px;
+    }
+}

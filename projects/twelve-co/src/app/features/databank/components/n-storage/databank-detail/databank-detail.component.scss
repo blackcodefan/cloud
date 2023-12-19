@@ -1,0 +1,293 @@
+._12co-databank-detail {
+    display: flex;
+    gap: 8px;
+    height: calc(100vh - 158px); // this is the key 1 of the scroll x
+    width: calc(100% - 48px); // this is the key 2 of the scroll x
+    margin-left: 24px;
+    margin-right: 24px;
+    overflow: auto;
+
+    mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .folder-item {
+        min-width: 264px;
+        width: 264px;
+        padding: 8px 4px 8px 8px;
+        margin-bottom: 18px;
+        //height: auto;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-backdrop-filter: blur(4px);
+        height: fit-content;
+        max-height: calc(100% - 34px);
+
+        .folder-item-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 16px 0;
+
+            .date {
+                font-family: "Helvetica Neue", sans-serif;
+                font-size: 0.9rem;
+                padding-left: 8px;
+                margin-bottom: 8px;
+            }
+
+            .title-action {
+                padding-left: 8px;
+                padding-right: 8px;
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-start;
+
+                .title {
+                    flex: 1;
+                    overflow: hidden;
+                    word-break: break-all;
+                    max-height: 36px;
+                    line-clamp: 2;
+                    -webkit-line-clamp: 2;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+
+                    span {
+                        font-weight: 500;
+                        text-overflow: ellipsis;
+                        background-color: #FFFF00;
+                    }
+                }
+
+                mat-icon {
+                    color: darkgrey;
+                    margin-left: 8px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .folder-item-body {
+            min-height: 0;
+            overflow-y: auto;
+            flex: 1 1 auto;
+
+            .file-item {
+                //width: 240px;
+                width: auto;
+                padding: 8px 12px;
+                height: auto;
+                min-height: 36px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                margin-bottom: 8px;
+                margin-right: 4px;
+
+                cursor: pointer;
+
+                .file-item-wrapper {
+                    display: flex;
+                    flex-direction: column;;
+                    justify-content: center;
+                    //width: calc(100% - 16px);
+
+                    .file-name {
+                        font-family: "Helvetica Neue", sans-serif;
+                        font-size: 0.9rem;
+                        letter-spacing: 0.05em;
+                        color: #111;
+                        line-height: 18px;
+                        text-overflow: ellipsis;
+                        word-break: break-all;
+                        min-height: 18px;
+                        max-height: 54px;
+                        overflow: hidden;
+                        line-clamp: 3;
+                        -webkit-line-clamp: 3;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                    }
+
+                    .file-extension-wrapper {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .file-extension {
+                            font-family: "Helvetica Neue", sans-serif;
+                            font-size: 0.9rem;
+                            letter-spacing: 0.05em;
+                            color: #111;
+                            font-weight: 500;
+                            line-height: 18px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+
+                        .file-action-icon {
+                            margin-left: 8px;
+                            display: none;
+                        }
+                    }
+
+                    .file-version {
+                        font-family: "Helvetica Neue", sans-serif;
+                        font-size: 0.85rem;
+                        letter-spacing: 0.1em;
+                        line-height: 18px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+
+                &:hover {
+                    background: yellow;
+
+                    .file-item-wrapper .file-extension-wrapper .file-action-icon {
+                        display: block;
+                    }
+                }
+            }
+
+            .image-item {
+                cursor: pointer;
+                margin-bottom: 8px;
+                margin-right: 4px;
+                position: relative;
+
+                .image-item-overlay {
+                    background-color: rgba(0, 0, 0, 0.1);
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    display: none;
+                }
+
+                img {
+                    width: 100%;
+                    height: 180px;
+                    object-fit: cover;
+                }
+
+                span {
+                    display: flex;
+                    height: 180px !important;
+                    overflow: hidden;
+                    word-break: break-all;
+                }
+
+                .image-item-icon {
+                    position: absolute;
+                    width: 24px;
+                    height: 24px;
+                    justify-content: center;
+                    align-items: center;
+                    background: white;
+                    bottom: 16px;
+                    right: 16px;
+                    display: none;
+                }
+
+                &:hover .image-item-icon {
+                    display: flex;
+                }
+
+                &:hover .image-item-overlay {
+                    display: block;
+                }
+            }
+        }
+
+        .folder-item-body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .folder-item-footer {
+            min-height: 32px;
+            padding-left: 8px;
+            padding-right: 8px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            span {
+                font-family: "Helvetica Neue", monospace;
+                font-size: 0.85rem;
+                font-weight: 400;
+                letter-spacing: 0.1em;
+                line-height: 1.3em;
+            }
+        }
+    }
+
+    .new-folder {
+        min-width: 264px;
+        padding: 8px 4px 8px 8px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-backdrop-filter: blur(4px);
+
+        .new-folder-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 16px 0 0;
+
+            .new-folder-label {
+                font-family: "Helvetica Neue", sans-serif;
+                font-size: 0.9rem;
+                letter-spacing: 0.1em;
+                padding-left: 8px;
+                margin-bottom: 8px;
+            }
+
+            .new-folder-title {
+                .new-folder-title-input {
+                    font-family: "Helvetica Neue", sans-serif;
+                    letter-spacing: 0.05em;
+                    font-size: 1rem;
+                    width: 232px;
+                    border-radius: 0;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    height: 16px; //ojo
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
+            }
+        }
+
+        .new-folder-footer {
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 16px;
+
+            .new-folder-cancel {
+                font-family: "Helvetica Neue", sans-serif;
+                font-size: 0.9rem;
+                letter-spacing: 0.1em;
+                cursor: pointer;
+            }
+
+            .new-folder-create {
+                font-family: "Helvetica Neue", sans-serif;
+                cursor: pointer;
+                letter-spacing: 0.1em;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+        }
+    }
+}
+

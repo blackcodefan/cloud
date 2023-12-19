@@ -1,0 +1,21 @@
+<div class="new-group-header">
+    <span class="new-group-header-title">Smart group name</span>
+    <mat-icon mat-dialog-close>close</mat-icon>
+</div>
+<form [formGroup]="newGroupForm" (ngSubmit)="saveNewGroup()">
+    <div class="new-group-body">
+        <mat-form-field appearance="standard"  [hideRequiredMarker]="true">
+            <mat-label>Name it</mat-label>
+            <input matInput
+                   #input minlength="1"
+                   maxlength="50"
+                   formControlName="name"
+                   [placeholder]="'e.g. Friends'">
+            <mat-hint class="hint-counter" align="end">{{ input.value?.length || 0 }}/50</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="new-group-footer">
+        <button mat-flat-button color="primary" type="submit"
+                [disabled]="input.value?.length==0" >Save</button>
+    </div>
+</form>

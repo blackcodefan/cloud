@@ -1,0 +1,12 @@
+<router-outlet></router-outlet>
+<!--<div *ngIf="showUploadWidget" class="upload-NotificationList">-->
+<!--    <app-uploading-data [boxId]="currentFolder?.itemId"></app-uploading-data>-->
+<!--</div>-->
+
+<div class="upload-NotificationList" *ngIf="!uploadQueueEmpty">
+    <app-uploading-data [boxId]="currentFolder?.itemId"></app-uploading-data>
+</div>
+<ngx-spinner [fullScreen]="true" bdColor="rgba(0, 0, 0, 1)" color="#000000" size="medium"
+             type="ball-spin-clockwise-fade">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

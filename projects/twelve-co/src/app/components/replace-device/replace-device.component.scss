@@ -1,0 +1,40 @@
+.p-t-24 {
+    padding-top: 24px;
+}
+
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fg-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.invalid-wrapper {
+    background: rgba(219, 129, 65, 0.5);
+    color: black;
+    height: 32px;
+    width: 256px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.button-class {
+    background: black !important;
+    color: white !important;
+}
+
+
+.button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

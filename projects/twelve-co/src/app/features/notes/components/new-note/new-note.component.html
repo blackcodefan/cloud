@@ -1,0 +1,66 @@
+<input #uploads (change)="handleFileUpload($event)" class="hidden" type="file">
+<div class="note-container">
+    <div class="note-title">
+        <input placeholder="Note title here" type="text" [(ngModel)]="title">
+    </div>
+    <div class="note-body">
+        <div class="box-email-quill-editor">
+            <quill-editor
+                class="quill-editor"
+                (onContentChanged)="contentChange($event)"
+                [sanitize]="true"
+                customToolbarPosition="top">
+                <div quill-editor-toolbar>
+                 <span class="ql-formats">
+                    <button [title]="'Bold'" class="ql-bold" type="button">
+                    </button>
+                    <button [title]="'Italic'" class="ql-italic" type="button">
+                    </button>
+                    <button [title]="'Underline'" class="ql-underline" type="button">
+                    </button>
+                    <button [title]="'Strikethrough'" class="ql-strike" type="button">
+                  </button>
+                </span>
+                <span class="ql-formats">
+                  <select [title]="'quill.font_color' | translate" class="ql-color"></select>
+                  <select [title]="'quill.background_color' | translate" class="ql-background"></select>
+                </span>
+                <span class="ql-formats">
+                    <button [title]="'quill.Subscript' | translate" class="ql-script" type="button" value="sub">
+                    </button>
+                    <button [title]="'quill.Superscript' | translate" class="ql-script" type="button" value="super">
+                    </button>
+                </span>
+                <span class="ql-formats">
+                    <button [title]="'quill.ordered_list' | translate" class="ql-list" type="button" value="ordered">
+                    </button>
+                    <button [title]="'quill.bullet_list' | translate" class="ql-list" type="button" value="bullet">
+                    </button>
+                </span>
+                <span class="ql-formats">
+                    <button [title]="'quill.decrease_indent' | translate" class="ql-indent" type="button" value="-1">
+                    </button>
+                    <button [title]="'quill.increase_indent' | translate" class="ql-indent" type="button" value="+1">
+                    </button>
+                </span>
+            </div>
+            </quill-editor>
+        </div>
+    </div>
+    <div class="note-media-preview">
+        <ng-container *ngIf="previewData.length===0">
+            <span>Upload files</span>
+        </ng-container>
+    </div>
+    <div class="note-save-actions">
+        <button (click)="handleCancel()" mat-icon-button>
+            <mat-icon>exit</mat-icon>
+            <span>Cancel</span>
+        </button>
+        <button (click)="handleSaveNote()" mat-icon-button>
+            <mat-icon>save</mat-icon>
+            <span>Save</span>
+        </button>
+    </div>
+
+</div>

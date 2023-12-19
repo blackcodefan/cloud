@@ -1,0 +1,106 @@
+// box list header css
+.boxList-moveToHeaderActionBar {
+    padding: 24px;
+    height: 48px;
+    color: #ffffff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    .mat-icon {
+        color: rgba(0, 0, 0, 0.26);
+        margin-right: 12px;
+    }
+}
+
+
+// box list body css
+.boxList-moveToBody {
+    height: 198px;
+    max-height: 198px;
+    overflow: auto;
+    // when one of boxes has been selected
+    .active {
+        background: floralwhite;
+        color: black;
+
+        .mat-icon {
+            display: block !important;
+        }
+    }
+
+    // box item css
+    .box-item {
+        padding: 24px;
+        cursor: default;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+        .box-name {
+            width: 480px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .mat-icon {
+            display: none;
+            color: black;
+        }
+
+        .mat-icon:hover {
+            background-color: #d0cfcf
+        }
+    }
+
+    .box-item:not(.active):hover {
+        background-color: #f1f1f1;
+        color: black;
+    }
+
+    .box-item:hover .mat-icon, .box-item.hover .mat-icon {
+        display: block;
+    }
+}
+
+// box list footer css
+.boxList-moveToFooter {
+    //position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    bottom: 0;
+    padding: 24px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+    letter-spacing: 0.05em;
+    width: 100%;
+    color: #ffffff;
+
+    .boxList-moveToFooterButtonList {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mat-button {
+        margin-right: 26px;
+        border-radius: 0;
+    }
+
+    .mat-flat-button {
+        border-radius: 0;
+    }
+
+    .mat-flat-button.mat-button-disabled {
+        color: #a17f7f !important;
+        border: none !important;
+    }
+}

@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Save this message as a draft?</h1>
+<div mat-dialog-content>This message has not been sent and contains unsaved changes. You can save it as a draft to work on later.</div>
+<div mat-dialog-actions class="flex-column-button-list">
+    <button mat-flat-button color="primary" class="save-button" (click)="closeActionModal(true)">Save</button>
+    <button mat-flat-button color="warn" class="unsave-button" (click)="closeActionModal(false)">Don't Save</button>
+    <button mat-stroked-button class="cancel-button" mat-dialog-close>Cancel</button>
+</div>

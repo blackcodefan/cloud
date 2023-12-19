@@ -1,0 +1,23 @@
+<div class="settings-container">
+    <div class="header">
+        <div class="header-left">
+            <div class="app-title">Settings</div>
+        </div>
+        <div class="header-right"></div>
+    </div>
+    <div class="settings-body">
+        <div class="settings-sidebar">
+            <div class="item" *ngFor="let item of listOfSettings"
+                 [routerLink]="item.path"
+                 routerLinkActive="active">
+                {{item.title}}
+            </div>
+        </div>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+

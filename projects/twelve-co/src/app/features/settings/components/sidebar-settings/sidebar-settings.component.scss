@@ -1,0 +1,21 @@
+.settings-list-row {
+  display: flex;
+  flex-direction: row;
+
+  & mat-icon {
+    margin-right: 10px;
+    align-items: center;
+    height: 18px;
+    width: 18px;
+  }
+
+  & .settings-list-label {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+  }
+}
+.active{
+    color: rgba(6, 164, 206, 0.87);
+}

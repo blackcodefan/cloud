@@ -1,0 +1,78 @@
+.device-group-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.device-page-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 50px
+}
+
+.device-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
+    width: 360px
+}
+
+.device-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.device-property {
+    display: flex;
+    flex-direction: row
+}
+
+.device-property-key {
+    width: 40%;
+}
+
+.device-property-value {
+    width: 60%;
+}
+
+
+.otp-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 46px;
+}
+
+.button-wrapper {
+    display: flex;
+    align-self: center;
+    height: fit-content
+}
+
+.small-icon {
+    font-size: 12px;
+}
+
+.add-device-button-wrapper {
+    width: 200px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 36px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    min-width: 100px !important;
+    border-radius: 50px !important;
+
+    label {
+        font-size: 12px;
+    }
+}
+
+.add-device-button-wrapper:hover {
+    background: #eae9e9 !important;
+}
+

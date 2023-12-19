@@ -1,0 +1,21 @@
+<div>
+    <div>
+        Move {{_toMoveDataIDs.length}} item to...
+    </div>
+    <div>
+        <!--box list view-->
+        <ng-container *ngIf="boxListViewMethod">
+            <app-moveto-boxlist (showBoxInfo)="showBoxInfo($event)"
+                                (submitMoveTo)="submitMoveTo($event)"
+            [toMoveItemIds]="_toMoveDataIDs">
+
+            </app-moveto-boxlist>
+        </ng-container>
+        <!--box info view-->
+        <ng-container *ngIf="!boxListViewMethod">
+            <app-moveto-boxinfo (backToBoxList)="showBoxList()" (submitMoveTo)="submitMoveTo($event)"
+                                [selectedBoxID]="selectedBoxID"
+                                [toMoveDataIDs]="_toMoveDataIDs"></app-moveto-boxinfo>
+        </ng-container>
+    </div>
+</div>

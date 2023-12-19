@@ -1,0 +1,215 @@
+<div class="get-info">
+    <!--header of get info-->
+    <div class="get-info-header">
+        <ng-container *ngIf="dataType=='box'">
+            <mat-label class="get-info-label-title">Safe-box info</mat-label>
+        </ng-container>
+        <ng-container *ngIf="dataType=='data'">
+            <mat-label *ngIf="selectedStorage.type === ItemTypeEnum.FOLDER" class="get-info-label-title">Folder info
+            </mat-label>
+            <mat-label *ngIf="selectedStorage.type === ItemTypeEnum.FILE" class="get-info-label-title">File info
+            </mat-label>
+        </ng-container>
+    </div>
+    <!--body of get info-->
+    <div *ngIf="dataType=='data'" class="get-info-body">
+        <!--folder info-->
+        <ng-container *ngIf="selectedStorage.type === ItemTypeEnum.FOLDER">
+            <div class="get-info-item">
+                <div class="get-info-item-field">title</div>
+                <div class="get-info-item-value"> {{selectedStorage.name}}</div>
+            </div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">id ref</div>
+                <div class="get-info-item-value"> {{selectedStorage.itemId}}</div>
+            </div>
+            <div class="h-12"></div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">safe-box</div>
+                <div class="get-info-item-value"> Name and Surname</div>
+            </div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">path</div>
+                <div class="get-info-item-value"> Root or ...untitle folder</div>
+            </div>
+            <div class="h-12"></div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">size</div>
+                <div class="get-info-item-value"> {{selectedStorage.size}}</div>
+            </div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">subfolders</div>
+                <div class="get-info-item-value"> 6</div>
+            </div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">files</div>
+                <div class="get-info-item-value"> 12</div>
+            </div>
+            <div class="h-12"></div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">created by</div>
+                <div class="get-info-item-value"> {{selectedStorage.ownerName}}</div>
+            </div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">modified</div>
+                <div class="get-info-item-value"> {{selectedStorage.lastAccess}}</div>
+            </div>
+            <div class="h-12"></div>
+            <!--
+            <div class="get-info-item">
+                <div class="get-info-item-field">Tags</div>
+                <div class="get-info-item-value">
+                    <ng-container *ngIf="selectedStorage.tagList.length==0">
+                        None
+                    </ng-container>
+                    <ng-container *ngIf="selectedStorage.tagList.length!=0">
+                          <span *ngFor="let tag of selectedStorage.tagList; let i = index">
+                            {{tag.value}}<span *ngIf="i!=selectedStorage.tagList.length-1"> , </span>
+                          </span>
+                    </ng-container>
+                </div>
+            </div>
+            -->
+            <div class="h-12"></div>
+            <div class="get-info-item flex-start">
+                <div class="get-info-item-field pt-13">versions</div>
+                <div class="get-info-item-value white">
+                    {{versions|json}}
+                    <div (contextmenu)="showVersionHandleMenu($event ,version)" *ngFor="let version of versions"
+                         class="get-info-version-item">
+                        <div>{{version.versionNumber === maxVersion ? 'Current version' : version.versionNumber}}</div>
+                        <div>{{version.modifiedDate |date}}</div>
+                        <div>{{version.ownerName}} / {{version.accountName}}</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!--file info-->
+        <ng-container *ngIf="!(selectedStorage.type === ItemTypeEnum.FOLDER)">
+            <div class="get-info-item">
+                <div class="get-info-item-field">title</div>
+                <div class="get-info-item-value"> {{selectedStorage.name}}</div>
+            </div>
+            <div class="h-12"></div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">path</div>
+                <div class="get-info-item-value"> Root or ...untitle folder</div>
+            </div>
+            <div class="h-12"></div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">size</div>
+                <div class="get-info-item-value"> {{selectedStorage.size}}</div>
+            </div>
+            <div class="h-12"></div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">created by</div>
+                <div class="get-info-item-value"> {{selectedStorage.ownerName}}</div>
+            </div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">modified</div>
+                <div class="get-info-item-value"> {{selectedStorage.lastAccess}}</div>
+            </div>
+            <div class="h-12"></div>
+            <div class="get-info-item">
+                <div class="get-info-item-field">Tags</div>
+                <div class="get-info-item-value">
+                    <ng-container *ngIf="selectedStorage.tagList && selectedStorage.tagList.length==0">
+                        None
+                    </ng-container>
+                    <ng-container *ngIf="selectedStorage.tagList?.length!=0">
+                          <span *ngFor="let tag of selectedStorage.tagList; let i = index">
+                            {{tag.name}}<span *ngIf="i!=selectedStorage.tagList.length-1"> , </span>
+                          </span>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="h-12"></div>
+            <div class="get-info-item flex-start">
+                <div class="get-info-item-field pt-13">versions</div>
+                <div class="get-info-item-value black">
+                    <div (contextmenu)="showVersionHandleMenu($event,version)" *ngFor="let version of versions"
+                         class="get-info-version-item black">
+                        <div>{{version.versionNumber === maxVersion ? 'Current version' : version.versionNumber}}</div>
+                        <div>{{version.modifiedDate |date}}</div>
+                        <div>{{version.ownerName}} / {{version.accountName}}</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <!--box information-->
+    <div *ngIf="dataType=='box'" class="get-info-body">
+        <div class="get-info-item">
+            <div class="get-info-item-field">title</div>
+            <div class="get-info-item-value"> {{selectedStorage.name}}</div>
+        </div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">id ref</div>
+            <div class="get-info-item-value"> {{selectedStorage.itemId}}</div>
+        </div>
+        <div class="h-12"></div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">owner</div>
+            <div class="get-info-item-value"> {{selectedStorage.ownerName}}</div>
+        </div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">account</div>
+            <div class="get-info-item-value"> Name of the account</div>
+        </div>
+        <div class="h-12"></div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">members</div>
+            <div class="get-info-item-value"> 0</div>
+        </div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">actions</div>
+            <div class="get-info-item-value"> 23</div>
+        </div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">starred</div>
+            <div class="get-info-item-value"> {{selectedStorage.starred ? 'yes' : 'no'}}</div>
+        </div>
+        <div class="h-12"></div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">size</div>
+            <div class="get-info-item-value"> {{selectedStorage.size}}</div>
+        </div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">folders</div>
+            <div class="get-info-item-value"> 6</div>
+        </div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">files</div>
+            <div class="get-info-item-value"> 12</div>
+        </div>
+        <div class="h-12"></div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">created</div>
+            <!--            <div class="get-info-item-value"> {{selectedStorage.uploadDate}}</div>-->
+        </div>
+        <div class="get-info-item">
+            <div class="get-info-item-field">modified</div>
+            <!--            <div class="get-info-item-value"> {{selectedStorage.uploadDate}}</div>-->
+        </div>
+        <div class="h-12"></div>
+        <div class="get-info-item flex-start">
+            <div class="get-info-item-field pt-3">description</div>
+            <div class="get-info-item-value"> {{description}}</div>
+        </div>
+    </div>
+
+    <!--footer of get info-->
+</div>
+
+<div #VersionHandleTrigger="matMenuTrigger"
+     [matMenuTriggerFor]="menu"
+     [style.left]="contextPosition.x"
+     [style.top]="contextPosition.y"
+     class="fixed-position"
+></div>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>Upload version</button>
+    <button (click)="downloadFile()" mat-menu-item>Download version</button>
+    <button (click)="removeVersion()" mat-menu-item>Remove version</button>
+</mat-menu>

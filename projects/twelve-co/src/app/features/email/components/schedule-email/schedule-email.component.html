@@ -1,0 +1,24 @@
+<div class="schedule-email-container">
+    <h2 class="schedule-email-header">Pick date & time</h2>
+    <div class="schedule-email-body">
+        <div class="schedule-email-date-picker">
+            <mat-calendar [(selected)]="selected" [minDate]="today"></mat-calendar>
+        </div>
+        <div class="schedule-email-date-time-renderer">
+            <div class="schedule-email-date-renderer">
+                <input [readOnly]="true" [value]="selected | date:'MMM d, YYYY'">
+            </div>
+            <div class="schedule-email-time-renderer">
+                <input [ngxTimepicker]="picker" [readOnly]="true" [value]="(today | date: 'HH:mm')|| today.toDateString()">
+                <ngx-material-timepicker #picker></ngx-material-timepicker>
+            </div>
+        </div>
+    </div>
+    <div class="schedule-email-footer">
+        <button (click)="close_Modal()" mat-button>Cancel</button>
+        <button color="primary" mat-flat-button>Schedule send</button>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,75 @@
+/*remove default padding of material dialog container*/
+::ng-deep .manage-tags-popup mat-dialog-container {
+  padding: 0;
+}
+
+// manage tags css
+.manage-tags {
+  width: 500px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+  /*manage tags header css*/
+  .manage-tags-header {
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /*manage tags body css*/
+  .manage-tags-body {
+    padding: 24px 0;
+    .tag-item{
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 30px;
+      cursor: pointer;
+    }
+    .tag-item:hover{
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  /*manage tags footer css*/
+  .manage-tags-footer {
+    padding: 24px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(0, 0, 0, 0.87);
+    .mat-flat-button{
+      border-radius: 0;
+    }
+    .mat-flat-button:not(.mat-button-disabled){
+      background: #F3A842;
+      color: rgba(0, 0, 0, 0.87);
+    }
+    .manage-tags-footer-btnList{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .mat-button{
+        border-radius: 0;
+        margin-right: 16px;
+      }
+      .mat-flat-button:not(.mat-button-disabled){
+        background-color:#F9D84D!important;
+      }
+    }
+  }
+
+}
+
+.fixed-position{
+  position: fixed;
+  visibility: hidden;
+}
+
+.mat-menu-item {
+  font-family: Inconsolata !important;
+  height: 30px !important;
+  line-height: 30px !important;
+}
+

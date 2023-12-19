@@ -1,0 +1,47 @@
+.al-l{
+  margin-top: 36px;
+  max-height: calc(100vh - 392px);
+  padding-top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .al-li{
+    width: 240px;
+    height: 36px !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    ::ng-deep .mat-list-item-content{
+      justify-content: space-between;
+    }
+    .al-item-title{
+      font-size: 12px;
+      white-space: nowrap;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    .al-item-detail{
+      display: flex;
+      gap: 8px;
+      span{
+        font-size: 12px;
+      }
+    }
+    mat-icon{
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      line-height: inherit;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .al-li-active{
+    background-color: #F2F2F2 !important;
+  }
+  .al-li:hover mat-icon{
+    display: flex;
+  }
+}

@@ -1,0 +1,22 @@
+.alo-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    width: 100%;
+
+    .alo-header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .alo-header-right {
+        padding-right: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+}

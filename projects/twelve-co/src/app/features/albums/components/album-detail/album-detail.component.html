@@ -1,0 +1,12 @@
+<div class="album-image-container">
+    <div class="album-container-close">
+        <mat-icon (click)="close_modal()" class="material-icons-outlined">cancel</mat-icon>
+    </div>
+    <div *ngIf="this.currentIndex > 0" class="navigate_before">
+        <mat-icon (click)="prevImage(mediaItem.id)" class="material-icons-outlined">navigate_before</mat-icon>
+    </div>
+    <div *ngIf="this.currentIndex < this.mediaList.length-1" class="navigate_next">
+        <mat-icon (click)="nextImage(mediaItem.id)" class="material-icons-outlined">navigate_next</mat-icon>
+    </div>
+    <img [src]="mediaItem.mediaUrl" class="album-fit-image">
+</div>

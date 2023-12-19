@@ -1,0 +1,17 @@
+<div class="media-wrapper">
+  <!--  <video #videoElement [autoplay]="true"></video>-->
+
+  <ng-template #audioControl>
+    <video style="height: 100%;width: 100%" controls [src]="mediaData" autoplay type="video/mpegURL"
+           *ngIf="extension.toLowerCase()==='m3u' || extension.toLowerCase()==='mov';else regularVideo">
+    </video>
+    <ng-template #regularVideo>
+      <video style="height: 100%;width: 100%" controls [src]="mediaData" autoplay type="video/mp4"></video>
+    </ng-template>
+  </ng-template>
+  <div *ngIf="isAudio;else audioControl" class="audio-container">
+    <audio style="width: 100%" controls [src]="mediaData" autoplay type="auto/mpeg"
+    ></audio>
+  </div>
+
+</div>

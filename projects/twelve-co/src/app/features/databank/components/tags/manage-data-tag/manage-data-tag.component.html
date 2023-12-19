@@ -1,0 +1,33 @@
+<div class="manage-data-tag">
+    <div class="manage-data-tag-header">
+        <mat-label>Managing tags</mat-label>
+    </div>
+    <div class="manage-data-tag-body">
+        <div *ngFor="let tag of tagList;let i=index" class="tag-item">
+            <mat-checkbox (change)="selectTag($event, tag.id, i)" [checked]="confirmSelectedTag(tag.id)"
+                          [disabled]=disabled(tag)>{{tag.internal ? (('tags.' + tag.tagCode)|translate) : tag.name}}</mat-checkbox>
+        </div>
+    </div>
+    <div class="manage-data-tag-footer">
+        <button (click)="newTag()" class="new-tag-btn" mat-button>New tag</button>
+        <div class="manage-data-tag-footer-btnList">
+            <button (click)="_matDialogRef.close()" cdkFocusInitial mat-button>Cancel</button>
+            <button (click)="saveTags()" mat-button>Save</button>
+        </div>
+    </div>
+</div>
+
+<div #tagActionMenuTrigger="matMenuTrigger"
+     [matMenuTriggerFor]="tagActionMenu"
+     [style.left]="contextPosition.x"
+     [style.top]="contextPosition.y"
+     class="fixed-position"
+></div>
+
+<mat-menu #tagActionMenu="matMenu" [hasBackdrop]="false" [overlapTrigger]="false">
+    <ng-template matMenuContent>
+        <div (click)="renameTag()" mat-menu-item>Rename</div>
+        <div (click)="removeTag()" mat-menu-item>Remove</div>
+    </ng-template>
+</mat-menu>
+

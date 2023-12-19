@@ -1,0 +1,32 @@
+<div class="popup">
+  <!--new tag header-->
+
+  <div class="popup-header">
+    <ng-container *ngIf="actionType=='create'">
+      <mat-label class="popup-label-title">{{'tags.MODAL_HEADER'|translate}}</mat-label>
+    </ng-container>
+    <ng-container *ngIf="actionType=='rename'">
+      <mat-label class="popup-label-title">{{'tags.RENAME_TAG'|translate}}</mat-label>
+    </ng-container>
+  </div>
+  <!--new tag body-->
+  <div class="popup-body">
+    <mat-form-field>
+      <input matInput #input [formControl]="inputFormControl" (keydown.enter)=saveNewTag()
+             maxlength="20" placeholder="" id="txt" type="text"/>
+      <mat-hint class="popup-counter">{{ input.value?.length || 0 }}/20</mat-hint>
+    </mat-form-field>
+  </div>
+  <!--new tag footer-->
+  <div class="popup-footer" [ngStyle]="{'justify-content': 'flex-end'}">
+    <div class="popup-footer-btnList">
+      <button (click)="closeModal()" mat-button>
+        {{'tags.TAG_CANCEL'|translate}}
+      </button>
+      <button type="submit" mat-button [disabled]="!inputFormControl.valid"
+              (click)="saveNewTag()">
+        {{'tags.TAG_SAVE'|translate}}
+      </button>
+    </div>
+  </div>
+</div>

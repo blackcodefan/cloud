@@ -1,0 +1,41 @@
+<input #uploadFileInput (change)="uploadAvatar($event)" accept="image/*" hidden type="file">
+<div class="page-wrapper">
+    <div [formGroup]="formGroup" class="account-details-wrapper">
+        <img (click)="uploadFileInput.click()" [matTooltipPosition]="'right'" [src]="selectedAccountImage"
+             class="user-avatar"
+             matTooltip="Change avatar"/>
+        <mat-form-field class="first-form">
+            <mat-label>First name</mat-label>
+            <input appearance="fill" formControlName="firstName" matInput type="text">
+        </mat-form-field>
+        <mat-form-field class="form-width">
+            <mat-label>Last name</mat-label>
+            <input appearance="fill" formControlName="lastName" matInput type="text">
+        </mat-form-field>
+        <mat-form-field class="form-width">
+            <mat-label>email</mat-label>
+            <input appearance="fill" formControlName="email" matInput readonly type="email">
+        </mat-form-field>
+        <mat-form-field class="form-width">
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country">
+                <mat-option *ngFor="let country of countries" [value]="country.id">{{country.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-width">
+            <mat-label>Timezone</mat-label>
+            <mat-select formControlName="timezone">
+                <mat-option *ngFor="let timezone of timezones"
+                            [value]="timezone.text">{{timezone.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-width">
+            <mat-label>Language</mat-label>
+            <mat-select formControlName="language">
+                <mat-option *ngFor="let language of languages"
+                            [value]="language.code">{{language.description}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button color="primary" mat-button type="submit" (click)="saveChanges()">Save changes</button>
+    </div>
+</div>

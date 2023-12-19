@@ -1,0 +1,47 @@
+.note-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: white !important;
+
+    .note-title {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+
+        input {
+            margin-top: 4px;
+            width: 97%;
+        }
+    }
+
+    .note-media-preview {
+        display: flex;
+        margin-top: auto;
+    }
+
+    .note-save-actions {
+        display: flex;
+        height: 60px !important;
+        justify-content: space-around;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.box-email-quill-editor {
+    flex: 0 1 auto;
+}
+
+.quill-editor {
+    max-height: 360px;
+    overflow-y: scroll;
+}
+
+.box-email-quill-editor {
+    max-height: 360px !important;
+    overflow-y: scroll;
+}

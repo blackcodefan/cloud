@@ -1,0 +1,32 @@
+<div class="notification">
+  <!-- notification header-->
+  <div class="notification-header">
+    <mat-label>System alert</mat-label>
+  </div>
+  <!--notification body-->
+  <div class="notification-body">
+    <div class="notification-item">
+      <div class="notification-item-content">
+        <div class="notification-img">
+          <img src="./assets/images/avatars/andrey-zvyagintsev-byfNhh81CWU-unsplash.jpg">
+        </div>
+        <div class="notification-content">
+          On 21/12/2021 at 14:32, Jaime del Burgo from the account jaime.delburgo123 has invited you to access the
+          safe-box “Maximum of 50 characters.”
+        </div>
+      </div>
+
+      <!--notification item footer-->
+      <div class="notification-item-footer">
+        <div class="notification-footer-btnList">
+          <button mat-flat-button class="new-tag-btn">Decide later</button>
+          <button (click)="closeModal()" mat-button>{{ "Cancel" | translate }}</button>
+          <button mat-flat-button type="submit">
+            {{ "Save" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

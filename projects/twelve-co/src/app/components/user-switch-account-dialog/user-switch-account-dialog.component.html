@@ -1,0 +1,27 @@
+<mat-dialog-content class="content-wrapper">
+  <span>YOUR ACCOUNTS IN 12CO</span>
+  <div class="subscriber-container">
+    <div *ngFor="let user of users">
+      <div class="subscriber-details">
+        <span>{{user.email}}</span>
+        <span>{{user.firstName}} {{user.lastName}}</span>
+      </div>
+      <div *ngFor="let account of accounts" class="sub-accounts-wrapper">
+        <ngx-avatar [src]="'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_960_720.png'"
+                    class="avatar-img"></ngx-avatar>
+        <div class="account-details-wrapper">
+          <span>{{account?.accountName}}</span>
+          <span>Personal Account - Default</span>
+
+        </div>
+        <div class="selected"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-wrapper">
+    <button mat-stroked-button class="full-width">Login from another email</button>
+    <button mat-stroked-button class="full-width">Add another account</button>
+    <button mat-raised-button class="full-width" color="primary" (click)="handleSignOut()">Sign out</button>
+  </div>
+</mat-dialog-content>

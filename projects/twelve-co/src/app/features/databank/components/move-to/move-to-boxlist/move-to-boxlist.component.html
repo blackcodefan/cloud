@@ -1,0 +1,27 @@
+<!--box list move to header action bar-->
+<div class="boxList-moveToHeaderActionBar">
+    All boxes
+</div>
+<!--box list move to body-->
+<div class="boxList-moveToBody">
+    <ng-container *ngIf="loading$">
+        <ng-container *ngFor="let box of boxList; let i=index">
+            <div (click)="selectBox(box)" (dblclick)="goToBoxInfo(box.itemId)"
+                 class="box-item {{selectedDestinationBox?.itemId==box.itemId?'active':''}}">
+                <div class="box-name">{{box.name}}</div>
+                <mat-icon>chevron_right</mat-icon>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>
+<!--box list move to footer-->
+<div class="boxList-moveToFooter">
+    <div class="boxList-moveToFooterButtonList">
+        <button (click)="closeModal()" mat-button>Cancel</button>
+        <button (click)="submitMoveToData()"
+                [disabled]="selectedDestinationBox === null || selectedDestinationBox === undefined"
+                class="float-right" color="accent" mat-flat-button>
+            Move here
+        </button>
+    </div>
+</div>

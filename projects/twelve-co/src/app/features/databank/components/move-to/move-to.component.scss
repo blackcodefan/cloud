@@ -1,0 +1,26 @@
+
+.move-to-header {
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 20px;
+    color: white;
+}
+
+.move-to-popup > * {
+    color: white !important;
+}
+
+// customize default mat dialog css
+::ng-deep .move-to-css .mat-dialog-container {
+    background-color: black !important;
+    backdrop-filter: blur(8px) !important;
+    padding: 0 !important;
+    position: relative;
+}
+
+::ng-deep .move-to-css .mat-dialog-content {
+    margin: 0 !important;
+}
+

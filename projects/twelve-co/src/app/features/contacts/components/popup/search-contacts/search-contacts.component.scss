@@ -1,0 +1,40 @@
+::ng-deep .search-contacts-popup .mat-dialog-container {
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  border: 1px solid #FFFFFF;
+}
+
+.search-contact {
+  background: rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px);
+  height: 48px;
+
+  .search-contact-input {
+    margin-right: 8px;
+
+    input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      width: 350px;
+    }
+
+    ::placeholder {
+      color: white;
+      opacity: 1;
+      text-indent: 2px;
+    }
+  }
+
+  .search-contact-action {
+    color: #ffffff;
+    cursor: pointer;
+  }
+}

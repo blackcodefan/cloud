@@ -1,0 +1,165 @@
+.album-list-container {
+  .album-list-header {
+    display: flex;
+    gap: 12px;
+
+    .album-list-header-dummy-button {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      height: 36px !important;
+      width: 36px !important;
+      min-width: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      border-radius: 100px !important;
+
+      mat-icon {
+        display: flex;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+        color: #021b41;
+      }
+    }
+  }
+
+  .album-list-search {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+
+    .album-list-search-container {
+      font-size: .85rem;
+      width: 100%;
+      background-color: transparent;
+      border: none;
+      outline: none;
+    }
+
+    .album-list-search-container::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+      padding-left: 1px;
+    }
+
+    mat-icon {
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin-right: 24px;
+    }
+  }
+
+  .album-list-body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 272px);
+    width: calc(100vw - 532px);
+    /*border: 2px dashed #009578;*/
+    position: relative;
+    margin-top: 12px;
+
+    .album-list {
+      -webkit-column-count: 2;
+      -webkit-column-gap: 0;
+      -moz-column-count: 2;
+      -moz-column-gap: 0;
+      column-count: 2;
+      column-gap: 0;
+
+      .album-grid-image-item {
+        cursor: pointer;
+        text-align: center;
+
+        img {
+          /*width: 340px;*/
+          width: 100%;
+          display: block;
+          /*height: auto !important;*/
+          /*  margin-right: 16px;
+            margin-bottom: 16px;*/
+        }
+      }
+
+      .album-grid-video-item {
+        width: 340px;
+        height: auto;
+        background-size: cover;
+        background-position: center;
+        float: left;
+        margin-right: 16px;
+        margin-bottom: 16px;
+        cursor: pointer;
+      }
+    }
+
+    .album-list-empty {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #cccccc;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+
+@media only screen and (min-width: 1540px) {
+  .album-list-container .album-list-body {
+    /*   width: 1074px;*/
+    .album-list {
+      -moz-column-count: 3;
+      -webkit-column-count: 3;
+      column-count: 3;
+    }
+  }
+}
+
+@media only screen and (max-width: 1162px) {
+  .album-list-container .album-list-body {
+    /*width: 356px;*/
+
+    .album-list {
+      -moz-column-count: 1;
+      -webkit-column-count: 1;
+      column-count: 1;
+    }
+  }
+}
+
+#people {
+  display: flex;
+  -webkit-column-count: 4; /* Chrome, Safari, Opera */
+  -moz-column-count: 4; /* Firefox */
+  column-count: 4;
+  -webkit-column-gap: .5em;
+  -moz-column-gap: .5em;
+  column-gap: .5em;
+  padding-bottom: 2px;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.keeptogether {
+  display: inline-block;
+  width: 100%;
+}
+
+.class1 {
+  color: red;
+}
+
+// Customizing mat-menu for Attachment
+
+::ng-deep .album-right-menu {
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+  border-radius: 0;
+}

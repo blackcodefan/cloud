@@ -1,0 +1,42 @@
+<div class="databank-detail-container" *ngIf="loading">
+    <div class="databank-detail-left">
+        <button class="back-button tooltip" (click)="goBack()">
+            <span class="tooltip-text left-tooltip">{{'DATABANK.ALL_SECURITY_BOXES' | translate}}</span>
+            <mat-icon class="material-icons-round">chevron_left</mat-icon>
+        </button>
+        <div class="app-title" [attr.id]="'email-app-title'">{{currentBox.name}}</div>
+    </div>
+    <div class="databank-detail-right">
+        <button><mat-icon class="material-icons">search</mat-icon></button>
+        <button [matMenuTriggerFor]="filterFolders" class="tooltip">
+            <span class="tooltip-text">Filter list</span>
+            <mat-icon class="material-icons">filter_list</mat-icon>
+        </button>
+        <mat-menu #filterFolders="matMenu"
+                  xPosition="before"
+                  yPosition="below"
+                  class="add-contact-menu">
+            <button mat-menu-item>
+                Last date opened
+            </button>
+            <button mat-menu-item>
+                Date created
+            </button>
+            <button mat-menu-item>
+                Name
+            </button>
+            <button mat-menu-item>
+                Number of files
+            </button>
+            <button mat-menu-item>
+                Size
+            </button>
+        </mat-menu>
+        <div class="add-new-button-container" (click)="newFolder()">
+            <button class="add-new-button">
+                <mat-icon class="material-icons">add</mat-icon>
+            </button>
+            <div class="add-label-button">Folder</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<input #inputElement (change)="fileChange($event)" accept=".ics" placeholder="Upload file" style="display: none"
+       type="file">
+
+<div class="left-content">
+    <div class="inline-block-container">
+        <div class="left-content-top-buttons">
+            <button class="left-sidebar-button" mat-raised-button
+                    routerLink="/apps">
+                <label>{{"EMAIL.Home" | translate}}</label>
+            </button>
+            <button (click)="dispatchCreateCalendarEvent()" [matTooltipPosition]="'right'" class="left-sidebar-button"
+                    mat-raised-button
+                    matTooltip="Create calendar"
+                    matTooltipClass='mat-tool-tip'>
+                <label>Create calendar</label>
+            </button>
+            <button [matMenuTriggerFor]="selectCalendarMenu"
+                    [matTooltipPosition]="'right'"
+                    class="left-sidebar-button" mat-raised-button
+                    matTooltip="Select a calendar"
+                    matTooltipClass='mat-tool-tip'>
+                <label>Select calendar</label>
+            </button>
+            <button (click)="inputElement.click()" [matTooltipPosition]="'right'" class="left-sidebar-button"
+                    mat-raised-button
+                    matTooltip="Import an existing calendar"
+                    matTooltipClass='mat-tool-tip'>
+                <label>Upload Calendar</label>
+            </button>
+
+        </div>
+    </div>
+</div>
+<mat-menu #selectCalendarMenu>
+    <div *ngFor="let cal of calendars"
+         [ngClass]="{'default-cal-class': cal.default}"
+         class="calendar-element"
+         mat-menu-item
+         style="background-color: {{cal.color?cal.color:''}}">
+        <div (click)="handleSelectCalendar(cal.id)" *ngIf="!selectedCalendarId;else someCalendarSelected"
+             class="selected">
+            <mat-icon>check</mat-icon>
+        </div>
+        <ng-template #someCalendarSelected>
+            <div (click)="handleSelectCalendar(cal.id)" class="selected">
+                <mat-icon *ngIf="selectedCalendarId===cal.id">check</mat-icon>
+            </div>
+        </ng-template>
+
+        <span class="dot"></span>
+        <span class="cal-name-wrapper">{{cal.name}}</span>
+    </div>
+</mat-menu>

@@ -1,0 +1,24 @@
+<div class="databank-app" [ngStyle]="{visibility: loading?'visible':'hidden'}">
+    <div class="databank-app-container" (click)="setIsPreview(false)"
+         [ngStyle]="{width: isBoxPreview?'calc(100vw - 600px)':'calc(100vw - 188px)', marginRight: isBoxPreview?'var(--generalPadding)':0}">
+        <!--    <div class="databank-app-container" (click)="setIsPreview(false)" [class.side-container]="isBoxPreview">-->
+        <div class="databank-app-header" [attr.id]="'_12co-data-bank-header'"></div>
+        <div class="databank-app-body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div class="databank-app-preview" *ngIf="isBoxPreview">
+        <ng-container *ngIf="currentPreviewType=='box'">
+            <app-databank-preview-box></app-databank-preview-box>
+        </ng-container>
+        <ng-container *ngIf="currentPreviewType=='folder'">
+            <app-databank-preview-folder></app-databank-preview-folder>
+        </ng-container>
+
+        <ng-container *ngIf="currentPreviewType=='file'">
+            <app-databank-preview-file></app-databank-preview-file>
+        </ng-container>
+    </div>
+</div>
+
+

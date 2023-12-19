@@ -1,0 +1,100 @@
+<div class="_12co-contacts">
+    <div class="_12co-contacts-header">
+        <div class="app-title">Contacts</div>
+        <div class="_12co-contacts-header-action-buttons">
+            <button>
+                <mat-icon class="material-icons-round">search</mat-icon>
+            </button>
+            <button [mat-menu-trigger-for]="sortContacts">
+                <mat-icon class="material-icons-round">sort</mat-icon>
+            </button>
+            <mat-menu #sortContacts="matMenu"
+                      xPosition="before"
+                      yPosition="below"
+                      class="add-contact-menu">
+                <button mat-menu-item (click)="sortKey='LastName'">
+                    <span class="selected-sort-key" [class.sort-key-active]="sortKey=='LastName'"></span>
+                    Last name
+                </button>
+                <button mat-menu-item (click)="sortKey='FirstName'">
+                    <span class="selected-sort-key" [class.sort-key-active]="sortKey=='FirstName'"></span>
+                    First name
+                </button>
+                <button mat-menu-item (click)="sortKey='Ascendant'">
+                    <span class="selected-sort-key" [class.sort-key-active]="sortKey=='Ascendant'"></span>
+                    Ascendant
+                </button>
+                <button mat-menu-item (click)="sortKey='Descendant'">
+                    <span class="selected-sort-key" [class.sort-key-active]="sortKey=='Descendant'"></span>
+                    Descendent
+                </button>
+            </mat-menu>
+
+
+            <button>
+                <mat-icon class="material-icons-round">upload</mat-icon>
+            </button>
+            <button [mat-menu-trigger-for]="addContactGroup">
+                <mat-icon class="material-icons-round">add</mat-icon>
+            </button>
+            <mat-menu #addContactGroup="matMenu"
+                      xPosition="before"
+                      yPosition="below"
+                      class="add-contact-menu">
+                <button (click)="newContact()" mat-menu-item>
+                    New Contact
+                </button>
+                <button (click)="newGroup()" mat-menu-item>
+                    New Group
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+    <div class="_12co-contacts-body">
+        <div class="my-contacts-list">
+            <div class="my-contacts-list-header">
+                <span>My contacts</span>
+                <span>{{contactsInGroup.contacts}}</span>
+                <span>Invite all</span>
+            </div>
+            <div class="my-contacts-list-body">
+                <div class="my-contacts-list-item" *ngFor="let contact of contacts| contactFilterInternal:false">
+                    <span>{{contact.firstName}} {{contact.lastName}}</span>
+                    <ng-container *ngFor="let email of contact|contactProperties:ContactItemInformationCategory.EMAIL">
+                        <span>{{email}}</span>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+        <div class="my-12co-contacts-list">
+            <div class="my-12co-contacts-list-header">
+                <span>In 12co</span>
+                <span>{{contactsInGroup.inTwelveCo}}</span>
+            </div>
+            <div class="my-12co-contacts-list-body">
+                <div class="my-12co-contacts-list-item"
+                     *ngFor="let contact of contacts | contactFilterInternal; let idx = index">
+                    <div class="my-12co-contacts-list-item-avatar">
+                        <!--                        <img [src]="contact.picture + '/' + idx">-->
+                    </div>
+                    <div class="my-12co-contacts-list-item-content">
+                        <span>{{contact.firstName}} {{contact.lastName}}</span>
+                        <ng-container
+                            *ngFor="let email of contact|contactProperties:ContactItemInformationCategory.EMAIL">
+                            <span>{{email}}</span>
+                        </ng-container>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="block-contacts-list">
+            <div class="block-contacts-list-header">
+                <span>Blocked</span>
+                <span>1</span>
+            </div>
+        </div>
+
+    </div>
+</div>

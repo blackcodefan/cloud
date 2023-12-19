@@ -1,0 +1,12 @@
+
+<div *ngIf="qrData" class="content-wrapper">
+    <span *ngIf="tokenInvalid" class="invalid-wrapper">Token is invalid</span>
+    <ngx-qrcode-styling [backgroundOptions]="{ color: 'rgba(255,0,0,0)' }"
+        [data]="qrData.data" [height]="300"
+        [shape]="'circle'" [width]="300">
+    </ngx-qrcode-styling>
+    <div class="button-wrapper">
+        <button (click)="close()" class="button-class" mat-flat-button>Close
+        </button>
+    </div>
+</div>

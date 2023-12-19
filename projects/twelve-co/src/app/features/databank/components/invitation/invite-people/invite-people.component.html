@@ -1,0 +1,162 @@
+<!--invite header-->
+<div class="invite-popup">
+    <div class="invite-header">
+        <span>Invitation</span>
+    </div>
+
+    <!--invite body-->
+    <div class="invite-body">
+
+        <!-- Invitees -->
+        <div class="mb-8">
+            Invitees. You can insert a name, an email or an alias. For multiple invitations you can go to Contacts,
+            create a
+            group and invite its member from there.
+        </div>
+        <div class="invite-item mb-48">
+            <div class="invite-item-content">
+                <mat-form-field appearance="fill"
+                                class="relative {{invitationList.length>0?'shared_members_mat_form':''}}">
+                    <mat-chip-list #chipList aria-label="Contacts selection">
+                        <div class="chip-list">
+                            <ng-container *ngFor="let member of invitationList">
+                                <mat-chip (removed)="remove(member.id)"
+                                          [removable]="removable"
+                                          [selectable]="selectable"
+                                          [selected]="member.selected"
+                                          color="accent">
+                                    <div>
+                                        {{member.name || ''}}
+                                    </div>
+                                    <button matChipRemove>
+                                        <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip>
+                            </ng-container>
+                        </div>
+                        <input #memberInput
+                               (focusin)="memberInputFocusIn()"
+                               (focusout)="memberInputFocusOut()"
+                               (keyup)="setInputValue($event)"
+                               (matChipInputTokenEnd)="add($event)"
+                               [formControl]="memberCtrl"
+                               [matAutocomplete]="auto"
+                               [matChipInputFor]="chipList"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               placeholder="{{placeHolder}}">
+                    </mat-chip-list>
+                </mat-form-field>
+                <ng-container *ngIf="emailInvalid">
+                    <div class="invalid-field">Email is invalid</div>
+                </ng-container>
+                <ng-container *ngIf="emailDuplicated">
+                    <div class="invalid-field">Email is already taken</div>
+                </ng-container>
+                <div class="mat-counter-hint">{{invitationList.length || 0}} invitees</div>
+                <mat-autocomplete #auto=matAutocomplete (optionSelected)="selected($event)"
+                                  class="mat-autocomplete-panel">
+                    <mat-option *ngFor="let member of filteredMembers " [value]="member.id">
+                        <div class="member-item">
+                            <div class="member-img">
+                                <img [src]="member.avatar" alt="avatar">
+                            </div>
+                            <div class="member-info">
+                                <div class="lineHeight20 m-b-0">{{member.firstName}} {{member.lastName}}</div>
+                                <div class="lineHeight20">{{member.accountName}}</div>
+                            </div>
+                        </div>
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+        </div>
+        <!-- Permissions -->
+        <div class="mb-8">
+            Permissions. You can change permissions anytime later for any member.
+        </div>
+
+        <div class="invite-item">
+            <div [matMenuTriggerFor]="permissionMenu" class="invite-item-content permission-label">
+                <mat-label>{{'role.' + selectedRole | translate}}</mat-label>
+                <mat-menu #permissionMenu="matMenu" [overlapTrigger]="false" class="permission-matMenu">
+                    <ng-template matMenuContent>
+                        <div (click)="setPermissions(RoleEnum.MEMBER)" mat-menu-item>
+                            <div class="permission-value">Can Edit<span *ngIf="selectedRole===RoleEnum.MEMBER">√</span>
+                            </div>
+                            <div class="permission-detail">Regular user able to create read and update files inside the
+                                box.
+                            </div>
+                        </div>
+                        <div (click)="setPermissions(RoleEnum.GUEST)" mat-menu-item>
+                            <div class="permission-value">
+                                Guest
+                                <span *ngIf="selectedRole===RoleEnum.GUEST">√</span></div>
+                            <div class="permission-detail">Can view and download files without the possibility of
+                                upload/modification
+                            </div>
+                        </div>
+                        <div (click)="setPermissions(RoleEnum.ADMIN)" mat-menu-item>
+                            <div class="permission-value">Co Owner<span *ngIf="selectedRole===RoleEnum.ADMIN">√</span>
+                            </div>
+                            <div class="permission-detail">Member of the box that can invite other people to the box
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-menu>
+            </div>
+        </div>
+
+        <div class="invite-item mb-48">
+            <div class="invite-item-content">
+                <!--Expiration-->
+                <div class="mb-8">
+                    Expiration. If you set a future date and time, members could not access the safe-box at the
+                    expiration.
+                </div>
+                <ng-container *ngIf="isPermission">
+                    <app-focus-v1-datetime (dateInvalid)="dateInvalid=$event"
+                                           (removePermission)="isPermission=false"
+                                           [formControl]="dateControl"></app-focus-v1-datetime>
+                </ng-container>
+                <ng-container *ngIf="!isPermission">
+                    <div class="permission-list">
+                        <span>None</span>
+                        <span (click)="isPermission=true" class="add-permission-list">Add</span>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="dateInvalid">
+                    <div class="invalid-field">You need to insert a future date</div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="invite-item flex-start">
+            <div class="invite-item-content">
+                <!--message to send as invitation-->
+
+                <div class="mb-8">
+                    Message. Collective and optional.
+                </div>
+                <mat-form-field appearance="fill">
+            <textarea (focusin)="inviteMessageFocusIn()" (focusout)="inviteMessageFocusOut()"
+                      (keyup)="setComments($event)"
+                      class="resize-none"
+                      matInput maxlength="150" placeholder="{{inviteMessagePlaceholder}}"
+                      rows="4"></textarea>
+                </mat-form-field>
+                <div class="mat-counter-hint">{{this.comments.length || 0}}/150 characters</div>
+            </div>
+        </div>
+
+    </div>
+    <!--invite footer-->
+    <div class="invite-footer">
+        <div class="main-action-buttons">
+            <button (click)="closeModal()" mat-button>Cancel</button>
+            <button (click)="sendInvitation()" [disabled]="invitationList.length==0" mat-button>
+                Send
+            </button>
+        </div>
+    </div>
+
+</div>
+

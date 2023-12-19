@@ -1,0 +1,39 @@
+.all-boxes-header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    width: 100%;
+
+    .all-boxes-header-left{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .all-boxes-header-right{
+        padding-right: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    button:not(.add-new-button) {
+        background-color: rgba(255, 255, 255, 0.4);
+        width: var(--headerButtonSize);
+        height: var(--headerButtonSize);
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+            color: #111111;
+        }
+    }
+}

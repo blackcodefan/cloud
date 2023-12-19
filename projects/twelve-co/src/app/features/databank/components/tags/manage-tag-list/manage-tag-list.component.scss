@@ -1,0 +1,59 @@
+/* manage tag list css*/
+.manage-tag-list {
+  width: 500px;
+
+  /*manage tag list header css*/
+  .manage-tag-list-header {
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /*manage tag list body css*/
+  .manage-tag-list-body {
+    padding: 24px 0;
+
+    .tag-item {
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .tag-item:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .tag-active {
+      background: #D6D6D6;
+    }
+
+    .tag-active:hover {
+      background: #D6D6D6 !important;
+    }
+  }
+
+  /*manage tag list footer css*/
+  .manage-tag-list-footer {
+    padding: 16px 24px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(0, 0, 0, 0.87);
+
+    .mat-button {
+      margin-right: 8px;
+      font-weight: 400 !important;
+    }
+  }
+}
+
+.fixed-position {
+  position: fixed;
+  visibility: hidden;
+}
+
+

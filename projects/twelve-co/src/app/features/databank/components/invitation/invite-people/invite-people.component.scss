@@ -1,0 +1,313 @@
+.invite-popup {
+  background-color: #ffffff3d;
+
+  .invite-header {
+    padding: 24px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .label-field {
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+
+  // CSS for Body
+
+  .invite-body {
+    padding-left: 24px;
+    padding-right: 24px;
+
+    .mb-8{
+      margin-bottom: 8px;
+    }
+
+    .mb-48 {
+      margin-bottom: 40px !important;
+    }
+
+    .invite-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .invite-item-label {
+        width: 20%;
+        font-size: 12px;
+        margin-right: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-align: right;
+      }
+
+      .permission-label {
+        padding: 6px 5px 6px 12px;
+        background: #0000003d;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+
+      .invite-item-content {
+        width: 100%;
+        position: relative;
+
+        .item-hidden {
+          display: none;
+        }
+
+        .chip-list{
+          max-height: 240px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          .mat-chip{
+            margin-left: 0!important;
+            max-width: 100%;
+            div{
+              display: block!important;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+
+        .resize-none{
+          resize: none;
+        }
+
+        textarea{
+          height: 60px;
+          line-height: 20px;
+        }
+
+        .datetime-picker-toggle {
+          cursor: pointer;
+          position: absolute;
+          top: 6px;
+          z-index: 100;
+          right: 10px;
+        }
+
+        .permission-list{
+          padding: 6px 12px 6px 12px;
+          background: #0000003d;
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          .add-permission-list{
+            cursor: pointer;
+          }
+        }
+
+        // Custom form field starts
+
+        ::ng-deep .mat-form-field {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+
+        ::ng-deep .mat-form-field-wrapper {
+          padding-bottom: 0;
+        }
+
+        ::ng-deep .mat-form-field-flex {
+          padding: 0;
+          background-color: #0000003d;
+        }
+
+        ::ng-deep .mat-form-field-infix {
+          padding: 6px 12px 6px 12px;
+          border-top: none;
+        }
+
+        ::ng-deep .mat-form-field-underline {
+          display: none;
+        }
+
+        ::ng-deep .mat-select-arrow {
+          border: none;
+        }
+
+        ::ng-deep .mat-form-field-flex {
+          border-radius: 0;
+        }
+
+        // Custom form field ends
+
+        // change the color of mouse caret color
+        ::ng-deep .mat-input-element {
+          caret-color: white !important;
+        }
+
+        // Placeholder color
+        ::ng-deep .mat-input-element::placeholder {
+          color: rgba(255, 255, 255, 0.6) !important;
+          opacity: 1;
+        }
+      }
+    }
+
+    .pt-6 {
+      padding-top: 6px;
+    }
+
+    mat-form-field {
+      position: relative;
+      width: 100%;
+    }
+
+    .mat-hint {
+      color: white;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+
+    .pl-12{
+      padding-left: 12px;
+    }
+
+    .invalid-field {
+      position: absolute;
+      height: 20px;
+      font-size: 13px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+
+    .mat-counter-hint{
+      position: absolute;
+      right: 0;
+      height: 20px;
+      font-size: 13px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+
+  }
+
+  .invite-footer {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: flex-end;
+
+    .main-action-buttons {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+
+.invite-popup > * {
+  color: white !important;
+}
+
+
+// Counter ends
+
+
+.member-item {
+  display: flex;
+  align-items: center;
+
+  .member-item-body {
+    display: flex;
+    align-items: center;
+  }
+
+  .member-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+}
+
+.lineHeight20 {
+  line-height: 20px;
+  height: 20px;
+}
+
+::ng-deep .mat-auto-spinner {
+  height: 300px !important;
+  display: flex;
+  align-items: center;
+
+  .mat-option-text {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+::ng-deep .invite-member-permission-option {
+  position: relative;
+  color: black !important;
+
+  .mat-option-item {
+    display: flex;
+    align-items: center;
+    color: red;
+  }
+
+  .mat-option-item-detail {
+    left: 16px;
+    cursor: pointer;
+    z-index: -1;
+  }
+
+  .mat-option {
+    height: auto !important;
+  }
+}
+
+
+// change the mat select for permissions css
+::ng-deep .mat-select-panel {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+
+::ng-deep .permission-matMenu {
+  background-color: #fff !important;
+
+  .mat-menu-item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: black !important;
+    height: fit-content !important;
+
+    .permission-value {
+      font-size: 15px;
+      line-height: 15px;
+      margin-bottom: 8px;
+
+      span {
+        margin-left: 4px;
+      }
+    }
+
+    .permission-detail {
+      font-size: 14px;
+      white-space: break-spaces;
+      line-height: 14px;
+    }
+  }
+}
+
+::ng-deep .mat-autocomplete-panel{
+  width: 80%!important;
+}
+
+
+
+

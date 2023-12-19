@@ -1,0 +1,22 @@
+<div class="popup">
+    <!--duplication system-notifications body-->
+    <div class="popup-body">
+        <!--        The item '...' already existed. Please choose one of the actions.-->
+        {{'databank.duplication.ITEMS_ALREADY_EXIST'|translate:{fileName} }}
+    </div>
+    <!--duplication system-notifications footer-->
+    <div class="popup-footer">
+        <div class="popup-footer-btnList">
+            <button (click)="handleClick(DuplicationHandleTypeEnum.CANCEL)" [attr.id]="'cancelButton'" mat-button>
+                {{'databank.duplication.CANCEL'|translate}}
+            </button>
+            <button (click)="handleClick(DuplicationHandleTypeEnum.REPLACE)" mat-button>
+                {{'databank.duplication.REPLACE'|translate}}
+            </button>
+            <button (click)="handleClick(DuplicationHandleTypeEnum.ADD_VERSION)" mat-button>
+                {{'databank.duplication.ADD_VERSION'|translate}}
+            </button>
+        </div>
+    </div>
+</div>
+

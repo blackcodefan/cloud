@@ -1,0 +1,27 @@
+.right-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: calc(100vh - 160px);
+    /* overflow: auto;*/
+
+    .right-content-top-buttons {
+        .right-sidebar-button {
+            margin: 5px auto;
+
+            .mat-icon {
+                align-items: center;
+            }
+        }
+    }
+
+    .right-content-bottom-buttons {
+        .right-sidebar-button {
+            margin: 5px auto;
+
+            .mat-icon {
+                align-items: center;
+            }
+        }
+    }
+}

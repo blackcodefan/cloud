@@ -1,0 +1,225 @@
+#loginVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 3;
+}
+
+.login-page {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+
+    mat-card {
+        background-color: rgba(255, 255, 255, 0.8);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 10px;
+        width: 280px;
+        height: 420px;
+        padding: 24px;
+        left: 10%;
+        top: 50%;
+        transform: translate(0, -50%);
+        box-shadow: none !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        ::ng-deep mat-form-field {
+            width: 100%;
+        }
+
+        .logo-login {
+            position: absolute;
+            top: -70px;
+            left: 50%;
+            transform: translate(-50%, 20px);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        mat-card-header {
+            justify-content: center;
+            margin-top: 48px;
+            mat-card-title {
+                font-family: PlusJakartaSans-Medium, sans-serif;
+                font-size: 1.6rem;
+                letter-spacing: 0.1em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 16px;
+            }
+            mat-card-subtitle {
+                color: #111;
+                font-size: 1rem;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 0;
+            }
+        }
+
+        mat-card-content {
+            text-align: center;
+            margin-bottom: 0;
+
+            .qr-code-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+            }
+        }
+
+        mat-card-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 24px 0;
+            gap: 16px;
+            .cancel-button{
+                background-color: transparent!important;
+                ::ng-deep.mat-button-wrapper {
+                    color: #111111!important;
+                }
+            }
+
+            .mat-flat-button {
+                display: flex;
+                padding: 0 36px;
+                border-radius: 4px;
+
+                ::ng-deep.mat-button-wrapper {
+                    color: white;
+                }
+            }
+
+            .mat-flat-button:not(.mat-button-disabled) {
+                background-color: black;
+                color: white;
+            }
+        }
+
+        .lost-device {}
+    }
+
+}
+
+.login-card-left-white {
+    left: 5%;
+    top: 50%;
+    transform: translate(-5%, -50%);
+}
+
+//::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+//  background-color: rgba(255,255,255,1) !important;
+//}
+
+.button-spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+
+
+.qr-code-button {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 36px !important;
+    width: 36px !important;
+    min-width: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-radius: 100px !important;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+
+    mat-icon {
+        display: flex;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+    }
+}
+
+.login-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    bottom: 24px;
+    left: 24px;
+    position: fixed;
+    gap: 12px;
+
+    .copyright {
+        padding: 6px;
+        //-webkit-backdrop-filter: blur(4px);
+        //background-color: rgba(255, 255, 255, 0.8);
+        //border-radius: 6px;
+    }
+
+    .copyright-pointy {
+        cursor: pointer;
+        padding: 6px;
+       -webkit-backdrop-filter: blur(4px);
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 6px;
+    }
+}
+
+::ng-deep .login-spinner div {
+    color: white !important;
+}
+
+.jaime-input {
+    margin-bottom: 12px;
+    height: 34px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: white;
+    outline: none;
+    border: 1px solid transparent;
+    width: calc(100% - 20px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+}
+
+.jaime-input:not(:read-only):focus {
+    border: 1px solid #111;
+}

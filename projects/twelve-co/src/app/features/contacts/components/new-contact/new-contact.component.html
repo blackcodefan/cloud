@@ -1,0 +1,99 @@
+<div class="new-contact-header">
+    <span class="new-contact-header-title">New Contact</span>
+    <mat-icon mat-dialog-close>close</mat-icon>
+</div>
+<form [formGroup]="newContactFormGroup">
+    <div class="new-contact-body">
+        <mat-form-field appearance="standard">
+            <mat-label>First name</mat-label>
+            <input matInput
+                   #input minlength="1" maxlength="50" formControlName="firstName">
+            <mat-hint class="hint-counter" align="end">{{ input.value?.length || 0 }}/50</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Last name</mat-label>
+            <input matInput
+                   #input minlength="1" maxlength="50" formControlName="lastName">
+            <mat-hint class="hint-counter" align="end">{{ input.value?.length || 0 }}/50</mat-hint>
+        </mat-form-field>
+
+        <!--        <mat-form-field appearance="standard">-->
+        <!--            <mat-label>Add a group</mat-label>-->
+        <!--            <input matInput-->
+        <!--                   #input minlength="1" maxlength="50" formControlName="name">-->
+        <!--            <mat-hint class="hint-counter" align="end">{{ input.value?.length || 0 }}/50</mat-hint>-->
+        <!--        </mat-form-field>-->
+        <mat-divider style="margin-top: 12px"></mat-divider>
+        <div class="emails-container">
+
+
+            <ng-container formArrayName="emails">
+                <ng-container *ngFor="let email of getFormGroups('emails').controls; let i = index">
+                    <div [attr.id]="'email'+i" [formGroupName]="i" class="new-contact-form-field">
+                        <ng-container *ngIf="getFormGroups('emails').controls.length==1">
+                            <div class="field-name">{{"contacts.EMAIL" | translate}}<span>*</span></div>
+                        </ng-container>
+                        <ng-container *ngIf="getFormGroups('emails').controls.length>1">
+                            <div class="field-name">{{"contacts.EMAIL" | translate}}  #{{i + 1}}
+                                <span>*</span>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="current_focused=='email'+i">
+                            <input (keydown.tab)="setNextElementCurrentFocus('email'+i)"
+                                   (keyup.enter)="setNextElementCurrentFocus('email'+i)"
+                                   class="new-contact-form-input"
+                                   formControlName="email">
+                        </ng-container>
+                        <div (click)="setCurrentFocus('email'+i)" *ngIf="current_focused!='email'+i"
+                             class="field-value">
+                            <span *ngIf="email.get('email')!.value!=''">{{email.get('email')!.value}}</span>
+                            <span *ngIf="email.get('email')!.value==''" class="new-contact-placeholder">example@email.com</span>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+
+            <ng-container  formArrayName="phones">
+                <ng-container *ngFor="let email of getFormGroups('phones').controls; let i = index">
+                    <div [attr.id]="'phone'+i" [formGroupName]="i" class="new-contact-form-field">
+                        <ng-container *ngIf="getFormGroups('emails').controls.length==1">
+                            <div class="field-name">{{"contacts.PHONE" | translate}}<span>*</span></div>
+                        </ng-container>
+                        <ng-container *ngIf="getFormGroups('phones').controls.length>1">
+                            <div class="field-name">{{"contacts.PHONE" | translate}}  #{{i + 1}}
+                                <span>*</span>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="current_focused=='phone'+i">
+                            <input matInput
+                                   #input minlength="1"
+                                   maxlength="50"
+                                   formControlName="phone"
+                                   [placeholder]="'+44111111111'">
+                        </ng-container>
+                        <div (click)="setCurrentFocus('phone'+i)" *ngIf="current_focused!='phone'+i"
+                             class="field-value">
+                            <span *ngIf="email.get('phone')!.value!=''">{{email.get('phones')!.value}}</span>
+                            <span *ngIf="email.get('phone')!.value==''" class="new-contact-placeholder">example@email.com</span>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <button mat-button (click)="addEmail()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+        </div>
+
+        <!--        <mat-calendar formControlName="birthdate" [minDate]="today"></mat-calendar>-->
+
+    </div>
+    <div class="new-contact-footer">
+        <button mat-flat-button color="primary" type="submit"
+                [disabled]="input.value?.length==0">Save
+        </button>
+    </div>
+</form>
+
+

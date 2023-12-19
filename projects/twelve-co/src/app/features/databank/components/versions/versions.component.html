@@ -1,0 +1,42 @@
+<div class="version">
+
+  <!--version header-->
+  <div class="version-header">
+    <mat-label>List of versions</mat-label>
+  </div>
+  <!--version body-->
+  <div class="version-body">
+    <div class="version-item">
+      <div class="version-item-detail">
+        <div class="version-number">Last version</div>
+        <div class="version-date-time">21/12/2021 14:34</div>
+        <div class="version-owner">Jaime Del Burgo / Personal Account</div>
+      </div>
+      <div class="version-action" [matMenuTriggerFor]="versionMenu">
+        <mat-icon>more_vert</mat-icon>
+      </div>
+      <mat-menu #versionMenu="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="versiondownloadMenu">Download</button>
+        <button mat-menu-item>remove version</button>
+      </mat-menu>
+      <mat-menu #versiondownloadMenu="matMenu">
+        <button mat-menu-item>Encrypted</button>
+        <button mat-menu-item>Decrypted</button>
+      </mat-menu>
+    </div>
+    <div class="version-item">
+      <div class="version-item-detail">
+        <div class="version-number">Original version</div>
+        <div class="version-date-time">21/12/2021 14:30</div>
+        <div class="version-owner">Jaime Del Burgo / Personal Account</div>
+      </div>
+      <div class="version-action" [matMenuTriggerFor]="versionMenu">
+        <mat-icon>more_vert</mat-icon>
+      </div>
+    </div>
+  </div>
+  <!--version footer-->
+  <div class="version-footer">
+        <button mat-button cdkFocusInitial (click)="matDialogRef.close()">Cancel</button>
+  </div>
+</div>

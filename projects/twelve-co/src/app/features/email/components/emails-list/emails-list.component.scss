@@ -1,0 +1,330 @@
+.emails-container {
+    //background-color: #ff4081;
+    margin-bottom: 40px;
+    width: calc(100vw - 332px); // (60 + 240 + 60 = 360) + (60 + 56 + 60 = 176) = 536
+}
+
+.emails-search {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+
+    .emails-search-container {
+        font-size: .85rem;
+        padding-left: 52px;
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    .emails-search-container::placeholder {
+        color: rgba(0, 0, 0, 0.4);
+        padding-left: 1px;
+    }
+
+    mat-icon {
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 24px;
+    }
+}
+
+::ng-deep table {
+    width: 100%;
+    display: block;
+
+    thead {
+        tr {
+            height: 36px !important;
+        }
+
+        th {
+            font-size: 12px;
+            font-weight: 300;
+            color: grey;
+            text-align: left;
+        }
+
+        .checkbox-th-container {
+            min-width: 20px;
+            padding-right: 8px;
+
+            .checkbox-th-circle {
+                background-color: lightgrey;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                cursor: pointer;
+                position: relative;
+                margin-left: 4px;
+                margin-right: 4px;
+
+
+                .checkbox-th-circle-active {
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+                    width: 6px;
+                    height: 6px;
+                    background-color: black;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 3px;
+                    left: 3px;
+                }
+            }
+        }
+
+        .sender-column-header {
+            min-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .content-column-header {
+            min-width: calc(100vw - 753px); //review
+        }
+
+        .attachment-column-header {
+            min-width: 60px;
+            padding-right: 12px;
+            text-align: right;
+        }
+
+        .date-column-header {
+            min-width: 72px;
+            padding-right: 24px !important;
+            text-align: right;
+        }
+    }
+
+    tbody {
+        display: block;
+        max-height: calc(100vh - 242px); //review
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+
+        tr {
+            cursor: pointer;
+            height: 40px;
+        }
+
+        .checkbox-td-container {
+            width: 12px;
+            vertical-align: top;
+            padding-top: 10px;
+            padding-right: 8px;
+
+            .checkbox-td-circle-container {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .checkbox-td-circle {
+                    background-color: lightgrey;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    position: relative;
+
+                    .checkbox-td-circle-active {
+                        background-color: black;
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: 3px;
+                        left: 3px;
+                    }
+                }
+            }
+
+
+        }
+
+        tr:not(:last-child) td {
+            border-bottom: none;
+        }
+
+        tr:not(:first-child) td {
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+        .ib-selected {
+            background-color: #F2F2F2;
+        }
+
+        .flagActiveLetter + tr td {
+            border-top: none !important;
+        }
+
+        .sender-subject-active .sender-column, .sender-subject-active .content-column .content-column__subject {
+            font-weight: bold;
+        }
+
+        .invite-active{
+            background-color: pink;
+        }
+
+        .sender-column {
+            padding-top: 10px;
+            padding-right: 16px;
+            vertical-align: top;
+
+
+            .sender-column__name {
+                width: 184px;
+                line-height: 20px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; //does not work
+
+                .sender-column__chain-counter {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: right;
+                    //margin-left: 12px;
+                    background-color: blue;
+                    color: red;
+                    font-size: 12px;
+                    font-weight: 300;
+                }
+            }
+        }
+
+        .content-column {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            vertical-align: top;
+
+            .content-column__subject, .content-subject__message {
+                width: calc(100vw - 753px); //this is the key concept
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                line-height: 20px;
+
+                p {
+                    margin: 0 !important;
+                    display: inline;
+                    br{
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .attachment-td {
+            padding-top: 10px;
+            vertical-align: top;
+
+            .Ia-c {
+                width: 60px;
+                padding-right: 12px;
+                font-size: 12px;
+                color: grey;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            .Iv-a {
+                width: 60px;
+                padding-right: 12px;
+                font-size: 12px;
+                color: deeppink;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+        }
+
+        .date-td {
+            padding-top: 10px;
+            vertical-align: top;
+
+            .Id-c {
+                width: 72px;
+                color: grey;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+
+                span {
+                    font-size: 12px;
+                }
+            }
+
+            .Iv-r{
+                width: 72px;
+                font-size: 12px;
+                color: deeppink;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+        }
+
+    }
+
+}
+
+// responsive policy
+
+@media only screen and (max-width: 1000px) {
+    .calcI100vw .email-list {
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .calcI100vw .email-list {
+        width: 100px;
+    }
+}
+
+.email-list-right-menu-flag-list{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto auto;
+    gap: 8px;
+    .email-list-right-menu-flag-item{
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .email-list-right-menu-flag-rectangle{
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .flag-item-active{
+            border: 1px solid grey;
+        }
+
+        .mat-icon{
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+            line-height: inherit;
+        }
+    }
+}
+

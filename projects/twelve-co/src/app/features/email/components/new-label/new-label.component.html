@@ -1,0 +1,24 @@
+<div class="new-label-header">
+    <span class="new-label-header-title" *ngIf="isUpdate;else new_label">{{'EMAIL.rename_label' | translate}}</span>
+    <ng-template #new_label>
+        <span class="new-label-header-title">{{'EMAIL.Create_new_label' | translate}}</span>
+    </ng-template>
+    <mat-icon mat-dialog-close>close</mat-icon>
+</div>
+<form [formGroup]="newLabelForm" (ngSubmit)="saveLabel()">
+    <div class="new-label-body">
+        <mat-form-field appearance="standard">
+            <mat-label *ngIf="isUpdate;else new_mat_label">{{'EMAIL.label_new_name' | translate}}</mat-label>
+            <ng-template #new_mat_label>
+                <mat-label >{{'EMAIL.new_label' | translate}}</mat-label>
+            </ng-template>
+            <input matInput
+                   #input minlength="1" maxlength="50" formControlName="label">
+            <mat-hint class="hint-counter" align="end">{{ input.value?.length || 0 }}/50</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="new-label-footer">
+        <button mat-flat-button color="primary" type="submit"
+                [disabled]="input.value?.length==0">Save</button>
+    </div>
+</form>

@@ -1,0 +1,84 @@
+<input type="file" #backgroundInput hidden (change)="changeBoxBg($event)" accept="image/*">
+<div class="all-boxes-container" [ngStyle]="{'padding-right': scroll?'18px':'24px'}"
+     [attr.id]="'all-boxes-container'"
+     (click)="setBoxPreview(false)">
+    <div class="all-boxes" [attr.id]="'all-boxes'">
+        <div class="new-box" *ngIf="isNewBox">
+            <div class="new-box-wrapper">
+                <div class="new-box-header">
+                    <div class="new-box-label">
+                        <span>Insert a title</span>
+                    </div>
+                    <div class="new-box-title">
+                        <input type="text" class="new-box-title-input" (keyup.enter)="createNewBox()"
+                               [formControl]="newBoxCtrl" [attr.id]="'new-box-title-input'">
+                    </div>
+                </div>
+                <div class="new-box-footer">
+                    <span class="new-box-cancel" (click)="cancelNewBox()">Cancel</span>
+                    <span class="new-box-create" (click)="createNewBox()">Create</span>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngFor="let box of boxes">
+            <div class='box-item' (dblclick)="goBoxDetail(box)">
+                <div class="box-item-wrapper">
+                    <ng-container *ngIf="box.coverPhotoId">
+                        <img class="box-item-image" [src]="boxImages[box.itemId]">
+                    </ng-container>
+                    <ng-container *ngIf="!box.coverPhotoId">
+                        <img class="box-item-image" src="assets/apps/istockphoto-1317496728-612x612.jpg">
+                    </ng-container>
+                    <div class="box-item-image-opacity"></div>
+                    <div class='box-item-container'>
+                        <div class="date-time-container">
+                            <span class="date-time">{{box.creationDate | date : 'dd MMMM yyyy\' at\' HH:mm'}}</span>
+                        </div>
+                        <div class="title-and-more">
+                            <div class="title">
+                                <span>{{box.name}}</span>
+                            </div>
+                            <button [matMenuTriggerFor]="boxMenu" (click)="selectBox(box)">
+                                <mat-icon>more_horiz</mat-icon>
+                            </button>
+                            <mat-menu #boxMenu="matMenu"
+                                      xPosition="before"
+                                      yPosition="below"
+                                      class="add-contact-menu">
+                                <button mat-menu-item (click)="setBoxInformation(box)">
+                                    Information
+                                </button>
+                                <button mat-menu-item (click)="handleDeleteBox(box)">
+                                    Delete
+                                </button>
+                                <button mat-menu-item (click)="backgroundInput.click()">
+                                    Change image
+                                </button>
+                                <button mat-menu-item (click)="removeImage()"
+                                        *ngIf="selectedBox && selectedBox.coverPhotoId">
+                                    Remove image
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                    <div class='box-item-count'>
+                        <div class='email-footer-container'>
+                            <div class='email-footer-item-number'>{{box.members}}</div>
+                            <div class='email-footer-item-label'>members</div>
+                        </div>
+                        <div class='email-footer-container'>
+                            <div class='email-footer-item-number'>{{ box.itemsCount || 0}}</div>
+                            <div class='email-footer-item-label'>files</div>
+                            <div class='email-footer-item-number'>{{box.size | fileSize : 2}}</div>
+                            <!--                        <div class='email-footer-item-label'>GB</div>-->
+                        </div>
+                        <div class='email-footer-container'>
+                            <div class='email-footer-item-number'>@{{((box.ownerId | account_details) | async)?.name}}</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

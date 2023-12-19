@@ -1,0 +1,61 @@
+<!--suppress ALL -->
+<div class="page-container"  [ngStyle]="{visibility: isLoading?'visible':'hidden'}">
+    <div class="left-bar" >
+        <div class="_12co-sidebar-top">
+            <div class="_12co-logo"><img src="./assets/logo/logoblack.png" alt="logo"></div>
+            <button class="_12co-sidebar-action-button"
+                    [matTooltip]="'APP_SHELL.TOOLTIP_DASHBOARD' | translate"
+                    [matTooltipPosition]="'right'"
+                    [class.disabled-button]="isDashboard" routerLink="/apps">
+                <mat-icon class="material-icons-round">dashboard</mat-icon>
+            </button>
+            <button class="_12co-sidebar-action-button" [matTooltip]="'APP_SHELL.TOOLTIP_CONTACTS' | translate"
+                    [matTooltipPosition]="'right'" (click)="setIsDashboardPreviewStatus()">
+                <mat-icon class="material-icons-round">contacts</mat-icon>
+            </button>
+            <button class="_12co-sidebar-action-button" [matTooltip]="'APP_SHELL.TOOLTIP_SUPERVISOR' | translate"
+                    [matTooltipPosition]="'right'" routerLink="/apps/settings">
+                <mat-icon class="material-icons-round">supervisor_account</mat-icon>
+            </button>
+            <button class="_12co-sidebar-action-button" [matTooltip]="'APP_SHELL.TOOLTIP_SETTINGS' | translate"
+                    [matTooltipPosition]="'right'" routerLink="/apps/settings">
+                <mat-icon class="material-icons-round">tune</mat-icon>
+            </button>
+            <button class="_12co-sidebar-action-button">
+                <mat-icon class="material-icons-round" [matTooltip]="'APP_SHELL.TOOLTIP_ORACLE' | translate"
+                          [matTooltipPosition]="'right'">fingerprint
+                </mat-icon>
+            </button>
+        </div>
+        <div class="_12co-sidebar-bottom">
+            <button class="_12co-sidebar-action-button" *ngIf="!isShowNotification"
+                    (click)="setNotificationStatus(true)"
+                    [matTooltip]="'APP_SHELL.TOOLTIP_NOTIFICATIONS' | translate" [matTooltipPosition]="'right'">
+                <mat-icon class="material-icons-round">notifications</mat-icon>
+            </button>
+            <ng-container *ngIf="isLogoButtons">
+                <button class="_12co-sidebar-action-button" [matTooltip]="'APP_SHELL.TOOLTIP_SWIFT' | translate"
+                        [matTooltipPosition]="'right'">
+                    <mat-icon class="material-icons-round">switch_account</mat-icon>
+                </button>
+                <button class="_12co-sidebar-action-button" [matTooltip]="'APP_SHELL.TOOLTIP_LOGOUT' | translate"
+                        [matTooltipPosition]="'right'" (click)="logout()">
+                    <mat-icon class="material-icons-round">logout</mat-icon>
+                </button>
+            </ng-container>
+            <div class="user-avatar-container" (click)="showActionButton()">
+                <img [matTooltip]="'APP_SHELL.TOOLTIP_LOGOUT' | translate"
+                     [matTooltipPosition]="'right'" [src]="ownerImage" alt="avatar"/>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="_12co-app-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+
+

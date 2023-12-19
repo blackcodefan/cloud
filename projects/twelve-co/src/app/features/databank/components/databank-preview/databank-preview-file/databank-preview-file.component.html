@@ -1,0 +1,56 @@
+<div class="databank-preview-file">
+    <div class="file-info-content">
+        <div class="file-info">
+            <div class="file-title-wrapper">
+                <div class="file-title-label-container">
+                    <span class="folder-title-label">{{'DATABANK.FILE_TITLE' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_RENAME' | translate}}</span>-->
+                </div>
+                <div class="file-title">{{selectedFile.name}}</div>
+            </div>
+            <div class="file-kind-wrapper">
+                <div class="file-kind-label-container">
+                    <span class="file-kind-label">{{'DATABANK.FILE_KIND' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>-->
+                </div>
+                <div class="file-kind">.{{selectedFile.extension}}</div>
+            </div>
+            <div class="file-versions-wrapper">
+                <div class="file-versions-label-container">
+                    <span class="file-versions-label">{{'DATABANK.FILE_VERSIONS' | translate}}</span>
+                    <span class="change-button">{{'DATABANK.FILE_ADD_VERSION' | translate}}</span>
+                </div>
+                <div class="file-versions">Version #1 - Download</div>
+            </div>
+            <div class="file-created-wrapper">
+                <div class="file-created-label-container">
+                    <span class="file-created-label">{{'DATABANK.FILE_CREATED' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>-->
+                </div>
+                <div class="file-created">{{selectedFile.created  | date : 'dd MMMM yyyy\' at\' HH:mm'}}</div>
+                <!--                <div class="file-created">Monday, 12 May 2022 at 14:22</div>-->
+            </div>
+            <div class="file-modified-wrapper">
+                <div class="file-modified-label-container">
+                    <span class="ffile-modified-label">{{'DATABANK.FILE_MODIFIED' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>-->
+                </div>
+                <div class="file-modified">{{selectedFile.created  | date : 'dd MMMM yyyy\' at\' HH:mm'}}</div>
+            </div>
+            <div class="file-size-wrapper">
+                <div class="file-size-label-container">
+                    <span class="file-size-label">{{'DATABANK.FILE_SIZE' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>-->
+                </div>
+                <div class="file-size">{{selectedFile.usedSpace | fileSize:2}}</div>
+            </div>
+            <div class="file-creator-wrapper">
+                <div class="file-creator-label-container">
+                    <span class="file-creator-label">{{'DATABANK.FILE_CREATOR' | translate}}</span>
+                </div>
+                <div class="file-creator">{{selectedFile.ownerName}}
+                    @{{((selectedFile.ownerAccountId | account_details) | async)?.name}}</div>
+            </div>
+        </div>
+    </div>
+</div>

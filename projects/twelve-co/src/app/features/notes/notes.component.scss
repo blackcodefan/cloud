@@ -1,0 +1,19 @@
+.notes-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    height: 100% !important;
+    width: 100% !important;
+    overflow-y: scroll;
+    justify-content: flex-start;
+}
+
+.wrap {
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+
+
+.mat-dialog-container {
+    background: white !important;
+}

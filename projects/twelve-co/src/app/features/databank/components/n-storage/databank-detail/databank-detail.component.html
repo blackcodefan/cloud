@@ -1,0 +1,125 @@
+<input type="file" multiple #addFile hidden (change)="uploadFiles($event)">
+<div class="_12co-databank-detail" [attr.id]="'_12co-databank-detail'">
+    <div class="folder-item" *ngFor="let folder of folderList; trackBy:itemDetailsTrackBy">
+        <div class="folder-item-header">
+            <div class="date">{{todayDate}}</div>
+            <div class="title-action">
+                <div class="title">
+                    <span>{{folder.name}}</span>
+                </div>
+                <mat-icon [matMenuTriggerFor]="menuInsideFolder" [matMenuTriggerData]="{folder:folder}"
+                          class="material-icons-outlined">more_horiz
+                </mat-icon>
+                <mat-menu #menuInsideFolder="matMenu"
+                          xPosition="before"
+                          yPosition="below"
+                          class="add-contact-menu">
+                    <ng-template matMenuContent let-folder="folder">
+                        <button mat-menu-item (click)="goInformation(folder)">
+                            Information
+                        </button>
+                        <button mat-menu-item>
+                            Download
+                        </button>
+
+                        <button mat-menu-item (click)="deleteFolder(folder)">
+                            Delete
+                        </button>
+                        <button [matMenuTriggerFor]="filterInsideFolder" mat-menu-item>
+                            Filter by
+                        </button>
+                        <mat-menu #filterInsideFolder="matMenu"
+                                  xPosition="after"
+                                  yPosition="below"
+                                  class="add-contact-menu">
+                            <button mat-menu-item>
+                                Name
+                            </button>
+                            <button mat-menu-item>
+                                Date upload
+                            </button>
+                            <button mat-menu-item>
+                                Size
+                            </button>
+                            <button mat-menu-item>
+                                Kind
+                            </button>
+                        </mat-menu>
+                        <button mat-menu-item>
+                            Images in line view
+                        </button>
+                    </ng-template>
+                </mat-menu>
+            </div>
+        </div>
+        <div class="folder-item-body">
+            <ng-container *ngFor="let file of folder.contents; trackBy:itemDetailsTrackBy">
+                <div class="image-item" *ngIf="file|isImagePipe;else fileNotImage"
+                     (contextmenu)="showFileRightMenu($event,file)">
+                    <div class="image-item-overlay"></div>
+                    <img [src]="thumbnails[file.coverPhotoId]" *ngIf="allowDecrypt;else encryptedDisplay">
+                    <ng-template #encryptedDisplay>
+                        <span>{{(thumbnails[file.coverPhotoId].length > 250) ? (thumbnails[file.coverPhotoId] | slice:0:250) + '..' : (thumbnails[file.coverPhotoId]) }}</span>
+                    </ng-template>
+                    <div class="image-item-icon" (click)="showFileRightMenu($event,file)">
+                        <mat-icon>more_horiz</mat-icon>
+                    </div>
+                </div>
+                <ng-template #fileNotImage>
+                    <div class="file-item" (contextmenu)="showFileRightMenu($event,file)">
+                        <div class="file-item-wrapper">
+                            <div class="file-name">{{file.name}}</div>
+                            <div class="file-extension-wrapper">
+                                <div class="file-extension">.{{file.extension}}</div>
+                                <mat-icon class="file-action-icon" (click)="showFileRightMenu($event,file)">more_horiz
+                                </mat-icon>
+                            </div>
+                            <div class="file-version" *ngIf="file.versions && file.versions>1">v.{{file.versions}}</div>
+                        </div>
+                    </div>
+                </ng-template>
+
+            </ng-container>
+        </div>
+        <div class="folder-item-footer" (click)="this.folderId=folder.itemId;addFile.click()">
+            <span>+ Add files</span>
+        </div>
+    </div>
+    <div class="new-folder" *ngIf="isFolder">
+        <div class="new-folder-header">
+            <div class="new-folder-label">Insert a title</div>
+            <div class="new-folder-title">
+                <input type="text" class="new-folder-title-input" (keyup.enter)="createNewFolder()"
+                       [formControl]="newFolderCtrl" [attr.id]="'new-folder-title-input'">
+            </div>
+        </div>
+        <div class="new-folder-footer">
+            <span class="new-folder-cancel" (click)="cancelNewFolder()">Cancel</span>
+            <span class="new-folder-create" (click)="createNewFolder()">Create</span>
+        </div>
+    </div>
+</div>
+
+<div #fileRightMenuHandler="matMenuTrigger"
+     [matMenuTriggerFor]="fileRightMenu"
+     [style.left]="contextMenuPosition.x"
+     [style.top]="contextMenuPosition.y"
+     class="fixed-position">
+</div>
+
+<!-- mat-menu styles.scss 495 -->
+
+<mat-menu #fileRightMenu="matMenu" [hasBackdrop]="false" [overlapTrigger]="false"
+          class="label-right-menu">
+    <ng-template matMenuContent let-fileItem="menuItems">
+        <button mat-menu-item (click)="handleDownload()">Download</button>
+        <button mat-menu-item (click)="handleUploadNewVersion()">Add a new version</button>
+        <button mat-menu-item (click)="handleDeleteFile()">Remove</button>
+        <button mat-menu-item (click)="handleRename()">Rename</button>
+        <button mat-menu-item (click)="goToFileInformation()">Information</button>
+        <button mat-menu-item>Move to</button>
+        <button mat-menu-item (click)="handlePreview()">Preview</button>
+    </ng-template>
+
+</mat-menu>
+

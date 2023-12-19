@@ -1,0 +1,84 @@
+$button-color: #385C94;
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  margin-top: auto;
+
+  .full-width {
+    width: 100%;
+  }
+
+  .full-width + .full-width {
+    margin-top: 24px;
+  }
+}
+
+
+.subscriber-container {
+  overflow-y: hidden;
+  width: 100%;
+  height: 100%;
+  padding-top: 24px;
+}
+
+.full-width + .full-width {
+  margin-bottom: 24px;
+}
+
+.subscriber-details {
+  span + span {
+    margin-left: 24px;
+  }
+}
+
+.sub-accounts-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 84px;
+  overflow-y: hidden;
+  background: white;
+  margin-top: 16px;
+
+  span + span {
+    margin-top: 8px;
+  }
+}
+
+.avatar-img {
+  display: flex;
+  align-self: center;
+  margin-left: 12px;
+}
+
+.selected {
+  margin-left: auto;
+  height: 100%;
+  width: 8px;
+  background: #021B41;
+}
+
+.account-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-left: 16px;
+}
+
+::ng-deep .mat-dialog-container {
+  background: #ECECED !important;
+}
+
+::ng-deep .mat-raised-button .mat-stroked-button .mat-button-base {
+  border-radius: 0;
+}

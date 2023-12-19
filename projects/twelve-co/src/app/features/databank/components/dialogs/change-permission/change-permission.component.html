@@ -1,0 +1,43 @@
+<div class="change-permission-wrapper">
+    <div class="element-wrapper">
+        <div class="element-name">
+            Member:
+        </div>
+        <div class="element-value">
+            {{selectedMembership.member}}
+        </div>
+    </div>
+    <div class="element-wrapper">
+        <div class="element-name">
+            Status:
+        </div>
+        <div class="element-value">
+            {{selectedMembership.status}}
+        </div>
+    </div>
+    <div class="element-wrapper">
+        <div class="element-name">
+            Current membership:
+        </div>
+        <div class="element-value">
+            {{selectedMembership.permission}}
+        </div>
+    </div>
+    <div class="element-wrapper">
+        <div class="element-name">
+            New membership:
+        </div>
+        <div class="element-value">
+            <mat-radio-group (change)="handleChange($event)" [labelPosition]="'after'" class="radio-gr">
+                <mat-radio-button [value]="'MEMBER'">Member</mat-radio-button>
+                <mat-radio-button [value]="'GUEST'">Guest</mat-radio-button>
+            </mat-radio-group>
+            <mat-checkbox [checked]="checked " [disabled]="sm==='GUEST'|| sm===undefined">Can invite people
+            </mat-checkbox>
+        </div>
+    </div>
+    <div class="button-wrapper">
+        <button (click)="handleClick(false)" color="primary" mat-button>Cancel</button>
+        <button (click)="handleClick(true)" color="accent" mat-button>Confirm</button>
+    </div>
+</div>

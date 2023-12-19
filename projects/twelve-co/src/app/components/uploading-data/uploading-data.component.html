@@ -1,0 +1,61 @@
+<mat-accordion class="notification-List">
+    <mat-expansion-panel (closed)="panelOpenState = false" (opened)="panelOpenState = true"
+                         [expanded]="panelOpenState" hideToggle>
+        <!--alert expansion panel header-->
+        <mat-expansion-panel-header class="upload-notificationlist-count">
+            <mat-panel-title class="w-100">
+                <span *ngIf="itemsPending===0">Upload queue empty </span>
+                <span *ngIf="itemsPending>0">Uploading {{uploadNotificationData.length}} items</span>
+<!--                <span class="w-40">{{progress$|async}}</span>-->
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!--alert expansion panel body-->
+        <div class="mat-expansion-panel-content-area">
+            <ng-container *ngFor="let uploadNotification of uploadNotificationData.slice().reverse();let i = index;">
+                <div
+                    [ngStyle]="{'border-bottom': i==uploadNotificationData.length-1?'none':'','error-upload':uploadNotification.errorStatus}"
+                    class="notification-item">
+                    <div class="notification-detail">
+                        <!--alert title-->
+                        <div class="notification-title">{{uploadNotification.fileName}}</div>
+                        <!--alert size and status-->
+                        <div class="notification-size">{{uploadNotification.sizeUploaded | fileSize}}
+                            / {{uploadNotification.size | fileSize}}</div>
+
+                        <div *ngIf="!uploadNotification.done" class="notification-status not-completed">
+                            <button *ngIf="!uploadNotification.errorStatus" mat-icon-button (click)="handleCancelUpload(uploadNotification)">
+                                Cancel
+                            </button>
+
+                            <!--                        <mat-icon (click)="removeNotificationFromQueue(uploadNotification.fileName)"-->
+                            <!--                                  *ngIf="uploadNotification.errorStatus">close</mat-icon>-->
+                        </div>
+                    </div>
+                    <!--                    <div (click)="removeNotificationFromQueue(uploadNotification.fileName)"-->
+                    <!--                         *ngIf="!uploadNotification.done && !uploadNotification.errorStatus"-->
+                    <!--                         class="notification-status not-completed">-->
+                    <!--                        <button mat-icon-button matTooltip="Remove this notification">-->
+                    <!--                            <mat-icon>close</mat-icon>-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+
+                    <div [ngStyle]="{'width': uploadNotification.progress+'%'}" class="notification-progress">
+                    </div>
+                </div>
+                <div class="notification-error">
+                    <div *ngIf="uploadNotification.errorStatus">
+                        <span style="color: red">Error uploading file : ({{uploadNotification.error}})</span>
+                    </div>
+
+                </div>
+            </ng-container>
+        </div>
+        <!--alert expansion panel footer-->
+        <div class="notification-footer">
+            <!-- <button mat-button (click)="stopNotification()">Stop</button>-->
+            <button (click)="panelOpenState=false" *ngIf="panelOpenState" mat-button>Minimize</button>
+            <button (click)="removeAllNotifications()" mat-button>Clear log</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

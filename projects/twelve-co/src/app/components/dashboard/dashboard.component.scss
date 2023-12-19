@@ -1,0 +1,1741 @@
+._12co-dashboard {
+    height: 100%;
+    display: flex;
+
+    ._12co-dashboard-container {
+        height: 100%;
+        min-width: 664px;
+        width: 100%;
+        padding: 0;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-backdrop-filter: blur(4px);
+
+        ._12co-dashboard-header {
+            align-items: center;
+            padding-top: 24px;
+            padding-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            ._12co-dashboard-header-action-buttons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+                padding-right: 24px;
+
+                button {
+                    background-color: rgba(255, 255, 255, 0.4);
+                    width: var(--headerButtonSize);
+                    height: var(--headerButtonSize);
+                    border: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+
+                    mat-icon {
+                        font-size: 18px;
+                        width: 18px;
+                        height: 18px;
+                        color: #111111;
+                    }
+                }
+
+                .sort-app-button {
+                    border-radius: 6px;
+                    background-color: rgba(255, 255, 255, 0.4);
+                    width: var(--headerButtonSize);
+                    height: var(--headerButtonSize);
+                    border: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    mat-icon {
+                        font-size: 18px;
+                        width: 18px;
+                        height: 18px;
+                        color: #111 !important;
+                    }
+                }
+
+                .save-12co-app-apps-button {
+                    border-radius: 6px;
+                    width: fit-content;
+                    height: var(--headerButtonSize);
+                    background-color: rgba(17,17,17,.9) !important;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    cursor: pointer;
+                    .save-12co-app-apps-label {
+                        font-size: .85rem;
+                        letter-spacing: 0.1em;
+                        color: white;
+                        margin-left: 16px;
+                        margin-right: 16px;
+                    }
+                }
+
+                .cancel-12co-app-button {
+                    border-radius: 6px;
+                    width: fit-content;
+                    height: var(--headerButtonSize);
+                    background-color: rgba(255, 255, 255, 0.4);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    .cancel-12co-app-label {
+                        font-size: .85rem;
+                        letter-spacing: 0.1em;
+                        color: #111;
+                        margin-left: 16px;
+                        margin-right: 16px;
+                    }
+                }
+            }
+        }
+        // what is sticky-header
+        .sticky-header {
+            position: sticky;
+            z-index: 100;
+            width: 100%;
+        }
+
+        ._12co-app-list-container {
+            display: flex;
+            justify-content: center;
+            overflow-y: auto;
+            margin-top: 6px;
+            padding-left: 24px;
+        }
+        ._12co-app-list {
+            //overflow-y: auto;
+            display: grid;
+            justify-content: flex-start;
+            gap: 16px;
+            margin-bottom: 18px;
+            width: 100%;
+
+            ::ng-deep .mat-slide-toggle-label {
+                height: 12px !important;
+            }
+
+            ::ng-deep .mat-slide-toggle-bar {
+                background-color: rgba(0,0,0,0.1);
+            }
+            ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+                background-color: rgba(0,0,0,1);
+            }
+
+            .app-disabled-item {
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                border-radius: 10px;
+                background-color: rgba(255,255,255,0.4);
+                -webkit-backdrop-filter: blur(4px);
+                position: relative;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .app-disabled-item-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                img {
+                    border-radius: 10px;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                .app-disabled-item-header {
+                    padding: 20px 20px 0 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    .app-disabled-item-header-container {
+                        z-index: 2;
+                        .app-disabled-item-header-title {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                            line-height: 1.3em;
+                            z-index: 1;
+                        }
+                        .app-disabled-item-header-subTitle {
+                            font-family: "Helvetica Neue", sans-serif;
+                            font-size: 1rem;
+                            letter-spacing: 0.2em;
+                            color: #111;
+                            text-align: left;
+                            line-height: 1.3em;
+                        }
+                    }
+
+                }
+
+                .app-disabled-item-content {
+                    padding: 0 20px 20px 20px;
+                    transition: visibility 0.9s linear, opacity 0.9s linear;
+                    opacity: 0.1;
+                    visibility: hidden;
+                }
+
+                &:hover img {
+                    display: none;
+                }
+                &:hover .app-disabled-item-content {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+
+            .app-email {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-email-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-email-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-email-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-email-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-email-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-email-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+                .app-email-footer {
+                    padding: 0 20px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    .app-email-footer-content {
+                        visibility: hidden;
+                        opacity: 0.1;
+                        display: flex;
+                        align-items: center;
+                        z-index: 3;
+                        transition: all 1.5s ease;
+                        .app-email-footer-left {
+                            display: flex;
+                            flex-direction: column;
+                            margin-right: 12px;
+                            span {
+                                width: 100%;
+                            }
+                        }
+                        .app-email-footer-right {
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
+                    .app-email-counter {
+                        height: 48px;
+                        width: 48px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        background-color: rgba(255,255,255,0.4);
+                        -webkit-backdrop-filter: blur(4px);
+                    }
+                }
+                &:hover .app-email-footer {
+                    justify-content: space-between;
+                }
+                &:hover .app-email-footer .app-email-footer-content {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            .app-bubbles {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-bubbles-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-bubbles-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: all 5s ease;
+                }
+                .app-bubbles-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-bubbles-header-title {
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .app-bubbles-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+                .app-bubbles-footer {
+                    padding: 0 20px 20px;
+                    display: flex;
+                    justify-content: flex-end;
+                    .app-bubbles-footer-item {
+                        height: 48px;
+                        width: 48px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        background-color: rgba(255,255,255,0.4);
+                        -webkit-backdrop-filter: blur(4px);
+                    }
+                }
+                &:hover .app-bubbles-image {
+                    transform: scale(1.05);
+                }
+                &:hover .app-bubbles-footer .app-bubbles-action-icons  {
+                    display: flex;
+                }
+            }
+            .app-alo {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-alo-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-alo-image {
+                    position: absolute;
+                    border-radius: 10px;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: all 5s ease;
+                }
+                &:hover .app-alo-image {
+                    transform: scale(1.05);
+                }
+                .app-alo-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-alo-header-title {
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .app-alo-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+                .app-alo-footer {
+                    padding: 0 20px 20px;
+                    display: flex;
+                    justify-content: flex-end;
+                    .app-alo-footer-item {
+                        height: 48px;
+                        width: 48px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        background-color: rgba(255,255,255,0.4);
+                        -webkit-backdrop-filter: blur(4px);
+                    }
+                }
+                &:hover .app-alo-footer .app-alo-action-icons {
+                    display: flex;
+                }
+            }
+            .app-rooms {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-rooms-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-rooms-image {
+                    position: absolute;
+                    border-radius: 10px;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0.8;
+                    object-fit: cover;
+                    transition: all 5s ease;
+                }
+                &:hover .app-rooms-image {
+                    transform: scale(1.05);
+                }
+                .app-rooms-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-rooms-header-title {
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .app-rooms-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+                .app-rooms-footer {
+                    padding: 0 20px 20px;
+                    display: flex;
+                    justify-content: flex-end;
+                    .app-rooms-footer-item {
+                        height: 48px;
+                        width: 48px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        background-color: rgba(255,255,255,0.4);
+                        -webkit-backdrop-filter: blur(4px);
+                    }
+                }
+                &:hover .app-calls-footer .app-calls-action-icons {
+                    display: flex;
+                }
+            }
+
+            .app-news {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-news-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-news-image {
+                    position: absolute;
+                    border-radius: 10px;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0.8;
+                    object-fit: cover;
+                    transition: all 5s ease;
+                }
+                &:hover .app-news-image {
+                    transform: scale(1.05);
+                }
+                .app-news-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-news-header-title {
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .app-news-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+            }
+
+            .app-bank {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-bank-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-bank-image {
+                    position: absolute;
+                    border-radius: 10px;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: all 5s ease;
+                }
+                &:hover .app-bank-image {
+                    transform: scale(1.05);
+                }
+                .app-bank-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-bank-header-title {
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .app-bank-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+                .app-bank-footer {
+                    padding: 0 20px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    .app-bank-footer-content {
+                        visibility: hidden;
+                        opacity: 0.1;
+                        display: flex;
+                        align-items: center;
+                        transition: all 1.5s ease;
+                        z-index: 3;
+                        .app-bank-footer-left {
+                            display: flex;
+                            flex-direction: column;
+                            margin-right: 12px;
+                            span {
+                                width: 100%;
+                            }
+                        }
+                        .app-bank-footer-right {
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
+                }
+                &:hover .app-bank-footer {
+                    justify-content: space-between;
+                }
+                &:hover .app-bank-footer .app-bank-footer-content {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            .app-photos {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-photos-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-photos-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-photos-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-photos-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-photos-header-title {
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .app-photos-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+            }
+            .app-remember-me {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-remember-me-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-remember-me-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-remember-me-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-remember-me-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-remember-me-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-remember-me-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+            }
+
+            .app-tasks {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-tasks-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-tasks-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-tasks-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-tasks-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-tasks-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-tasks-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+            }
+            .app-calendar {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-calendar-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-calendar-image {
+                    position: absolute;
+                    border-radius: 10px;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: all 5s ease;
+                }
+                &:hover .app-calendar-image {
+                    transform: scale(1.05);
+                }
+                .app-calendar-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-calendar-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-calendar-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+                .app-calendar-footer {
+                    padding: 0 20px 20px;
+                    display: flex;
+                    justify-content: flex-end;
+                    .app-calendar-footer-item {
+                        height: 48px;
+                        width: 48px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        background-color: rgba(255,255,255,0.4);
+                        -webkit-backdrop-filter: blur(4px);
+                    }
+                }
+                &:hover .app-calendar-footer {
+                    display: flex;
+                }
+            }
+            .app-notes {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-notes-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-notes-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-notes-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-notes-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-notes-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-notes-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+
+            }
+            .app-reminders {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-reminders-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-reminders-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-reminders-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-reminders-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-reminders-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-reminders-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+
+            }
+            .app-words {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-words-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-words-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-words-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-words-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-words-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-words-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+
+            }
+            .app-numbers {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-numbers-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-numbers-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-numbers-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-numbers-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-numbers-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-numbers-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+
+            }
+
+            .app-insta {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-insta-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-insta-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-insta-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-insta-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-insta-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-insta-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+
+            }
+
+            .app-financial-bank {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-financial-bank-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-financial-bank-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-financial-bank-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-financial-bank-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-financial-bank-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-financial-bank-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+
+            }
+
+
+            .app-books {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-books-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-books-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-books-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-books-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-books-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-books-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+            }
+            .app-art {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-art-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-art-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-art-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-art-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-art-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-art-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+
+            }
+            .app-bazaar {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-bazaar-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-bazaar-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-bazaar-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-bazaar-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-bazaar-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-bazaar-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+
+            }
+
+            .app-signatures {
+                cursor: pointer;
+                width: 100%;
+                padding-top: var(--appCardRatio);
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                // css for prevent to remove border radius
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                .app-signatures-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .app-signatures-image {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                &:hover .app-signatures-image {
+                    transition: all 5s ease;
+                    transform: scale(1.05);
+                }
+                .app-signatures-header {
+                    padding: 20px 20px 0;
+                    z-index: 2;
+                    .app-signatures-header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span {
+                            font-family: PlusJakartaSans-Bold, sans-serif;
+                            font-size: 1.4rem;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                    .app-signatures-header-subtitle {
+                        font-size: 1rem;
+                        letter-spacing: 0.1em;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+
+        ._12co-app-list-edit {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 18px;
+            margin-top: 6px;
+
+            ._12co-app-list-edit-categories {
+                margin-left: 24px;
+                margin-right: 24px;
+                width: 300px;
+
+                .app-category-item {
+                    width: fit-content;
+                    background-color: rgba(255, 255, 255, 0.4);
+                    //-webkit-backdrop-filter: blur(4px);
+                    height: 32px;
+                    display: flex;
+                    align-items: center;
+                    padding-left: 18px;
+                    padding-right: 18px;
+                    cursor: pointer;
+                    margin-bottom: 12px;
+                    font-family: "Helvetica Neue", sans-serif;
+                    font-size: 0.9rem;
+                    letter-spacing: 0.1em;
+                    line-height: 2.3em;
+                    font-weight: 400;
+                    white-space: nowrap;
+                }
+
+                .app-category-item-active {
+                    background-color: #111;
+                    color: white;
+                }
+            }
+
+            .app-list-edit {
+                margin-left: 24px;
+                width: 100%;
+
+                ._12co-edit-app-group {
+                    margin-bottom: 24px;
+                    display: grid;
+                    gap: 16px;
+                    justify-content: center;
+                    min-width: 656px;
+                    //overflow-y: auto;
+                    height: calc(100% - 102px);
+
+                    .edit-app-item {
+                        cursor: pointer;
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        gap: 4px;
+                        height: 240px;
+                        background-color: rgba(255, 255, 255, 0.8);
+                        padding-left: 24px;
+                        padding-right: 24px;
+
+                        .edit-app-item-header {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            align-items: flex-start;
+                            margin-top: 24px;
+
+                            .edit-app-item-header-title-container {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+
+                                .edit-app-item-header-title {
+                                    font-family: "Helvetica Neue", sans-serif;
+                                    font-size: 1rem;
+                                    font-weight: 700;
+                                    letter-spacing: 0.3em;
+                                    text-transform: uppercase;
+                                }
+
+                                .edit-app-action-button {
+                                    text-align: right;
+
+                                    .mat-slide-toggle-label {
+                                        height: 12px !important;
+                                    }
+
+                                    ::ng-deep .mat-slide-toggle-bar {
+                                        background-color: rgba(0,0,0,0.1);
+                                    }
+                                    ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+                                        background-color: rgba(0,0,0,1);
+                                    }
+                                }
+                            }
+
+                            .edit-app-item-header-subtitle {
+                                font-family: "Helvetica Neue", sans-serif;
+                                font-size: 0.9rem;
+                                letter-spacing: 0.2em;
+                            }
+                        }
+
+                        .edit-app-item-content {
+                            margin-top: 16px;
+                            //visibility: hidden;
+                            transition: visibility 0.9s linear, opacity 0.9s linear;
+                            opacity: 0.1;
+                            .edit-app-item-content-paragraph {
+                                font-family: "Helvetica Neue", sans-serif;
+                                font-size: 0.85rem;
+                                letter-spacing: 0.05em;
+                                margin-bottom: 8px;
+                            }
+                        }
+
+                    }
+
+                    .edit-app-item:hover .edit-app-item-content {
+                        visibility: visible;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        ._12co-swiper {
+            width: 500px;
+        }
+    }
+
+    ._12co-dashboard-preview {
+        width:0;
+        border-radius: 10px;
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(255,255,255,0.4);
+        -webkit-backdrop-filter: blur(4px);
+
+        ._12co-dashboard-preview-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 24px 16px;
+            font-size: 14px;
+            app-search-button {
+                width: 100%;
+            }
+        }
+
+        ._12co-dashboard-preview-body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            ._12co-dashboard-preview-item {
+                //background-color: green;
+                //width: 320px;
+                padding: 8px 16px;
+                display: flex;
+                flex-direction: row;
+                font-size: 14px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                vertical-align: middle;
+                white-space: nowrap;
+                ._12co-dashboard-preview-item-avatar {
+                    margin-right: 12px;
+
+                }
+                ._12co-dashboard-preview-item-content {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 14px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    gap:2px;
+                    .preview-item-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+                img {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50px;
+                }
+            }
+        }
+    }
+
+    ._12co-dashboard-preview-transition {
+        flex: 0 0 auto;
+        margin-left: var(--generalPadding);
+        transition: min-width 0s;
+        visibility: visible;
+        width: 30vw;
+        min-width: 380px;
+        max-width: 480px;
+    }
+}
+
+
+._12co-dashboard-container[max-width~="979px"] {
+    ._12co-app-list {
+        grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+    }
+}
+
+._12co-dashboard-container[min-width~="980px"] {
+    ._12co-app-list {
+        grid-template-columns: calc(33.33% - 10.66px) calc(33.33% - 10.66px) calc(33.33% - 10.66px);
+    }
+}
+
+._12co-dashboard-container[min-width~="1296px"] {
+    ._12co-app-list {
+        grid-template-columns: calc(25% - 12px) calc(25% - 12px) calc(25% - 12px) calc(25% - 12px);
+    }
+}
+
+._12co-dashboard-container[min-width~="1612px"] {
+    ._12co-app-list {
+        grid-template-columns: calc(20% - 12.8px) calc(20% - 12.8px) calc(20% - 12.8px) calc(20% - 12.8px) calc(20% - 12.8px);
+    }
+}
+
+
+// Customizing mat-menu for Attachment
+
+::ng-deep .sort-right-menu {
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    border-radius: 18px !important;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    .mat-menu-item {
+        padding-left: 8px;
+        padding-right: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    .selected-sort-key {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: transparent;
+        margin-right: 8px;
+    }
+
+    .sort-key-active {
+        background-color: #111111;
+    }
+}
+
+::ng-deep .sort-app-by-category {
+    margin-top: 8px;
+    //box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    border-radius: 8px!important;
+    padding: 8px;
+    .mat-menu-item {
+        padding-left: 8px;
+        padding-right: 8px;
+        display: flex;
+        align-items: center;
+    }
+    .selected-sort-app {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: transparent;
+        margin-right: 8px;
+    }
+    .sort-app-active {
+        background-color: #111;
+    }
+}

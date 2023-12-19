@@ -1,0 +1,21 @@
+<div class="content-wrapper">
+    <ejs-schedule #scheduleObj
+                  (actionComplete)="handleChange($event)"
+                  (popupOpen)="onPopupOpen($event)"
+                  [allowDragAndDrop]="allowDragDrop"
+                  [allowResizing]="allowResizing"
+                  [enableAllDayScroll]="true"
+                  [eventSettings]="eventSettings"
+                  [selectedDate]="selectedDate"
+                  cssClass='virtual-scrolling'
+                  height="900px"
+    >
+        <!--            <e-view [allowVirtualScrolling]="true" option='Agenda'>-->
+        <!--            </e-view>-->
+    </ejs-schedule>
+    <ejs-contextmenu #menuObj (beforeOpen)='onContextMenuBeforeOpen($event)' (select)='onMenuItemSelect($event)'
+                     [items]='menuItems'
+                     cssClass='schedule-context-menu'
+                     target='.e-schedule'></ejs-contextmenu>
+</div>
+

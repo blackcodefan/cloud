@@ -1,0 +1,55 @@
+<div class="all-boxes-header-container">
+    <div class="all-boxes-header-left">
+        <div class="app-title">{{'DATABANK.DATABANK' | translate}}</div>
+    </div>
+    <div class="all-boxes-header-right">
+        <button><mat-icon class="material-icons">search</mat-icon></button>
+        <button [matMenuTriggerFor]="sortFolders" class="tooltip">
+            <span class="tooltip-text">Sort by</span>
+            <mat-icon class="material-icons">sort</mat-icon></button>
+        <mat-menu #sortFolders="matMenu"
+                  xPosition="before"
+                  yPosition="below"
+                  class="add-contact-menu">
+            <button mat-menu-item>
+                All folders
+            </button>
+            <button mat-menu-item>
+                My folders
+            </button>
+            <button mat-menu-item>
+                Shared with me
+            </button>
+        </mat-menu>
+        <button [matMenuTriggerFor]="filterFolders" class="tooltip">
+            <span class="tooltip-text">Filter list</span>
+            <mat-icon class="material-icons">filter_list</mat-icon>
+        </button>
+        <mat-menu #filterFolders="matMenu"
+                  xPosition="before"
+                  yPosition="below"
+                  class="add-contact-menu">
+            <button mat-menu-item>
+                Last date opened
+            </button>
+            <button mat-menu-item>
+                Date created
+            </button>
+            <button mat-menu-item>
+                Name
+            </button>
+            <button mat-menu-item>
+                Number of members
+            </button>
+            <button mat-menu-item>
+                Size
+            </button>
+        </mat-menu>
+        <div class="add-new-button-container" (click)="createNewBox()">
+            <button class="add-new-button">
+                <mat-icon class="material-icons">add</mat-icon>
+            </button>
+            <div class="add-label-button">{{'DATABANK.SAFEBOX' | translate}}</div>
+        </div>
+    </div>
+</div>

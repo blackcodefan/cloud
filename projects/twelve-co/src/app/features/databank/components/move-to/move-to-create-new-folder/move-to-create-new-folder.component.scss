@@ -1,0 +1,39 @@
+::ng-deep .moveto-create-newFolder mat-dialog-container {
+    padding: 0;
+    border: none;
+}
+
+.moveto-new-folder {
+    width: 160px;
+    height: 160px;
+    /*border: solid 1px white;*/
+    .moveto-new-folder-label {
+        padding: 10px 10px 0 10px;
+    }
+
+    .moveto-new-folder-input {
+        padding: 0 10px;
+        margin-top: 10px;
+        margin-bottom: 8px;
+        height: 60px;
+
+        textarea {
+            background: transparent;
+            border: none;
+            outline: none;
+            caret-color: white;
+            color: white;
+            resize: none;
+            padding: 0;
+            height: 60px;
+            max-height: 60px;
+            line-height: 20px;
+            width: 100%;
+        }
+
+        ::placeholder {
+            color: white;
+            opacity: 0.6;
+        }
+    }
+}

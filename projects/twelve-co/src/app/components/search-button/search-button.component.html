@@ -1,0 +1,11 @@
+<div class="search-button-container" [class.search-container-transition]="isSearch" [ngStyle]="{'visibility' : isSearch ? 'visible':'hidden'}">
+    <button class="search-button"><mat-icon class="material-icons-round">search</mat-icon></button>
+    <input class="search-input" [placeholder]="placeholders">
+    <div class="search-action-button" (click)="setSearchStatus(false)">
+        <mat-icon>close</mat-icon>
+    </div>
+</div>
+<button [ngStyle]="{'display' : !isSearch ? 'flex':'none'}" (click)="setSearchStatus(true)">
+    <mat-icon class="material-icons-round">search</mat-icon>
+</button>
+

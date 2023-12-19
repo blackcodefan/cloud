@@ -1,0 +1,47 @@
+<div class="search-12co-contacts">
+    <div class="search-12co-contacts-header">
+        <div class="search-12co-contacts-input">
+            <input #input placeholder="{{'contacts.PLACEHOLDER_SEARCH' | translate}}"
+                   [formControl]="searchInTwelveCoFormControl">
+        </div>
+        <div class="search-12co-contacts-action" (click)="remove_12CoContactSearchValue()">
+            /x
+        </div>
+    </div>
+    <div class="search-12co-contacts-gap"></div>
+    <ng-container *ngIf="searchResult.length>0">
+        <div class="spinner-content" *ngIf="spinnerStatus">
+            <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                         size="medium"
+                         color="#ffffff"
+                         type="ball-spin-clockwise-fade"
+                         [name]="searchContactsSpinner">
+            </ngx-spinner>
+        </div>
+        <div class="search-12co-contacts-result" *ngIf="!spinnerStatus">
+            <ng-container *ngFor="let contact of searchResult; let i = index">
+                <!--        <div [class.search-12co-contact-item-added]="contact.status"-->
+                <div [class.search-12co-contact-item-added]="false"
+                     [class.mb-0]="i==searchResult.length-1"
+                     class="search-12co-contact-item">
+                    <div class="search-12co-contact-info">
+                        <div class="search-12co-contact-details">
+                            <div class="search-12co-contact-name">{{contact.firstName}} {{contact.lastName}}</div>
+                            <div class="search-12co-contact-account">{{contact.contactAccountName}}</div>
+                            <!--              <div class="search-12co-contact-country">{{contact.}}</div>-->
+                        </div>
+                    </div>
+                    <!-- todo-->
+                    <!--          <ng-container *ngIf="!contact.status">-->
+                    <!--            <div class="search-12co-contact-action" (click)="addToMyContacts(contact)">Add</div>-->
+                    <!--          </ng-container>-->
+                    <!--          <ng-container *ngIf="contact.status">-->
+                    <!--            <div class="search-12co-contact-action">Added</div>-->
+                    <!--          </ng-container>-->
+                    <!-- end to do-->
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
+

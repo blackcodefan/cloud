@@ -1,0 +1,117 @@
+<div class="left-content">
+    <div class="inline-block-container">
+        <div class="left-content-top-buttons">
+            <button class="left-sidebar-button" mat-raised-button
+                    routerLink="/apps">
+                <label>{{"EMAIL.Home" | translate}}</label>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="contacts-sidebar">
+    <div class="contacts-sidebar-right">
+        <div class="contacts-app-name">
+            Contacts
+        </div>
+        <div (click)="search_12contacts()" class="contacts-sidebar-right-item contacts-sidebar-right-item-no-hover">
+            <div class="contacts-sidebar-right-item-title contacts-sidebar-search">
+                /<span>Search in 12CO</span>
+            </div>
+            <div class="contacts-sidebar-right-item-count">
+            </div>
+        </div>
+        <div>
+
+            <ng-container *ngIf="!(GROUP_TYPE.MY_CONTACTS==editingGroupId && renamingGroup)">
+                <div (click)="setCurrentGroup({id:GROUP_TYPE.MY_CONTACTS,name:'My Contacts'})"
+                     [attr.group-id]='GROUP_TYPE.MY_CONTACTS'
+                     [attr.id]='GROUP_TYPE.MY_CONTACTS'
+                     [attr.item-type]="'group-item'"
+                     [class.contacts-sidebar-right-item-active]="GROUP_TYPE.MY_CONTACTS==selectedGroupId"
+                     class="contacts-sidebar-right-item contacts-group-item">
+                    <div [attr.group-id]='GROUP_TYPE.MY_CONTACTS'
+                         [attr.item-type]="'group-item'"
+                         class="contacts-sidebar-right-item-title contacts-group-item">
+                        My Contacts
+                    </div>
+                    <div [attr.group-id]='GROUP_TYPE.MY_CONTACTS'
+                         [attr.item-type]="'group-item'"
+                         class="contacts-sidebar-right-item-count contacts-group-item">
+                        {{myContactsCount}}
+                        <!-- fixme add group here -->
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngFor="let group of groups | sortGroupsBy : sortKey ">
+                <ng-container *ngIf="group.id==editingGroupId && renamingGroup">
+                    <div class="contacts-sidebar-right-new-group">
+                        <input (keydown.enter)="renameGroup()" [(ngModel)]="renameText"
+                               [attr.id]="'rename-group-input'"
+                               class="create-new-group-contact">
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!(group.id==editingGroupId && renamingGroup)">
+                    <div (click)="setCurrentGroup(group)"
+                         (contextmenu)="handleGroupRightClick($event,group)"
+                         [attr.group-id]='group.id'
+                         [attr.id]='group.id'
+                         [attr.item-type]="'group-item'"
+                         [class.contacts-sidebar-right-item-active]="group.id==selectedGroupId"
+                         class="contacts-sidebar-right-item contacts-group-item">
+                        <div [attr.group-id]='group.id'
+                             [attr.item-type]="'group-item'"
+                             class="contacts-sidebar-right-item-title contacts-group-item">
+                            {{group.name}}
+                        </div>
+                        <div [attr.group-id]='group.id'
+                             [attr.item-type]="'group-item'"
+                             class="contacts-sidebar-right-item-count contacts-group-item">
+                            {{group?.count ?? 0}}
+                            <!-- fixme add group here -->
+                        </div>
+                    </div>
+                </ng-container>
+
+            </ng-container>
+            <ng-container *ngIf="!(GROUP_TYPE.BLOCKED==editingGroupId && renamingGroup)">
+                <div (click)="setCurrentGroup({id:GROUP_TYPE.BLOCKED,name:'Blocked',subscriberId:-1})"
+                     [attr.group-id]='GROUP_TYPE.BLOCKED'
+                     [attr.id]='GROUP_TYPE.BLOCKED'
+                     [attr.item-type]="'group-item'"
+                     [class.contacts-sidebar-right-item-active]="GROUP_TYPE.BLOCKED==selectedGroupId"
+                     class="contacts-sidebar-right-item contacts-group-item">
+                    <div [attr.group-id]='GROUP_TYPE.BLOCKED'
+                         [attr.item-type]="'group-item'"
+                         class="contacts-sidebar-right-item-title contacts-group-item">
+                        Blocked
+                    </div>
+                    <div [attr.group-id]='GROUP_TYPE.BLOCKED'
+                         [attr.item-type]="'group-item'"
+                         class="contacts-sidebar-right-item-count contacts-group-item">
+                        {{blockedContactsCount}}
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+
+        <mat-menu #groupOptionsMenu="matMenu" [hasBackdrop]="false" [overlapTrigger]="false" class="contacts-list-menu">
+            <button (click)="handleRenameGroup()" id="renameGroupButton" mat-menu-item>Rename</button>
+            <button (click)="handleDeleteGroup()" id="deleteGroupButton" mat-menu-item>Delete group</button>
+        </mat-menu>
+        <div #groupOptionMenu="matMenuTrigger"
+             [matMenuTriggerFor]="groupOptionsMenu"
+             [style.left]="contextMenuPosition.x"
+             [style.top]="contextMenuPosition.y"
+             class="fixed-position">
+        </div>
+        <div *ngIf="isNewGroup" class="contacts-sidebar-right-new-group">
+            <input (keyup.enter)="saveNewGroup()" (keyup.escape)="cancelNewGroup()" [(ngModel)]="newGroupName"
+                   [attr.id]="'create-new-group-input'" class="create-new-group-contact">
+        </div>
+    </div>
+</div>
+

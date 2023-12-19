@@ -1,0 +1,246 @@
+.databank-preview-folder {
+  margin-left: 36px;
+  margin-right: 36px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  width: var(--rightSidebarWidth);
+
+  .folder-info-content {
+    margin-top: 24px;
+
+    .folder-info {
+      padding-top: 8px;
+      padding-bottom: 24px;
+
+      .folder-title-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .folder-title-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .folder-title-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+
+        .folder-title {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .folder-description-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .folder-description-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .folder-description-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .folder-description {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .folder-created-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .folder-created-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .folder-created-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .folder-created {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .folder-modified-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .folder-modified-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .folder-modified-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .folder-modified {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .folder-size-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .folder-size-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .folder-size-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .folder-size {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .folder-creator-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .folder-creator-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .folder-creator-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .creator-size {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+    }
+  }
+}

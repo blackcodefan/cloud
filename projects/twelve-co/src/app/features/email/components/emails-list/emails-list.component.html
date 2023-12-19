@@ -1,0 +1,179 @@
+<!-- class="emails-container" -->
+<link rel="stylesheet" href="emails-list.component.scss">
+<div class="emails-container">
+
+    <!-- search -->
+    <div class="emails-search" *ngIf="searchStatus">
+        <input class="emails-search-container" placeholder="Search" [attr.id]="'search'"
+        (focusout)="searchEmails()" (keyup.enter)="searchEmails()" [(ngModel)]="searchParam">
+        <mat-icon (click)="hideSearchInboxContainer()">close</mat-icon>
+    </div>
+
+    <!-- table -->
+
+    <table [dataSource]="emailsList" mat-table>
+
+        <!-- checkbox -->
+
+        <ng-container matColumnDef="checkbox">
+            <th *matHeaderCellDef mat-header-cell class="checkbox-th-container">
+                <div class="checkbox-th-circle" (click)="$event ? masterToggle() : null">
+                    <div *ngIf="selection.hasValue() && isAllSelected()" class="checkbox-th-circle-active"></div>
+                </div>
+            </th>
+            <td *matCellDef="let value" mat-cell class="checkbox-td-container">
+                <div class="checkbox-td-circle-container">
+                    <div class="checkbox-td-circle" (click)="$event ? selection.toggle(value) : null"
+                         [ngStyle]="{background: value.flag}">
+                        <div *ngIf="selection.isSelected(value)" class="checkbox-td-circle-active"></div>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+
+        <!-- chain counter -->
+
+        <!-- sender + recipients counter-->
+
+        <ng-container matColumnDef="sender">
+            <th *matHeaderCellDef mat-header-cell class="sender-column-header">Sender</th>
+            <td *matCellDef="let value" mat-cell class="sender-column">
+                <div class="sender-column__name">
+                    {{value.senderUserName}}
+                </div>
+                <span *ngIf="value.chainCounter>1"
+                      class="sender-column__chain-counter">{{value.chainCounter}}</span>
+            </td>
+        </ng-container>
+
+        <!-- Subject & content -->
+
+        <ng-container matColumnDef="subject-content">
+            <th *matHeaderCellDef mat-header-cell class="content-column-header">Content</th>
+            <td *matCellDef="let value" class="content-column" mat-cell>
+                <div class="content-column__subject">{{value.subject}}</div>
+                <ng-container *ngIf="value.invite">
+                    <div class="content-subject__message">
+                        <span *ngIf="value.inviteStatus=='p'">Pending</span>
+                        <span *ngIf="value.inviteStatus=='a'">Accepted</span>
+                        Invite
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="value.content!=''&&!value.invite">
+                    <div class="content-subject__message"  [innerHTML]="value.content"></div>
+                </ng-container>
+            </td>
+        </ng-container>
+
+        <!-- Attachment -->
+
+        <ng-container matColumnDef="attachment">
+            <th *matHeaderCellDef mat-header-cell class="attachment-column-header">Files</th>
+            <td *matCellDef="let value" class="attachment-td" mat-cell>
+                <div class="Ia-c">
+                    {{value.size}}
+                </div>
+                <div class="Iv-a" *ngIf="value.invite&&value.inviteStatus=='p'" (click)="AcceptInvite(value.id)">Accept</div>
+            </td>
+        </ng-container>
+
+        <!-- Date -->
+
+        <ng-container matColumnDef="date">
+            <th *matHeaderCellDef mat-header-cell class="date-column-header">Date</th>
+            <td *matCellDef="let value" class="date-td" mat-cell>
+                <div class="Id-c">
+                    <span *ngIf="!(value.date | isToday); else showTime">{{value.date | date:'MMM d' }}</span>
+                    <ng-template #showTime>
+                        {{value.date | date:'hh:mm' }}
+                    </ng-template>
+                </div>
+                <div class="Iv-r" *ngIf="value.invite&&value.inviteStatus=='p'" (click)="RejectInvite(value.id)">Reject</div>
+            </td>
+        </ng-container>
+
+        <!-- I don't know why this is here -->
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row [hidden]="searchStatus"></tr>
+
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row
+            (contextmenu)="showEmailListItemActionMenu($event, row.id, row.flag, row.isRead)"
+            [class.sender-subject-active]="!row.isRead"
+            [class.invite-active]="row.inviteStatus=='p'"
+            (dblclick)="showChainEmailList(row, row.invite)"
+            [class.ib-selected]="selection.isSelected(row)">
+        </tr>
+    </table>
+
+
+</div> <!-- class="emails-container" -->
+
+
+<div #emailListRightMenuHandler="matMenuTrigger"
+     [matMenuTriggerFor]="emailListItemRightMenu"
+     [style.left]="contextMenuPosition.x"
+     [style.top]="contextMenuPosition.y"
+     class="fixed-position">
+</div>
+
+<!-- mat-menu styles.scss 495 -->
+
+<mat-menu #emailListItemRightMenu="matMenu" [hasBackdrop]="false" [overlapTrigger]="false">
+    <button mat-menu-item (click)="onOpenEmail()">Open</button>
+    <button mat-menu-item (click)="onReplyEmail()">Reply</button>
+    <button mat-menu-item (click)="onForwardEmail()">Forward</button>
+    <!-- <button mat-menu-item (click)="onAuthenticityCheck()">Authenticity</button> -->
+    <ng-container *ngIf="selectedEmailIsRead">
+        <button mat-menu-item (click)="setAsUnRead()">Mark as unread</button>
+    </ng-container>
+    <ng-container *ngIf="!selectedEmailIsRead">
+        <button mat-menu-item (click)="setAsRead()">Mark as read</button>
+    </ng-container>
+    <button mat-menu-item  [matMenuTriggerFor]="label" *ngIf="showMoveToAction">Move to</button>
+    <button mat-menu-item (click)="onTrashEmail()" *ngIf="showTrashAction">Move to Trash</button>
+    <button mat-menu-item (click)="onDeleteEmail()">Delete</button>
+    <!-- <button [matMenuTriggerFor]="label" mat-menu-item>Labels</button>
+    <button mat-menu-item [matMenuTriggerFor]="flag">Flag...</button> -->
+</mat-menu>
+
+
+<mat-menu #label="matMenu" [hasBackdrop]="false" [overlapTrigger]="false" class="email-list-right-sub-menu">
+    <button mat-menu-item *ngFor="let label of labelList" (click)="onMoveToLabel(label)">{{label.name | translate}}</button>
+</mat-menu>
+
+<mat-menu #label="matMenu" [hasBackdrop]="false" [overlapTrigger]="false" class="email-list-right-sub-menu">
+    <div class="email-list-right-menu-label-list">
+        <button mat-menu-item>
+            <mat-checkbox><span class="mat-checkbox-label-header">Social</span></mat-checkbox>
+        </button>
+        <button mat-menu-item>
+            <mat-checkbox><span class="mat-checkbox-label-header">Updates</span></mat-checkbox>
+        </button>
+        <button mat-menu-item>
+            <mat-checkbox><span class="mat-checkbox-label-header">Forums</span></mat-checkbox>
+        </button>
+        <button mat-menu-item>
+            <mat-checkbox><span class="mat-checkbox-label-header">Promotions</span></mat-checkbox>
+        </button>
+        <div class="email-list-right-menu-label-list-divider"></div>
+        <button mat-menu-item><span class="email-list-right-menu-new-label">Create new</span></button>
+        <button mat-menu-item><span class="email-list-right-menu-new-label">Manage labels</span></button>
+        <!--<ng-container *ngFor="let color of flagColorList">
+            <div class="email-list-right-menu-flag-item" (click)="setFlag(color)" [ngStyle]="{'backgroundColor': color}"></div>
+        </ng-container>-->
+    </div>
+</mat-menu>
+<mat-menu #flag="matMenu" [hasBackdrop]="false" [overlapTrigger]="false" class="email-list-right-sub-menu">
+    <div class="email-list-right-menu-flag-list">
+        <div class="email-list-right-menu-flag-item" [class.flag-item-active]="selectedFlagColor==null"
+             (click)="setFlag(null)">
+            <mat-icon>close</mat-icon>
+        </div>
+        <ng-container *ngFor="let color of flagColorList">
+            <div class="email-list-right-menu-flag-item" [class.flag-item-active]="selectedFlagColor==color"
+                 (click)="setFlag(color)">
+                <div class="email-list-right-menu-flag-rectangle" [ngStyle]="{'backgroundColor': color}"></div>
+            </div>
+        </ng-container>
+    </div>
+</mat-menu>

@@ -1,0 +1,42 @@
+<div (click)="clearInvitationItem($event)" class="databank-invitation-list">
+    <ng-container *ngFor="let inviteItem of invitationList;let i = index">
+        <div (click)="setInvitationItem(inviteItem)"
+             [class.databank-invitation-item-active]="inviteItem==selectedInvitationData"
+             class="databank-invitation-item databank-invitation-common-item">
+            <div (click)="setInvitationItem(inviteItem)"
+                 class="databank-invitation-item-image databank-invitation-common-item">
+                <img (mouseleave)="leaveBoxImage($event)"
+                     (mouseover)="hoverBoxImage($event,inviteItem)"
+                     [src]="(inviteItem.box.coverPhotoId | iconFetcher: inviteItem.inviterAccount) | async"
+                     class="box-image-invite">
+            </div>
+            <div class="databank-invitation-item-title databank-invitation-common-item">
+                {{inviteItem.box.name}}
+            </div>
+        </div>
+    </ng-container>
+</div>
+<div #BoxInfoMenuTrigger="matMenuTrigger"
+     [matMenuTriggerData]="{element:invitationDetail}"
+     [matMenuTriggerFor]="BoxInfoMenu"
+     [style.left]="contextBoxInfoPosition.x"
+     [style.top]="contextBoxInfoPosition.y"
+     class="fixed-position">
+</div>
+
+<mat-menu #BoxInfoMenu="matMenu" [hasBackdrop]="false" [overlapTrigger]="false" class="box-info-menu">
+    <ng-template let-element="element" matMenuContent>
+        <div mat-menu-item>
+            Owner: {{element?.box.ownerName}}
+        </div>
+        <div mat-menu-item>
+            Account: {{element?.inviterAccountName}}
+        </div>
+        <div mat-menu-item>
+            Safe-box: {{element?.box.name}}
+        </div>
+        <div mat-menu-item>
+            Members: {{element?.box.members}}
+        </div>
+    </ng-template>
+</mat-menu>

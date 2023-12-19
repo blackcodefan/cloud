@@ -1,0 +1,136 @@
+// box info header css
+.boxInfo-moveToHeaderActionBar {
+    padding: 24px;
+    height: 48px;
+    color: #FFFFFF;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    .mat-icon {
+        color: #FFFFFF;
+        margin-right: 12px;
+        cursor: pointer;
+    }
+
+    .flex-between {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+// box info body css
+.boxInfo-moveToBody {
+    overflow: auto;
+    max-height: 350px;
+    min-height: 350px;
+    // data item css
+    .data-item {
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 48px;
+        border-bottom: 1px solid white;
+
+        .box-item-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .mat-icon {
+            color: #ffffff;
+            margin-right: 12px;
+        }
+    }
+
+    // data item disable css
+    .data-item.disabled {
+        cursor: default;
+        color: rgba(255, 255, 255, 0.5);
+
+        .mat-icon {
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    // data item enable css
+    .data-item.enabled {
+        cursor: default;
+
+        .data-name {
+            width: 480px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .mat-icon {
+            color: white;
+        }
+
+        .right-arrow {
+            display: none;
+            color: black;
+            margin-right: 0 !important;
+        }
+
+    }
+
+    // when hover data item
+    .data-item.enabled:hover {
+        background-color: #f1f1f1;
+        color: black;
+
+        .mat-icon {
+            color: black;
+        }
+    }
+
+    .data-item.enabled:hover .mat-icon, .data-item.enabled.hover .mat-icon {
+        display: block;
+    }
+
+    // when one of datas has been selected
+    .data-item.active {
+        background-color: #f1f1f1;
+        color: black;
+
+        .mat-icon {
+            color: black;
+        }
+
+        .right-arrow {
+            display: block;
+        }
+    }
+}
+
+// box info footer css
+.boxInfo-moveToFooter {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    bottom: 0;
+    padding: 24px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+    letter-spacing: 0.05em;
+    width: 100%;
+
+    .boxInfo-moveToFooter-buttonList {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .mat-button {
+            margin-right: 26px;
+        }
+    }
+}

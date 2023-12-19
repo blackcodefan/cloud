@@ -1,0 +1,267 @@
+.all-boxes-container {
+    height: 100%;
+    padding-left: 24px;
+    min-width: 616px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .all-boxes {
+        display: grid;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 16px;
+
+
+        .new-box {
+            position: relative;
+            border-radius: 10px;
+            width: 100%;
+            padding-top: var(--appCardRatio);
+            //height: fit-content;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255,255,255,0.4);
+            -webkit-backdrop-filter: blur(4px);
+
+            .new-box-wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .new-box-header {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 16px 16px 0 16px;
+
+                .new-box-label {
+                    line-height: 14px;
+                    span {
+                        font-size: 0.85rem;
+                        letter-spacing: 0.1em;
+                        font-family: "Helvetica Neue", sans-serif;
+                    }
+                }
+
+                .new-box-title {
+                    margin-top: 4px;
+                    .new-box-title-input {
+                        font-family: "Helvetica Neue", sans-serif;
+                        letter-spacing: 0.05em;
+                        font-size: 1rem;
+                        width: 232px;
+                        border-radius: 0;
+                        border: none;
+                        outline: none;
+                        height: 16px; //ojo
+                        background-color: transparent;
+                    }
+                }
+            }
+
+            .new-box-footer {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                padding: 0 16px 16px 16px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 16px;
+
+
+                .new-box-cancel {
+                    font-family: "Helvetica Neue", sans-serif;
+                    font-size: 0.9rem;
+                    letter-spacing: 0.1em;
+                    cursor: pointer;
+                }
+
+                .new-box-create {
+                    font-family: "Helvetica Neue", sans-serif;
+                    cursor: pointer;
+                    letter-spacing: 0.1em;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .box-item {
+            cursor: pointer;
+            width: 100%;
+            padding-top: var(--appCardRatio);
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            // css for prevent to remove border radius
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+
+            .box-item-wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .box-item-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: all 5s ease;
+            }
+
+            &:hover .box-item-image {
+                transform: scale(1.05);
+            }
+
+            .box-item-container {
+                padding: 16px 16px 0 16px;
+                z-index: 2;
+
+                .date-time-container {
+                    line-height: 14px;
+                    .date-time {
+                        font-family: "Helvetica Neue", sans-serif;
+                        font-size: 0.85rem;
+                        letter-spacing: 0.05em;
+                        margin-bottom: 4px;
+                    }
+                }
+
+                .title-and-more {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin-top: 4px;
+
+                    .title {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                        height: fit-content;
+                        line-clamp: 2;
+                        -webkit-line-clamp: 2;
+                        display: flex;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        span {
+                            font-family: "Helvetica Neue", sans-serif;
+                            font-weight: 500;
+                            font-size: 1rem;
+                            letter-spacing: 0.05em;
+                            color: #111;
+                            background-color: rgba(255,255,255,0.4);
+                            -webkit-backdrop-filter: blur(4px);
+                            backdrop-filter: blur(4px);
+                            word-break: break-word;
+                        }
+                    }
+
+                    button {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 18px;
+                        height: 18px;
+                        background-color: transparent;
+                        border: none;
+                        margin-left: 8px;
+                        cursor: pointer;
+
+                        mat-icon {
+                            font-size: 18px;
+                            width: 18px;
+                            height: 18px;
+                            color: #111;
+                            background-color: white;
+                        }
+                    }
+                }
+
+            }
+
+            .box-item-count {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: flex-end;
+                padding: 0 16px 16px 16px;
+                z-index: 2;
+
+                .email-footer-container {
+                    display: flex;
+                    flex-direction: row;
+                    text-align: center;
+
+                    .email-footer-item-number {
+                        font-family: "Helvetica Neue", sans-serif;
+                        font-size: 0.85rem;
+                        letter-spacing: 0.05em;
+                        margin-right: 8px;
+                    }
+                    .email-footer-item-label {
+                        font-family: "Helvetica Neue", sans-serif;
+                        font-size: 0.85rem;
+                        letter-spacing: 0.05em;
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            &:hover .box-item-image-opacity {
+                display: flex;
+            }
+
+        }
+    }
+}
+
+
+
+
+
+:host{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.all-boxes-container[max-width~="979px"] {
+    .all-boxes {
+        grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+    }
+}
+
+.all-boxes-container[min-width~="980px"] {
+    .all-boxes {
+        grid-template-columns: calc(33.33% - 10.66px) calc(33.33% - 10.66px) calc(33.33% - 10.66px);
+    }
+}
+
+.all-boxes-container[min-width~="1296px"] {
+    .all-boxes {
+        grid-template-columns: calc(25% - 12px) calc(25% - 12px) calc(25% - 12px) calc(25% - 12px);
+    }
+}
+
+.all-boxes-container[min-width~="1612px"] {
+    .all-boxes {
+        grid-template-columns: calc(20% - 12.8px) calc(20% - 12.8px) calc(20% - 12.8px) calc(20% - 12.8px) calc(20% - 12.8px);
+    }
+}

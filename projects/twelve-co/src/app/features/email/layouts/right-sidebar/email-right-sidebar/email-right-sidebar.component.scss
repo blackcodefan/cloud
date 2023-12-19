@@ -1,0 +1,57 @@
+
+.right-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: calc(100vh - 160px);
+    /* overflow: auto;*/
+
+    .right-content-top-buttons {
+        .right-sidebar-button {
+            margin: 5px auto;
+
+            .mat-icon {
+                align-items: center;
+            }
+        }
+    }
+
+    .right-content-bottom-buttons {
+        .right-sidebar-button {
+            margin: 5px auto;
+
+            .mat-icon {
+                align-items: center;
+            }
+        }
+    }
+}
+// Customizing mat-menu for Attachment
+
+::ng-deep .attachment-menu, ::ng-deep .email-sort-list-right-menu, ::ng-deep .email-filter-list-right-menu{
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    border-radius: 0;
+    max-width: 320px;
+
+    .mat-menu-item {
+        display: flex;
+        align-items: center;
+
+        .email-sort-list-right-menu-item-checked, .email-filter-list-right-menu-item-checked {
+            width: 30px;
+
+            mat-icon {
+                display: flex;
+                justify-content: center;
+                width: 16px;
+                height: 16px;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+.divider-fields {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}

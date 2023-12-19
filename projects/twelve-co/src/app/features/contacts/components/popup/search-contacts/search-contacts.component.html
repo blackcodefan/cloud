@@ -1,0 +1,9 @@
+<div class="search-contact">
+  <div class="search-contact-input">
+    <input #input (keyup)="setSearchKey($event)" (keyup.enter)="close_Modal()" [value]="searchKey"
+           placeholder="Search for contacts">
+  </div>
+  <div (click)="searchContacts()" class="search-contact-action">
+    /x
+  </div>
+</div>

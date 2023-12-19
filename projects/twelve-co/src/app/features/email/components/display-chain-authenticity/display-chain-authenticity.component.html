@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{'EMAIL.chain_authenticity_title' | translate}}</h1>
+<div *ngIf="authenticityToken.isValid;else not_valid">
+    <h2 >{{'EMAIL.chain_authenticity_valid' | translate}}</h2>
+</div>
+<ng-template #not_valid>
+    <div>
+        <h2 >{{'EMAIL.chain_authenticity_invalid' | translate}}</h2>
+    </div>
+</ng-template>
+<div mat-dialog-actions class="cd-button-list">
+    <button mat-stroked-button class="cancel-button" mat-dialog-close>{{'CLOSE' | translate}}</button>
+</div>

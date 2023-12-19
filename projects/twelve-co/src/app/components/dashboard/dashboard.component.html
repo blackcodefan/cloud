@@ -1,0 +1,527 @@
+<div class="_12co-dashboard" [ngStyle]="{visibility: loading?'visible':'hidden'}">
+    <div class="_12co-dashboard-container"
+         #dashboardContainer
+         [attr.id]="'12co-dashboard-container'"
+         (click)="setIsDashboardPreviewStatus(false)"
+         (contextmenu)="discard($event)">
+        <div class="_12co-dashboard-header" [class.sticky-header]="isSticky">
+            <div class="app-title" *ngIf="!isEditApps">{{'DASHBOARD.Dashboard' | translate}}</div>
+            <div class="app-title" *ngIf="isEditApps">{{'DASHBOARD.Managing_Dashboard' | translate}}</div>
+            <div class="_12co-dashboard-header-action-buttons" *ngIf="!isEditApps">
+                <div class="add-new-button-container" (click)="manageApps()">
+                    <button class="add-new-button">
+                        <mat-icon class="material-icons-round">edit</mat-icon>
+                    </button>
+                    <div class="add-label-button">{{'DASHBOARD.Apps' | translate}}</div>
+                </div>
+            </div>
+            <div class="_12co-dashboard-header-action-buttons" *ngIf="isEditApps">
+                <button class="sort-app-button" [matMenuTriggerFor]="sortAppByCategory"
+                        [matTooltip]="'DASHBOARD.Short_Apps' | translate" [matTooltipPosition]="'right'">
+                    <mat-icon class="material-icons-round">sort</mat-icon>
+                </button>
+                <mat-menu #sortAppByCategory="matMenu"
+                          xPosition="before"
+                          yPosition="below"
+                          class="sort-app-by-category">
+                    <button mat-menu-item (click)="sortApp='All'">
+                        <span class="selected-sort-app" [class.sort-app-active]="sortApp=='All'"></span>
+                        {{'DASHBOARD.All_Apps' | translate}}
+                    </button>
+                    <button mat-menu-item (click)="sortApp='Communication'">
+                        <span class="selected-sort-app" [class.sort-app-active]="sortApp=='Communication'"></span>
+                        {{'DASHBOARD.Communication' | translate}}
+                    </button>
+                    <button mat-menu-item (click)="sortApp='Storage'">
+                        <span class="selected-sort-app" [class.sort-app-active]="sortApp=='Storage'"></span>
+                        {{'DASHBOARD.Storage' | translate}}
+                    </button>
+                    <button mat-menu-item (click)="sortApp='Genuine Information'">
+                        <span class="selected-sort-app" [class.sort-app-active]="sortApp=='Genuine Information'"></span>
+                        {{'DASHBOARD.Genuine_Information' | translate}}
+                    </button>
+                    <button mat-menu-item (click)="sortApp='Content'">
+                        <span class="selected-sort-app" [class.sort-app-active]="sortApp=='Content'"></span>
+                        {{'DASHBOARD.Content' | translate}}
+                    </button>
+                    <button mat-menu-item (click)="sortApp='Productivity'">
+                        <span class="selected-sort-app" [class.sort-app-active]="sortApp=='Productivity'"></span>
+                        {{'DASHBOARD.Productivity' | translate}}
+                    </button>
+                    <button mat-menu-item (click)="sortApp='Social Media'">
+                        <span class="selected-sort-app" [class.sort-app-active]="sortApp=='Social Media'"></span>
+                        {{'DASHBOARD.Social_Media' | translate}}
+                    </button>
+                    <button mat-menu-item (click)="sortApp='Finance'">
+                        <span class="selected-sort-app" [class.sort-app-active]="sortApp=='Finance'"></span>
+                        {{'DASHBOARD.Finance' | translate}}
+                    </button>
+                    <button mat-menu-item (click)="sortApp='Notary Services'">
+                        <span class="selected-sort-app" [class.sort-key-active]="sortApp=='Notary Services'"></span>
+                        {{'DASHBOARD.Notary_Services' | translate}}
+                    </button>
+                </mat-menu>
+                <div class="cancel-12co-app-button" (click)="cancelApps()">
+                    <span class="cancel-12co-app-label">{{'DASHBOARD.Cancel' | translate}}</span>
+                </div>
+                <div class="save-12co-app-apps-button" (click)="saveApps()">
+                    <span class="save-12co-app-apps-label">{{'DASHBOARD.Save' | translate}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="_12co-app-list-container" [ngStyle]="{'padding-right': scroll?'18px':'24px'}"
+             (contextmenu)="discard($event)">
+            <div class="_12co-app-list"
+                 [attr.id]="'_12co-app-list'"
+                 [ngStyle]="{visibility: loading?'visible':'hidden'}"
+                 [sortablejs]="appItemList"
+                 [sortablejsOptions]="options">
+                <ng-container *ngFor="let item of appItemList | filterArray : 'disabled' : false">
+                    <!-- Communication -->
+                    <div class="app-email" [routerLink]="isEditApps?null:'/apps/emails'"
+                         *ngIf="item.value=='circlemail'">
+                        <div class="app-email-container">
+                            <img class="app-email-image" [src]="item.imageUrl" alt="circlemail">
+                            <div class="app-email-header">
+                                <div class="app-email-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-email-header-subtitle">
+                                    {{owner.email}}
+                                </div>
+                            </div>
+                            <div class="app-email-footer" *ngIf="!isEditApps">
+                                <div class="app-email-footer-content">
+                                    <div class="app-email-footer-left">
+                                        <span>{{'DASHBOARD.Inbox' | translate}}</span>
+                                        <span>{{'DASHBOARD.Drafts' | translate}}</span>
+                                        <span>{{'DASHBOARD.Storage' | translate}}</span>
+                                    </div>
+                                    <div class="app-email-footer-right">
+                                        <span>{{metadata?.email?.inboxCount || 0}}</span>
+                                        <span>{{metadata?.email?.unreadCount || 0}}</span>
+                                        <span>{{metadata?.email?.unreadCount || 0}}</span>
+                                    </div>
+                                </div>
+                                <div class="app-email-counter">
+                                    <span>16</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-bubbles"
+                         *ngIf="item.value=='bubbles'">
+                        <div class="app-bubbles-container">
+                            <img class="app-bubbles-image" [src]="item.imageUrl" alt="bubbles">
+                            <div class="app-bubbles-header">
+                                <div class="app-bubbles-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-bubbles-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                            <div class="app-bubbles-footer">
+                                <div class="app-bubbles-footer-item">
+                                    <span>12</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-alo" [routerLink]="isEditApps? null: '/apps/alo'"
+                         *ngIf="item.value=='aló?'">
+                        <div class="app-alo-container">
+                            <img class="app-alo-image" [src]="item.imageUrl" alt="aló?">
+                            <div class="app-alo-header">
+                                <div class="app-alo-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-alo-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                            <div class="app-alo-footer">
+                                <div class="app-alo-footer-item">
+                                    <span>12</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-rooms"
+                         *ngIf="item.value=='rooms'">
+                        <div class="app-rooms-container">
+                            <img class="app-rooms-image" [src]="item.imageUrl" alt="rooms">
+                            <div class="app-rooms-header">
+                                <div class="app-rooms-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-rooms-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                            <div class="app-rooms-footer">
+                                <div class="app-rooms-footer-item">
+                                    <span>24</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Storage -->
+                    <div class="app-bank" [routerLink]="isEditApps ? null:'/apps/databank'"
+                         *ngIf="item.value=='databank'">
+                        <div class="app-bank-container">
+                            <img class="app-bank-image" [src]="item.imageUrl" alt="bank">
+                            <div class="app-bank-header">
+                                <div class="app-bank-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-bank-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                            <div class="app-bank-footer" *ngIf="!isEditApps">
+                                <div class="app-bank-footer-content">
+                                    <div class="app-bank-footer-left">
+                                        <span>{{'DASHBOARD.Boxes' | translate}}</span>
+                                        <span>{{'DASHBOARD.Files' | translate}}</span>
+                                        <span>{{'DASHBOARD.Storage' | translate}}</span>
+                                    </div>
+                                    <div class="app-bank-footer-right">
+                                        <span>{{metadata?.DATA?.boxesWhereMember || 0}}</span>
+                                        <span>{{metadata?.DATA?.filesWhereMember || 0}}</span>
+                                        <span>{{metadata?.DATA?.filesWhereMember || 'todo'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-photos"
+                         *ngIf="item.value=='photos'">
+                        <div class="app-photos-container">
+                            <img class="app-photos-image" [src]="item.imageUrl" alt="photos">
+                            <div class="app-photos-header">
+                                <div class="app-photos-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-photos-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                            <div class="app-photos-footer">
+                                <div class="app-photos-footer-container">
+                                    <div class="app-photos-footer-item">
+                                        <span
+                                            class="app-photos-footer-item-label">{{'DASHBOARD.Albums' | translate}}</span>
+                                        <span
+                                            class="app-photos-footer-item-size">{{metadata?.ALBUMS?.countAlbumsWhereOwner || 0}}</span>
+                                    </div>
+                                    <div class="app-photos-footer-item">
+                                        <span
+                                            class="app-photos-footer-item-label">{{'DASHBOARD.Items' | translate}}</span>
+                                        <span
+                                            class="app-photos-footer-item-size">{{metadata?.ALBUMS?.countImagesWhereMember || 0}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-remember-me"
+                         *ngIf="item.value=='remember me'">
+                        <div class="app-remember-me-container">
+                            <img class="app-remember-me-image" [src]="item.imageUrl" alt="rememberme">
+                            <div class="app-remember-me-header">
+                                <div class="app-remember-me-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-remember-me-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Genuine information -->
+                    <div class="app-news"
+                         *ngIf="item.value=='news'">
+                        <div class="app-news-container">
+                            <img class="app-news-image" [src]="item.imageUrl" alt="news">
+                            <div class="app-news-header">
+                                <div class="app-news-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-news-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Productivity -->
+                    <div class="app-tasks"
+                         *ngIf="item.value=='tasks'">
+                        <div class="app-tasks-container">
+                            <img class="app-tasks-image" [src]="item.imageUrl" alt="tasks">
+                            <div class="app-tasks-header">
+                                <div class="app-tasks-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-tasks-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-calendar"
+                         *ngIf="item.value=='calendar'">
+                        <div class="app-calendar-container">
+                            <img class="app-calendar-image" [src]="item.imageUrl" alt="calendar">
+                            <div class="app-calendar-header">
+                                <div class="app-calendar-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-calendar-subtitle">{{todayDate}}</div>
+                            </div>
+                            <div class="app-calendar-footer">
+                                <div class="app-calendar-footer-item">
+                                    <span>8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-notes"
+                         *ngIf="item.value=='notes'">
+                        <div class="app-notes-container">
+                            <img class="app-notes-image" [src]="item.imageUrl" alt="notes">
+                            <div class="app-notes-header">
+                                <div class="app-notes-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-notes-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-reminders"
+                         *ngIf="item.value=='reminders'">
+                        <div class="app-reminders-container">
+                            <img class="app-reminders-image" [src]="item.imageUrl" alt="reminders">
+                            <div class="app-reminders-header">
+                                <div class="app-reminders-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-reminders-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-words"
+                         *ngIf="item.value=='words'">
+                        <div class="app-words-container">
+                            <img class="app-words-image" [src]="item.imageUrl" alt="words">
+                            <div class="app-words-header">
+                                <div class="app-words-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-words-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-numbers"
+                         *ngIf="item.value=='numbers'">
+                        <div class="app-numbers-container">
+                            <img class="app-numbers-image" [src]="item.imageUrl" alt="numbers">
+                            <div class="app-numbers-header">
+                                <div class="app-numbers-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-numbers-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="app-insta"
+                         *ngIf="item.value=='insta+'">
+                        <div class="app-insta-container">
+                            <img class="app-insta-image" [src]="item.imageUrl" alt="insta">
+                            <div class="app-insta-header">
+                                <div class="app-insta-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-insta-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Finance -->
+                    <div class="app-financial-bank"
+                         *ngIf="item.value=='jedibank'">
+                        <div class="app-financial-bank-container">
+                            <img class="app-financial-bank-image" [src]="item.imageUrl" alt="financialbank">
+                            <div class="app-financial-bank-header">
+                                <div class="app-financial-bank-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-financial-bank-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="app-books"
+                         *ngIf="item.value=='books'">
+                        <div class="app-books-container">
+                            <img class="app-books-image" [src]="item.imageUrl" alt="books">
+                            <div class="app-books-header">
+                                <div class="app-books-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-books-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-art"
+                         *ngIf="item.value=='art nft'">
+                        <div class="app-art-container">
+                            <img class="app-art-image" [src]="item.imageUrl" alt="films">
+                            <div class="app-art-header">
+                                <div class="app-art-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-art-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-bazaar"
+                         *ngIf="item.value=='bazaar'">
+                        <div class="app-bazaar-container">
+                            <img class="app-bazaar-image" [src]="item.imageUrl" alt="bazaar">
+                            <div class="app-bazaar-header">
+                                <div class="app-bazaar-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-bazaar-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notary services -->
+                    <div class="app-signatures"
+                         *ngIf="item.value=='signatures'">
+                        <div class="app-signatures-container">
+                            <img class="app-signatures-image" [src]="item.imageUrl" alt="signatures">
+                            <div class="app-signatures-header">
+                                <div class="app-signatures-header-title">
+                                    <span>{{'DASHBOARD.' + item.title | translate}}</span>
+                                    <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                      (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                                </div>
+                                <div class="app-signatures-header-subtitle">
+                                    {{'DASHBOARD.' + item.subTitle | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+                <ng-container *ngFor="let item of appItemList | filterArray :'disabled'">
+                    <div class="app-disabled-item">
+                        <div class="app-disabled-item-container">
+                            <img [src]="item.imageUrl" *ngIf="isEditApps">
+                            <div class="app-disabled-item-header">
+                                <div class="app-disabled-item-header-container" *ngIf="isEditApps">
+                                    <div class="app-disabled-item-header-title">{{item.title}}</div>
+                                    <div class="app-disabled-item-header-subTitle">{{item.subTitle}}</div>
+                                </div>
+                                <mat-slide-toggle *ngIf="isEditApps" [checked]="!item.disabled"
+                                                  (change)="setAppStatus(item, $event)"></mat-slide-toggle>
+                            </div>
+                            <div class="app-disabled-item-content" *ngIf="isEditApps&&item.disabled">
+                                <div class="app-disabled-item-description" *ngFor="let description of item.description">
+                                    {{'DASHBOARD.' + description | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="_12co-dashboard-preview" [class._12co-dashboard-preview-transition]="isDashboardPreview"
+         [ngStyle]="{'flex-grow': isDashboardPreview? 1: 0}">
+        <div class="_12co-dashboard-preview-header">
+            <app-search-button [placeholder]="'Search for contacts'"></app-search-button>
+        </div>
+        <div class="_12co-dashboard-preview-body">
+            <div class="_12co-dashboard-preview-item" *ngFor="let contact of contacts; let idx = index">
+                <div class="_12co-dashboard-preview-item-avatar">
+                    <img [src]="contact.contactAccountId!| fetchUserIcon | async">
+                </div>
+                <div class="_12co-dashboard-preview-item-content">
+                    <span>{{contact.firstName}} {{contact.lastName}}</span>
+                    <span>{{contact.contactAccountName}}</span>
+                    <ng-container *ngFor="let opt of contact|contactProperties:ContactItemInformationCategory.EMAIL">
+                        <span class="preview-item-email">{{opt.value}}</span>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

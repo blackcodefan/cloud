@@ -1,0 +1,67 @@
+<div class="album-member-container">
+    <div class="album-member-header">
+        <div class="album-member-subject">
+            Add Members
+        </div>
+        <div class="album-member-header-action-buttons">
+            <mat-icon (click)="matDialogRef.close()">close</mat-icon>
+        </div>
+    </div>
+    <div class="album-member-activity-bar">
+        <div class="album-member-activity-bar-right">
+            <div class="album-member-sending-btn-menu">
+                <button mat-fab color="primary" [disabled]="members.length==0" (click)="sendAlbumInvite()">
+                    <mat-icon>arrow_upward</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="album-member-submit-form" [attr.id]="'album-member-submit-form'">
+        <div class="album-member-container"
+                 (focusin)="focusInAlbumMemberToInput()"
+                 (focusout)="focusOutAlbumMemberToInput()">
+            <div class="album-member-container-label">Add<sup>*</sup>:</div>
+            <div class="album-member-search-container" #albumMemberSearchContainer>
+                <mat-form-field appearance="fill" (resized)="ChipListResized('to',$event)">
+                    <mat-chip-list #searchAlbumChipList>
+                        <mat-chip class="zhang-mat-chip" (removed)="removeAlbumMember(user)"
+                                  [class.mat-chip-invalid]="!validateEmail(user)"
+                                  *ngFor="let user of members">
+                            {{user}}
+                            <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip>
+                        <input
+                            #searchAlbumMemberInput
+                            (matChipInputTokenEnd)="addAlbumMember($event)"
+                            [formControl]="albumMemberCtrl"
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="searchAlbumChipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                    </mat-chip-list>
+                    <mat-autocomplete class="zhang-autocomplete" #auto="matAutocomplete"
+                                      (optionSelected)="selectedAlbumMember($event)"
+                                      [panelWidth]="albumMemberSearchContainer.offsetWidth/2">
+                        <mat-option *ngFor="let user of filteredMembers | async;let i = index" [value]="user">
+                            {{user}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-icon *ngIf="isAlbumMemberGroupIcon"  matSuffix
+                              [ngStyle]="{bottom: newAlbumMemberChipListCreated?'4px':'11px'}"
+                              (menuOpened)="albumMemberRightMenuOpened()"
+                              (menuClosed)= "albumMemberRightMenuClosed()"
+                              [matMenuTriggerFor]="memberToRightMenu">group</mat-icon>
+                    <mat-menu #memberToRightMenu="matMenu"
+                              yPosition="below" class="album-member-right-menu">
+                        <button mat-menu-item>Family</button>
+                        <button mat-menu-item>Enemies</button>
+                        <button mat-menu-item>Friends</button>
+                        <button mat-menu-item>People from 12co</button>
+                        <button mat-menu-item>IBM</button>
+                    </mat-menu>
+                </mat-form-field>
+            </div>
+       </div>
+    </div>
+</div>

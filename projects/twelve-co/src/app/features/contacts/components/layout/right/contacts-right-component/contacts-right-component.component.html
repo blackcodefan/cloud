@@ -1,0 +1,52 @@
+<div class="right-content">
+    <div class="right-content-top-buttons">
+
+        <button (click)="showContactSearchBar()" class="right-sidebar-button" mat-raised-button>
+            <mat-icon>search</mat-icon>
+        </button>
+        <button class="right-sidebar-button" mat-raised-button [matMenuTriggerFor]="sortListRightMenu">
+            <mat-icon>sort</mat-icon>
+        </button>
+        <mat-menu #sortListRightMenu="matMenu" class="album-sort-list-right-menu">
+            <button (click)="updateSortByKey('lastName')" mat-menu-item>
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sortKey=='lastName'">done</mat-icon>
+                </div>
+                Sort by last Name
+            </button>
+            <button (click)="updateSortByKey('firstName')" mat-menu-item>
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sortKey=='firstName'">done</mat-icon>
+                </div>
+                Sort by first Name
+            </button>
+
+            <mat-divider class="divider-fields"></mat-divider>
+            <button (click)="updateSortDirection('ascending')" mat-menu-item>
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sortDirection=='ascending'">done</mat-icon>
+                </div>
+
+                Ascending
+            </button>
+            <button (click)="updateSortDirection('descending')" mat-menu-item>
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sortDirection=='descending'">done</mat-icon>
+                </div>
+                Descending
+            </button>
+
+        </mat-menu>
+
+    </div>
+</div>
+
+
+<div class="spinner-content">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                 color="#ffffff"
+                 size="medium"
+                 type="ball-spin-clockwise-fade">
+        <span style="color:#ffffff ">{{spinnerMessage}}</span>
+    </ngx-spinner>
+</div>

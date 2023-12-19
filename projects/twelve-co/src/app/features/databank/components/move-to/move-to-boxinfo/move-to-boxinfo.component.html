@@ -1,0 +1,66 @@
+<!--box info move to header-->
+<div class="boxInfo-moveToHeaderActionBar">
+    <ng-container *ngIf="!isCreateNewFolder">
+        <!--      <mat-icon (click)="navigateToFolderByRoot(boxInfo!.moveTocurrentPath.length==0 || boxInfo!.moveTocurrentPath.length==1?null:boxInfo!.moveTocurrentPath[boxInfo!.moveTocurrentPath.length-2].element,boxInfo!.moveTocurrentPath.length-2)">-->
+        <!--        chevron_left-->
+        <!--      </mat-icon>-->
+        <span>{{currentFolderName}}</span>
+    </ng-container>
+    <ng-container *ngIf="isCreateNewFolder">
+        <div class="flex-between">
+            <input (keypress)="preventEnter($event)" (keyup)="changeNewFolderName($event)" [attr.id]="'newFolderInput'" [value]="newFolderName"
+                   class="w-200 new-folder-input" type="text">
+            <mat-icon (click)="cancelCreateNewFolder()" class="mr-5">close</mat-icon>
+        </div>
+    </ng-container>
+</div>
+<!--box info move to body-->
+<div class="boxInfo-moveToBody">
+    <!-- boxInfo!.moveToElementList -> to remove
+      <ng-container *ngFor="let data of boxInfo!.moveToElementList; let i=index">
+        <ng-container *ngIf="!data.isFolder">
+          <div class="data-item disabled">
+            <div class="box-item-left">
+              <mat-icon *ngIf="data.extension!='image'" class="m-r-12 material-icons-outlined">insert_drive_file</mat-icon>
+              <mat-icon *ngIf="data.extension=='image'" class="m-r-12 material-icons-outlined">image</mat-icon>
+              <div class="data-name">{{data.name}}</div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="data.isFolder">
+          <ng-container *ngIf="!confirmDuplicated(data.id)">
+            <div class="data-item enabled {{selectedDataID==data.id?'active':''}}" (dblclick)="goToFolderInfo(data.id)"
+                 (click)="selectData(data.id)">
+              <div class="box-item-left">
+                <mat-icon class="m-r-12 material-icons-outlined">folder</mat-icon>
+                <div class="data-name">{{data.name}}</div>
+              </div>
+              <mat-icon class="right-arrow" (click)="goToFolderInfo(data.id)">chevron_right</mat-icon>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="confirmDuplicated(data.id)">
+            <div class="data-item disabled">
+              <div class="box-item-left">
+                <mat-icon class="m-r-12 material-icons-outlined">folder</mat-icon>
+                <div class="data-name">{{data.name}}</div>
+              </div>
+              <mat-icon class="right-arrow" (click)="goToFolderInfo(data.id)">chevron_right</mat-icon>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      -->
+</div>
+<!--box info move to footer-->
+<div class="boxInfo-moveToFooter">
+    <button (click)="createNewFolder()" class="create-new-folder-btn" mat-flat-button>Create new folder</button>
+    <div class="boxInfo-moveToFooter-buttonList">
+        <button (click)="closeModal()" mat-button>Cancel</button>
+        <ng-container *ngIf="selectedDataID==''">
+            <button (click)="submitMoveToData()" class="move-btn" mat-flat-button>Move</button>
+        </ng-container>
+        <ng-container *ngIf="selectedDataID!=''">
+            <button (click)="submitMoveToData()" class="move-btn" mat-flat-button>Move Here</button>
+        </ng-container>
+    </div>
+</div>

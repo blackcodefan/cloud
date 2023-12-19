@@ -1,0 +1,44 @@
+<div class="right-content" *ngIf="loading">
+    <div class="right-content-top-buttons">
+        <button class="right-sidebar-button" mat-raised-button  (click)="goBack()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button class="right-sidebar-button" mat-raised-button (click)="setExpand()">
+            <mat-icon *ngIf="isExpand">expand_less</mat-icon>
+            <mat-icon *ngIf="!isExpand">expand_more</mat-icon>
+        </button>
+        <button class="right-sidebar-button" mat-raised-button (click)="replyEmail()">
+            <mat-icon (click)="replyEmail()">reply</mat-icon>
+        </button>
+        <button class="right-sidebar-button" mat-raised-button (click)="forwardEmail()">
+            <mat-icon >forward</mat-icon>
+        </button>
+        <button class="right-sidebar-button" mat-raised-button (click)="addMember()">
+            <mat-icon>person_add</mat-icon>
+        </button>
+        <!--  TODO need two check what mean delete/trash chain
+            <button class="right-sidebar-button" mat-raised-button (click)="removeChainEmail()">
+            <mat-icon>delete</mat-icon>
+        </button> -->
+        <!-- <button class="right-sidebar-button" mat-raised-button  [matMenuTriggerFor]="moreVertRightMenu">
+            <mat-icon>more_vert</mat-icon>
+        </button> -->
+        <mat-menu #moreVertRightMenu="matMenu" yPosition="below" xPosition="after" class="attachment-menu">
+            <button mat-menu-item>Print</button>
+            <button mat-menu-item>Mark as unread</button>
+            <button mat-menu-item>Move to</button>
+            <!-- <button mat-menu-item>Authenticate</button> -->
+        </mat-menu>
+    </div>
+</div>
+
+<div class="spinner-content">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                 color="#ffffff"
+                 size="medium"
+                 type="ball-spin-clockwise-fade">
+        <span style="color:#ffffff ">{{spinnerContent}}</span>
+    </ngx-spinner>
+</div>
+
+

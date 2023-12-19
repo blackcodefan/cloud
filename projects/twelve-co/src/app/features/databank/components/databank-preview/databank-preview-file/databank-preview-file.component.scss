@@ -1,0 +1,284 @@
+.databank-preview-file {
+  margin-left: 36px;
+  margin-right: 36px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  width: var(--rightSidebarWidth);
+
+  .file-info-content {
+    margin-top: 24px;
+
+    .file-info {
+      padding-top: 8px;
+      padding-bottom: 24px;
+
+      .file-title-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .file-title-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .file-title-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+
+        .file-title {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .file-kind-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .file-kind-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .file-kind-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .file-kind {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .file-versions-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .file-versions-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .file-versions-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .file-versions {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .file-created-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .file-created-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .file-created-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .file-created {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .file-modified-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .file-modified-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .file-modified-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .file-modified {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .file-size-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .file-size-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .file-size-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .file-size {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+      .file-creator-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .file-creator-label-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #111;
+          width: 100%;
+          margin-bottom: 8px;
+
+          .file-creator-label {
+            width: 100%;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-bottom: 8px;
+          }
+
+          .change-button {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            padding-bottom: 8px;
+          }
+        }
+        .file-creator {
+          width: 100%;
+          font-family: "Helvetica Neue", sans-serif;
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        }
+      }
+
+    }
+  }
+}

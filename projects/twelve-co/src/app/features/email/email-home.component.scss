@@ -1,0 +1,297 @@
+.email {
+    height: 100%;
+    display: flex;
+    padding: 0;
+
+    .email-container {
+      background-color: rgba(255, 255, 255, 0.4);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      flex: 1;
+
+      .email-header {
+
+      }
+
+      .today-date {
+        font-family: "IBM Plex Mono Semibold";
+        display: flex;
+        align-items: center;
+        line-height: 48px;
+        margin-top: 6px;
+        margin-bottom: 16px;
+      }
+
+      .email-body {
+        margin-top: 6px;
+        padding: 0;
+        display: flex;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: space-evenly;
+
+        .email-right-side-bar {
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            margin-right: 36px;
+            width: 5%;
+        }
+
+        .email-sidebar {
+          max-width: 300px;
+          display: flex;
+          flex-direction: column;
+          margin-right: 36px;
+          padding-top: 64px;
+
+          .sidebar-mail {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 120px;
+            margin-bottom: 8px;
+            cursor: pointer;
+
+            span {
+              text-transform: capitalize;
+              font-family: "IBM Plex Mono Light";
+              color: #111111;
+            }
+          }
+
+          .active span{
+            font-family: "IBM Plex Mono Semibold";
+          }
+
+
+
+
+
+          //.email-sidebar-item {
+          //  position: relative;
+          //  width: fit-content;
+          //  background-color: rgba(255, 255, 255, 0.4);
+          //  -webkit-backdrop-filter: blur(4px);
+          //  height: 14px;
+          //  display: flex;
+          //  align-items: center;
+          //  cursor: pointer;
+          //  white-space: nowrap;
+          //  padding: 9px 18px;
+          //  font-size: 14px;
+          //
+          //  .email-sidebar-item-container {
+          //    display: flex;
+          //    justify-content: flex-start;
+          //    align-items: center;
+          //    span {
+          //      line-height: 14px;
+          //      font-size: 14px;
+          //      text-transform: capitalize;
+          //    }
+          //
+          //    .email-sidebar-counter {
+          //      margin-left: 32px;
+          //      font-size: 12px;
+          //      text-align: right;
+          //    }
+          //  }
+          //}
+          //.email-sidebar-item:not(.active)::before,
+          //.email-sidebar-item:not(.active)::after {
+          //  position: absolute;
+          //  content: "";
+          //  bottom: 0;
+          //  width: 0;
+          //  transition: width 0.2s 0.2s ease-out;
+          //  height: 0.5px;
+          //  background-color: rgb(54, 56, 55);
+          //}
+          //.email-sidebar-item:not(.active)::before {
+          //  right: 50%;
+          //}
+          //.email-sidebar-item:not(.active)::after {
+          //  left: 50%;
+          //}
+          //.email-sidebar-item:not(.active):hover::before,
+          //.email-sidebar-item:not(.active):hover::after {
+          //  width: 50%;
+          //  transition: width 0.2s ease-in;
+          //}
+          //.email-sidebar-item:not(.active) .email-sidebar-item-container::after,
+          //.email-sidebar-item:not(.active) .email-sidebar-item-container::before {
+          //  width: 0;
+          //  height: 0;
+          //  background: transparent;
+          //  opacity: 0;
+          //  z-index: 2;
+          //  transition: width 0.2s ease-in, height 0.15s 0.2s linear, opacity 0s 0.2s;
+          //}
+          //.email-sidebar-item .email-sidebar-item-container::before {
+          //  position: absolute;
+          //  content: "";
+          //  bottom: 0; left: 0;
+          //  border-left: 1px solid rgb(54, 56, 55);
+          //  border-top: 1px solid rgb(54, 56, 55);
+          //}
+          //.email-sidebar-item .email-sidebar-item-container::after {
+          //  position: absolute;
+          //  content: "";
+          //  bottom: 0; right: 0;
+          //  border-right: 1px solid rgb(54, 56, 55);
+          //  border-top: 1px solid rgb(54, 56, 55);
+          //}
+          //.email-sidebar-item:not(.active):hover .email-sidebar-item-container::after,
+          //.email-sidebar-item:not(.active):hover .email-sidebar-item-container::before {
+          //  width: 50%;
+          //  height: 100%;
+          //  opacity: 1;
+          //  transition: height 0.2s 0.2s ease-in, width 0.2s 0.4s linear, opacity 0s 0.2s;
+          //}
+          //.active {
+          //  background-color: #111111;
+          //  span{
+          //    color: white;
+          //  }
+          //  .email-sidebar-counter {
+          //    color: white;
+          //  }
+          //}
+
+            // css for add app title
+          .add-new-label-button-container {
+            height: var(--headerButtonSize);
+            background-color: white;
+            display: flex;
+            align-items: center;
+            border-radius: 18px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(4px);
+            width: fit-content;
+
+            .add-new-label-button {
+              background-color: #111111;
+              width: var(--headerButtonSize);
+              height: var(--headerButtonSize);
+              margin-left: -1px;
+              border: none;
+              border-radius: 50%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+
+              mat-icon {
+                font-size: 18px;
+                width: 18px;
+                height: 18px;
+                color: white;
+              }
+            }
+
+            .add-new-label-button-label {
+              color: #111111;
+              font-size: 12px;
+              height: 12px;
+              line-height: 12px;
+              margin-right: 18px;
+              margin-left: 8px;
+              white-space: nowrap;
+            }
+          }
+        }
+
+        .email-content {
+          flex-grow: 1;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
+    .email-detail-view {
+      //flex: 1;
+      min-width: var(--rightSidebarWidth);
+      max-width: var(--rightSidebarWidth);
+      padding-left: var(--generalPadding);
+    }
+
+  }
+
+  .collapsed-email-list {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+
+    .collapsed-email-item {
+      .collapsed-email-item-header {
+        width: 260px;
+        border-radius: 12px 12px 0 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+
+        .collapsed-email-item-subject {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+
+          span {
+            color: white;
+          }
+        }
+
+        .collapsed-email-item-action-icons {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          width: 64px;
+          margin-left: 8px;
+
+          mat-icon {
+            cursor: pointer;
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+            color: white;
+          }
+        }
+      }
+
+      .collapsed-email-item-body {
+
+      }
+    }
+  }
+
+
+
+// .email-wrapper {
+//     display: flex;
+//     flex-direction: row;
+//     flex-grow: 1;
+//     justify-content: space-evenly;
+
+//     .sidebar-wrapper {
+//         width: 20%;
+//     }
+// }

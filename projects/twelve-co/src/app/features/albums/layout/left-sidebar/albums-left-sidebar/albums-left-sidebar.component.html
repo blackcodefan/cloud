@@ -1,0 +1,27 @@
+<div class="left-content">
+    <div class="inline-block-container">
+        <div class="left-content-top-buttons">
+            <button (click)="goWelcome()" class="left-sidebar-button" mat-raised-button>
+                <label>{{"ALBUMS.HOME" | translate}}</label>
+            </button>
+            <button (click)="newAlbum()" class="left-sidebar-button" mat-raised-button>
+                <label>{{"ALBUMS.NewAlbum" | translate}}</label>
+            </button>
+            <button (click)="reloadCurrentPage()" class="left-sidebar-button" mat-raised-button>
+                <label>{{"EMAIL.Refresh" | translate}}</label>
+            </button>
+        </div>
+    </div>
+    <mat-list class="al-l" role="list">
+            <ng-container *ngFor="let album of albumList">
+                <mat-list-item class="al-li" routerLink="/features/albums/{{album._id}}" routerLinkActive="al-li-active">
+                    <label class="al-item-title">{{album.name=='All'?'All Photos':album.name}}</label>
+                    <label class="al-item-detail">
+                        <span *ngIf="album.counter!=0">{{album.counter}}</span>
+                        <span *ngIf="album.counter!=0">{{album.size}}</span>
+                    </label>
+                    <mat-icon (click)="removeAlbum(album._id)" *ngIf="album._id!='All'">close</mat-icon>
+                </mat-list-item>
+            </ng-container>
+    </mat-list>
+</div>

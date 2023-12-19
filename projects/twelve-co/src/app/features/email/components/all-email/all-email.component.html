@@ -1,0 +1,62 @@
+<div class="all-labels">
+    <!-- <ng-container *ngFor="let item of itemList">
+        <div class='email-label' (dblclick)="goEmailList(item)">
+            <div class='email-label-container'>
+                <span class="title">
+                    {{item}}
+                </span>
+            </div>
+            <div class='email-footer'>
+                <div class='email-footer-container'>
+                    <div class="email-footer-item">
+                        <div class='email-footer-item-label'>Unread</div>
+                        <div class='email-footer-item-number'>4</div>
+                    </div>
+                    <div class='email-footer-item'>
+                        <div class='email-footer-item-label'>Emails</div>
+                        <div class='email-footer-item-number'>10</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container> -->
+    <ng-container *ngFor="let item of labelList">
+        <div class='email-label' (contextmenu)="showLabelMenu($event, item)" (click)="onClickLabel(item)">
+            <div class='email-label-container'>
+                <span class="title">
+                    {{item.name | translate}}
+                </span>
+            </div>
+            <div class='email-footer'>
+                <div class='email-footer-container'>
+                    <div class="email-footer-item">
+                        <div class='email-footer-item-label'>{{'EMAIL.unread' | translate}}</div>
+                        <div class='email-footer-item-number'>{{getTotalUnreadEmailForLabel(item.id)}}</div>
+                    </div>
+                    <div class='email-footer-item'>
+                        <div class='email-footer-item-label'>{{'EMAIL.emails' | translate}}</div>
+                        <div class='email-footer-item-number'>{{getTotalEmailForLabel(item.id)}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+
+<div #labelRightMenuHandler="matMenuTrigger"
+     [matMenuTriggerFor]="labelRightMenu"
+     [style.left]="contextMenuPosition.x"
+     [style.top]="contextMenuPosition.y"
+     class="fixed-position">
+</div>
+
+<!-- mat-menu styles.scss 495 -->
+
+<mat-menu #labelRightMenu="matMenu" [hasBackdrop]="false" [overlapTrigger]="false"
+          class="label-right-menu">
+    <button mat-menu-item (click)="renameLabel()">Rename</button>
+    <button mat-menu-item (click)="deleteLabel()">Delete</button>
+</mat-menu>
+

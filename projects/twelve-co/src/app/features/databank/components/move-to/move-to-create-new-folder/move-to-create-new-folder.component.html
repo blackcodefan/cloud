@@ -1,0 +1,25 @@
+<div class="moveto-create-new-folder">
+  <!--move to new folder header-->
+  <div class="moveto-create-new-folder-header">
+    Create a new folder
+  </div>
+  <!--move to new folder body-->
+  <div class="moveto-create-new-folder-body">
+    <mat-form-field appearance="fill">
+      <mat-label>Insert a title</mat-label>
+      <input matInput #matInput maxlength="50" (keyup)="setNewFolderName($event)" [value]="newFolderName" (keypress)="preventEnter($event)">
+      <mat-icon class="remove-newFolder-name" (click)="remove_newFolderName()" *ngIf="newFolderName!=''">close</mat-icon>
+      <mat-hint align="end">{{ matInput.value?.length || 0 }}/50</mat-hint>
+    </mat-form-field>
+  </div>
+  <!--move to new folder footer-->
+  <div class="moveto-create-new-folder-footer" mat-dialog-actions>
+    <div class="moveto-create-new-folder-footer-btnList">
+      <button mat-button (click)="closeModal()">Cancel</button>
+      <button mat-flat-button color="primary" [disabled]="newFolderName==''" (click)="saveNewFolder()">Save</button>
+    </div>
+  </div>
+</div>
+
+
+

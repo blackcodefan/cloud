@@ -1,0 +1,23 @@
+<div class="popup">
+  <!--Header-->
+  <div class="popup-header">
+    <div class="popup-label-title">{{"databank.RENAME_DATA" | translate}}</div>
+  </div>
+  <!--Body-->
+  <div class="popup-body">
+    <mat-form-field class="popup-input">
+      <input matInput #matInput [maxLength]="inputLength" (keyup)="setRenameDataName($event)" [value]="renameDataName"
+             (keypress)="preventEnter($event)">
+      <mat-hint class="popup-counter">{{ renameDataName?.length || 0 }}/{{inputLength}}</mat-hint>
+    </mat-form-field>
+  </div>
+  <!--Actions-->
+  <div class="popup-footer">
+    <div class="popup-footer-btnList">
+      <button mat-button (click)="closeModal()">Cancel</button>
+      <button mat-flat-button color="primary" [disabled]="renameDataName==''"
+              (click)="saveRenameData()">{{'Save'|translate}}</button>
+    </div>
+  </div>
+</div>
+

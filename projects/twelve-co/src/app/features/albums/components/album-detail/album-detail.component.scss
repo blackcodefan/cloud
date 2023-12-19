@@ -1,0 +1,56 @@
+::ng-deep .image-preview .mat-dialog-container{
+  padding: 0!important;
+  border-radius: 0!important;
+  background: black;
+  width: 100vw!important;
+}
+.album-image-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .album-fit-image{
+    width: auto;
+    max-width: 90vw;
+    height: 100%;
+    object-fit: cover;
+  }
+  .album-container-close{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    mat-icon{
+      color: white;
+    }
+  }
+  .navigate_before{
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    mat-icon{
+      color: white;
+    }
+  }
+  .navigate_next{
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    mat-icon{
+      color: white;
+    }
+  }
+}
+

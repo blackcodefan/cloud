@@ -1,0 +1,25 @@
+::ng-deep .confirm-to-save-draft-email .mat-dialog-container {
+  width: 500px;
+  border-radius: 0 !important;
+  background-color: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+}
+
+.flex-column-button-list{
+  display: flex;
+  flex-direction: column;
+  button{
+    width: 100%;
+    margin: 8px 0;
+    border-radius: 0!important;
+  }
+  .save-button{
+    background-color: black;
+  }
+  .unsave-button{
+    background-color: red;
+  }
+  .cancel-button{
+    color: black;
+  }
+}

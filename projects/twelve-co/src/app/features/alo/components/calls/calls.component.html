@@ -1,0 +1,123 @@
+<div class="alo-container">
+    <div class="side-wrapper">
+        <div class="list-of-calls-wrapper">
+            <div (click)="handleCallHistory()" class="top-corner">
+                <mat-icon>more_vert</mat-icon>
+            </div>
+            <span class="section-title">{{'calls.LIST_OF_CALLS'|translate}}</span>
+            <div class="calls-details-wrapper">
+                <div class="calls-details-item">
+                    <span>{{'calls.SENT'|translate}}</span>
+                    <span>{{madeCalls}}</span>
+                </div>
+                <div class="calls-details-item">
+                    <span>{{'calls.RECEIVED'|translate}}</span>
+                    <span>{{receivedCalls}}</span>
+                </div>
+                <div class="calls-details-item">
+                    <span>{{'calls.MISSED'|translate}}</span>
+                    <span>{{missedCalls}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="recordings-wrapper">
+            <span class="section-title">Blockchain</span>
+            <div class="recordings-container">
+                <span>{{'calls.RECORDINGS'|translate}}</span>
+                <span>{{recordings}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-wrapper">
+        <mat-tab-group (selectedIndexChange)="handleIndexChange($event)" mat-stretch-tabs>
+            <mat-tab [label]="'Phone book'">
+                <div class="action-button-wrapper">
+                    <mat-form-field *ngIf="searching" appearance="fill"
+                                    style=" width: 100%;height:fit-content;">
+                        <input [autofocus]="searching" [formControl]="searchFormControl"
+                               matInput
+                               placeholder="{{'calls.SEARCH_FOR_A_CONTACT'|translate}}" style="width: 80%">
+                        <button (click)="deleteSearchContent()" mat-button>
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <span (click)="toggleSearch()" class="icon-button" matRipple>
+                       <mat-icon matTooltip="{{'calls.SEARCH_FOR_CONTACT'|translate}}" style="height: 24px;width: 24px">search</mat-icon>
+                    </span>
+                    <span (click)="toggleSort()" class="icon-button" matRipple>
+                    <mat-icon matTooltip="{{(sortAscending?'calls.SORT_ASCENDING':'calls.SORT_DESCENDING')|translate}}"
+                              style="height: 24px;width: 24px">sort</mat-icon>
+                     </span>
+                </div>
+                {{searchText}}
+                <div class="list-wrapper">
+                    <!--                    <ng-container-->
+                    <!--                        *ngIf="searchText === null || searchText === undefined || searchText === ''; else noContactsInSystem">-->
+                    <div *ngFor="let contact of searchResult | searchContactProperty : searchText"
+                         class="list-item">
+                        <div *ngIf="searchResult.length>0; else noResultsFound"
+                             class="contact-head">
+                            <img [src]="contact.contactAccountId! | fetchUserIcon | async"
+                                 class="avatar-img item-head">
+                            <div class="contact-wrapper">
+                                    <span
+                                        class="account-name">{{contact.firstName || ''}} {{contact.lastName || ''}} </span>
+                                <span class="account-detail">@{{contact.contactAccountName}}</span>
+                            </div>
+                        </div>
+                        <button (click)="onContactCallClicked(contact)"
+                                mat-stroked-button>{{'calls.CALL'|translate}}</button>
+                    </div>
+                    <ng-template #noResultsFound>
+                        <span>No results for your search</span>
+                    </ng-template>
+                    <!--                    </ng-container>-->
+                    <!--                    <ng-template #noContactsInSystem>-->
+                    <!--                        <span class="no-contacts">No contacts </span>-->
+                    <!--                    </ng-template>-->
+
+                </div>
+            </mat-tab>
+            <mat-tab label="{{'calls.PEOPLE_IN_CO'|translate}}">
+                <div class="action-button-wrapper">
+                    <!--                  <span class="icon-button" matRipple>-->
+                    <!--                    <mat-icon style="height: 24px;width: 24px">search</mat-icon>-->
+                    <!--                  </span>-->
+                </div>
+                <div *ngIf="selectedTabIndex===1" class="list-wrapper">
+                    <div *ngFor="let account of accountsInTwelveco|async as people"
+                         class="list-item">
+                        <div *ngIf="people.length>0; else noResultsFound"
+                             class="contact-head">
+                            <img [src]="account.id | fetchUserIcon | async" class="avatar-img item-head">
+                            <div class="contact-wrapper">
+                                <span class="account-name">{{account.fullName}} </span>
+                                <span class="account-detail">@{{account.accountName}}</span>
+                            </div>
+                        </div>
+                        <button [matMenuTriggerData]="{data:account}" [matMenuTriggerFor]="menu" mat-stroked-button>
+                            Call
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <ng-template let-data=data matMenuContent>
+                                <button (click)="onCallClicked(data)" mat-menu-item>Audio call
+                                </button>
+                                <button (click)="onVideoCallClicked(data)" mat-menu-item>Video
+                                    Call
+                                </button>
+                            </ng-template>
+                        </mat-menu>
+                        <!--                        <button (click)="onCallClicked(account)" mat-stroked-button>{{'calls.CALL'|translate}}</button>-->
+                        <!--                        <button (click)="onVideoCallClicked(account)" mat-stroked-button>Video call</button>-->
+                    </div>
+                    <ng-template #noResultsFound>
+                        <span>No accounts in 12co available</span>
+                    </ng-template>
+                </div>
+            </mat-tab>
+
+
+        </mat-tab-group>
+    </div>
+</div>

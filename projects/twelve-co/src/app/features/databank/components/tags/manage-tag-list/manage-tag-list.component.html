@@ -1,0 +1,41 @@
+<div class="manage-tag-list">
+  <div class="manage-tag-list-header">
+    <mat-label>{{'tags.MANAGE_TAGS'|translate}}</mat-label>
+  </div>
+  <div class="manage-tag-list-body">
+    <ng-container *ngFor="let tag of tagList;let i=index">
+      <ng-container *ngIf="i+1<=3">
+        <div class="tag-item">
+          <div class="tag-item-name">{{tag.value}}</div>
+          <div class="tag-item-counter">1 item</div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="i+1>3">
+        <div class="tag-item {{selectedTagID==tag.id?'tag-active':''}}" (contextmenu)="setTagAction($event, tag.id)">
+          <div class="tag-item-name">{{tag.value}}</div>
+          <div class="tag-item-counter">1 item</div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="manage-tag-list-footer">
+    <button mat-button (click)="newTag()" class="new-tag-btn">{{'tags.NEW_TAG'|translate}}</button>
+    <button mat-button (click)="_matDialogRef.close()" cdkFocusInitial>{{'tags.TAG_CANCEL'|translate}}</button>
+  </div>
+</div>
+
+<div class="fixed-position"
+     [matMenuTriggerFor]="tagActionMenu"
+     [style.left]="contextPosition.x"
+     [style.top]="contextPosition.y"
+     #tagActionMenuTrigger="matMenuTrigger"
+></div>
+
+<mat-menu #tagActionMenu="matMenu" [overlapTrigger]="false" [hasBackdrop]="false">
+  <ng-template matMenuContent>
+    <div mat-menu-item (click)="renameTag()">{{'tags.RENAME'|translate}}</div>
+    <div mat-menu-item (click)="removeTag()">{{'tags.REMOVE'|translate}}</div>
+    <div mat-menu-item>{{'tags.SHOW_ITEMS'|translate}}</div>
+  </ng-template>
+</mat-menu>
+

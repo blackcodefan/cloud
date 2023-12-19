@@ -1,0 +1,9 @@
+<div *ngFor="let settingsOption of settingsOptions"
+     [matTooltipPosition]="'right'"
+     [matTooltip]="settingsOption.tooltip | translate"
+     class="sidebar-center-item h-16"
+     matTooltipClass='mat-tool-tip'
+     routerLink="{{settingsOption.path}}"
+     routerLinkActive="active">
+    <mat-icon>{{settingsOption.icon}}</mat-icon>
+</div>

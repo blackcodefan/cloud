@@ -1,0 +1,74 @@
+
+// Style colors
+
+// Base layout colors
+$black: #000000;
+$gray-70: #2c2424;
+$gray-60: #535353;
+$gray-50: #767676;
+$gray-40: #a2a2a2;
+$gray-30: #c8c8c8;
+$gray-20: #eeeeee;
+$gray-10: #f7f7f7;
+$white: #ffffff;
+
+$red-error: #d92911;
+$highlight: #0076cf;
+$success: #108747;
+$warning: #eec226;
+
+// Tag colors
+$tag-top-secret: #ff804a;
+$tag-secret: #ff4032;
+$tag-confidential: #318cfe;
+
+$tag-in-progress: #9d9da0;
+$tag-completed: #439429;
+
+// Typography
+
+// Font sizes
+$font2XS: 0.625rem; // 10px
+$fontXS: 0.75rem; //12px
+$fontS: 0.875rem; //14px
+$fontM: 1rem; // 16px
+$fontL: 1.25rem; // 20px
+$fontXL: 1.5rem; // 24px
+$font2XL: 1.75rem; // 28px
+$font3XL: 2.25rem; // 36px
+$font4XL: 2.75rem; // 44px
+
+// Font weights
+$fontLight: 300;
+$fontNormal: 400;
+$fontBold: 700;
+
+// Line height
+$heightM: 1rem; // 16px
+$heightL: 1.25rem; // 20px
+$heightXL: 1.5rem; // 24px
+$height2XL: 1.75rem; // 28px
+$height3XL: 2rem; // 32px
+$height4XL: 2.5rem; // 40px
+$height5XL: 3rem; // 48px
+
+// Spacing
+$space3XS: 0.125rem; // 2px
+$space2XS: 0.25rem; // 4px
+$spaceXS: 0.5rem; // 8px
+$spaceS: 0.75rem; // 12px
+$spaceM: 1rem; // 16px
+$spaceL: 1.5rem; // 24px
+$spaceXL: 2rem; // 32px
+$space2XL: 2.5rem; // 40px
+$space3XL: 3rem; // 48px
+
+// Layout
+$layout2XS: 1rem; // 16px
+$layoutXS: 1.5rem; // 24px
+$layoutS: 2rem; // 32px
+$layoutM: 2.5rem; // 40px
+$layoutL: 3rem; // 48px
+$layoutXL: 4rem; // 64px
+$layout2XL: 6rem; // 96px
+$layout3XL: 10rem; // 160px

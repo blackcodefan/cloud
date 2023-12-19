@@ -1,0 +1,41 @@
+<div class="search-12co-databank">
+    <div class="search-12co-databank-header">
+        <div class="search-12co-databank-input">
+            <input #input [formControl]="searchFormControl" placeholder="{{'SEARCH_HERE' | translate}}">
+        </div>
+        <div (click)="clearSearchInput()" class="search-12co-databank-action">
+            x
+        </div>
+    </div>
+    <div class="search-12co-databank-gap"></div>
+    <ng-container *ngIf="searchResult.length>0">
+        <div *ngIf="spinnerStatus" class="spinner-content">
+            &nbsp;
+            <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                         color="#ffffff"
+                         name="contactSearchSpinner"
+                         size="medium"
+                         type="ball-spin-clockwise-fade">
+            </ngx-spinner>
+        </div>
+        <div *ngIf="!spinnerStatus" class="search-12co-databank-result">
+            <ng-container *ngFor="let storage of searchResult; let i = index">
+                <div [class.mb-0]="i==searchResult.length-1"
+                     class="search-12co-databank-item"
+                (click)="handleNavigation(storage)">
+                    <div class="search-12co-databank-info">
+                        <img [src]="storage.avatarImage" alt="card image" class="search-12co-databank-avatar">
+                        <div class="search-12co-databank-details">
+                            <div class="search-12co-databank-country">{{storage.name}}</div>
+                            <div class="search-12co-databank-name">{{storage.ownerName}} {{storage.accountName}}</div>
+                        </div>
+<!--                        <div style="color: white;padding-left: 16px">-->
+<!--                            <mat-checkbox [checked]="storage.isBox" [disabled]="true"></mat-checkbox>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
+

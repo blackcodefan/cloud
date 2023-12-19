@@ -1,0 +1,317 @@
+.email-chain-list-container {
+  //background-color: #ff4081;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .chain-inbox {
+    padding: 24px;
+    //border: 1px solid lightgrey;
+    background-color: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    margin-bottom: 16px;
+    width: calc(100vw - 396px);
+
+    .chain-inbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .chain-inbox-header__info {
+        display: flex;
+        align-items: center;
+
+        .chain-inbox-header__avatar {
+          width: 56px;
+          height: 56px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-right: 16px;
+        }
+
+        .chain-inbox-header__container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          .chain-inbox-header__in {
+            color: red;
+          }
+
+          .chain-inbox-header__date {
+            display: flex;
+            flex-direction: row;
+            align-content: space-between;
+            color: grey;
+          }
+
+          .chain-inbox-header__sender {
+            display: flex;
+            flex-direction: column;
+          }
+
+        }
+      }
+
+      .chain-inbox-header__icons {
+        display: none;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+
+    .chain-inbox-recipients {
+      margin-left: 72px;
+      display: flex;
+      justify-content: space-between;
+
+      .chain-inbox-recipients-container {
+        flex-grow: 1;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .chain-inbox-recipients__detail-hide {
+        cursor: pointer;
+        span {
+          font-size: 0.85rem;
+        }
+      }
+    }
+
+    .line-header-divider {
+      margin-bottom: 8px;
+      margin-top: 8px;
+      margin-left: 72px;
+    }
+
+    .chain-inbox-content {
+      margin-bottom: 16px;
+      word-break: break-all;
+      ::ng-deep p {
+        margin: 0!important;
+        padding: 0!important;
+      }
+    }
+
+    .chain-inbox-attachments {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      .chain-inbox-attachments__files {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        .chain-inbox-attachments__label {
+          margin-right: 8px;
+        }
+
+        .email-chain-attachment-download {
+          margin-left: 12px;
+          display: none;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+
+      }
+
+      .chain-inbox-attachments__files:hover .email-chain-attachment-download {
+        display: block;
+      }
+    }
+  }
+
+  .chain-inbox:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+    /*outline: 1px solid black;*/
+  }
+
+  .chain-inbox:hover .chain-inbox-header .chain-inbox-header__icons {
+    display: flex;
+  }
+
+  .chain-invite {
+    padding: 24px;
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.04);
+    margin-bottom: 16px;
+    margin-right: 8px;
+
+    .chain-invite-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .chain-invite-header__info {
+        display: flex;
+        align-items: center;
+
+        .chain-invite-header__avatar {
+          width: 56px;
+          height: 56px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-right: 16px;
+        }
+
+        .chain-invite-header__container {
+          display: flex;
+          flex-direction: column;
+
+          .chain-invite-header__in {
+            color: red;
+          }
+
+          .chain-invite-header__date {
+            display: flex;
+            flex-direction: row;
+            align-content: space-between;
+            color: grey;
+          }
+
+          .chain-invite-header__sender {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+
+      .chain-invite-header__icons {
+        display: none;
+      }
+
+    }
+
+    .chain-invite-recipients {
+      margin-left: 72px;
+
+      .chain-invite-recipients__detail-hide {
+        float: right;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .pending-invite {
+    background-color: lightyellow;
+  }
+
+  .accepted-invite {
+    background-color: lightgreen;
+  }
+
+  .rejected-invite {
+    background-color: #ee6464;
+  }
+
+  .chain-sent {
+    padding: 24px;
+    //border: 1px solid lightgrey;
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.04);
+    margin-bottom: 16px;
+    width: calc(100vw - 596px);
+
+    .chain-sent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .chain-sent-header__info {
+        display: flex;
+        align-items: center;
+
+        .chain-sent-header__avatar {
+          width: 56px;
+          height: 56px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-right: 16px;
+        }
+
+        .chain-sent-header__container {
+          display: flex;
+          flex-direction: column;
+
+          .chain-sent-header__in {
+            color: red;
+          }
+
+          .chain-sent-header__date {
+            display: flex;
+            flex-direction: row;
+            align-content: space-between;
+            color: grey;
+          }
+
+          .chain-sent-header__sender {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+
+      .chain-sent-header__icons {
+        display: none;
+        align-items: center;
+        gap: 8px;
+      }
+
+    }
+
+    .chain-sent-recipients {
+      margin-left: 72px;
+      display: flex;
+      justify-content: space-between;
+
+      .chain-sent-recipients-container {
+        flex-grow: 1;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .chain-sent-recipients__detail-hide {
+        cursor: pointer;
+      }
+    }
+
+    .line-header-divider {
+      margin-bottom: 8px;
+      margin-top: 8px;
+      margin-left: 72px;
+    }
+
+    .chain-sent-content {
+      margin-bottom: 16px;
+      word-break: break-all;
+      ::ng-deep p {
+        margin: 0!important;
+        padding: 0!important;
+      }
+    }
+  }
+
+  .chain-sent:hover {
+    //outline: 1px solid black;
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+
+  .chain-sent:hover .chain-sent-header .chain-sent-header__icons {
+    display: flex;
+  }
+
+}
+
+::-webkit-scrollbar-track {
+  background-color: red;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+}
+

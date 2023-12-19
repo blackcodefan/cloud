@@ -1,0 +1,66 @@
+<input type="file" #filesUpload hidden (change)="uploadImages($event)" accept="image/*" multiple/>
+<div class="right-content" *ngIf="$loading">
+    <div class="right-content-top-buttons">
+        <button class="right-sidebar-button" mat-raised-button (click)="showAlbumSearchBar()">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button class="right-sidebar-button" mat-raised-button [matMenuTriggerFor]="sortListRightMenu">
+            <mat-icon>sort</mat-icon>
+        </button>
+        <mat-menu #sortListRightMenu="matMenu" class="album-sort-list-right-menu">
+            <button mat-menu-item (click)="sort='Date'">
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sort=='Date'">done</mat-icon>
+                </div>
+                Date
+            </button>
+            <button mat-menu-item (click)="sort='Size'">
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sort=='Size'">done</mat-icon>
+                </div>
+                Size
+            </button>
+            <button mat-menu-item (click)="sort='From'">
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sort=='From'">done</mat-icon>
+                </div>
+                From
+            </button>
+            <button mat-menu-item (click)="sort='Attachments'">
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sort=='Attachments'">done</mat-icon>
+                </div>
+                Attachments
+            </button>
+            <mat-divider class="divider-fields"></mat-divider>
+            <button mat-menu-item (click)="sortMessage='Oldest'">
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sortMessage=='Oldest'">done</mat-icon>
+                </div>
+                Oldest messages on top
+            </button>
+            <button mat-menu-item (click)="sortMessage='Newest'">
+                <div class="album-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sortMessage=='Newest'">done</mat-icon>
+                </div>
+                Newest messages on Top
+            </button>
+        </mat-menu>
+        <button class="right-sidebar-button" mat-raised-button (click)="filesUpload.click()">
+            <mat-icon>file_upload</mat-icon>
+        </button>
+        <button class="right-sidebar-button" mat-raised-button (click)="goAlbumInvite()">
+            <mat-icon>people</mat-icon>
+        </button>
+    </div>
+</div>
+
+
+<div class="spinner-content">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                 color="#ffffff"
+                 size="medium"
+                 type="ball-spin-clockwise-fade">
+        <span style="color:#ffffff ">{{spinnerMessage}}</span>
+    </ngx-spinner>
+</div>

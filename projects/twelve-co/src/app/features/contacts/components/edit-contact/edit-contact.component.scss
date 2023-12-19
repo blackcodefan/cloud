@@ -1,0 +1,190 @@
+.new-contact-context {
+  width: 50%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  display: flex;
+
+  .new-contact-context-sidebar {
+    padding-top: 70px;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 48px;
+
+    .new-contact-context-sidebar-item {
+      color: #FFFFFF;
+      line-height: 18px;
+      margin-bottom: 9px;
+      cursor: pointer;
+    }
+  }
+
+  .new-contact-context-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 70px;
+
+    .new-contact-form {
+      display: inline-block;
+
+      .scrollable {
+        max-height: calc(100vh - 140px);
+        overflow-y: auto;
+      }
+    }
+
+    .new-contact-form-block {
+      margin-bottom: 12px;
+
+      .new-contact-form-field {
+        display: flex;
+        align-items: center;
+        height: 26px;
+
+        .field-name {
+          height: 16px;
+          color: #FFCC00;
+          margin-right: 16px;
+          width: 100px;
+          text-align: right;
+
+          span {
+            color: #FFFFFF
+          }
+        }
+
+        .field-setting {
+          color: #FFFFFF;
+          cursor: pointer;
+        }
+
+        .field-value {
+          color: white;
+          width: 300px;
+          padding-left: 8px;
+          min-height: 14px;
+          position: relative;
+          text-align: left;
+
+          .new-contact-placeholder {
+            color: rgba(255, 255, 255, 0.4)
+          }
+
+
+          button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            font-size: 12px;
+            background-color: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+          }
+
+          .hover-btn {
+            display: none;
+          }
+
+          .hover-img {
+            position: relative;
+            width: 80px;
+            height: 80px;
+
+            .hover-img-overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 80px;
+              width: 80px;
+              border-radius: 50%;
+              opacity: 0;
+              transition: .5s ease;
+              background-color: rgba(0, 0, 0, 0.6);
+              color: #FF0000;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+              border: 1px solid #ffffff;
+            }
+          }
+
+          .hover-img:hover .hover-img-overlay {
+            opacity: 1;
+          }
+
+          img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #ffffff;
+          }
+
+          /*       .hover-img:hover img{
+                   display: none;
+                 }*/
+          .hover-img:hover .hover-btn {
+            background: transparent;
+            opacity: 0.5;
+            display: flex;
+          }
+        }
+
+
+        .new-contact-form-input {
+          background: transparent;
+          border: 1px solid #ffffff;
+          outline: none;
+          padding: 4px 7px;
+          color: white;
+          width: 300px;
+          height: 26px;
+        }
+      }
+
+      .new-contact-edit-button {
+        height: fit-content !important;
+        margin-bottom: 20px;
+      }
+    }
+
+
+    .grid-align {
+      width: 100%;
+      text-align: center;
+    }
+
+    .inline-block-align {
+      display: inline-block;
+    }
+  }
+}
+
+::ng-deep .new-contacts-setting-menu {
+  margin-left: 124px;
+  margin-top: -13px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 0 !important;
+  min-height: fit-content !important;
+
+  .mat-menu-item {
+    color: white;
+    font-size: 13px;
+  }
+
+  .divider {
+    border-top: 1px solid #ffffff;
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+}

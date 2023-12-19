@@ -1,0 +1,203 @@
+.members-list-content {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+
+  .members-list-header {
+    height: 76px;
+    padding: 24px 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+
+    .members-list-header-left {
+      display: flex;
+      align-items: center;
+      color: white;
+
+      .m-r-8 {
+        margin-right: 8px;
+      }
+
+      span {
+        background-color: #0000003d;
+        padding: 8px;
+        height: 36px;
+        margin-right: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 auto;
+      }
+    }
+
+    .invitation-members-list-header-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .members-list-body {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 76px;
+    height: 100%;
+    min-width: 640px;
+
+    .invitation-members-list-table {
+      background: transparent;
+      height: 100%;
+      width: 100%;
+
+      .year {
+        width: 36px;
+        padding: 0 !important;
+      }
+
+      ::ng-deep thead {
+        width: 100%;
+
+        tr {
+          display: table;
+          width: 100%;
+          table-layout: fixed;
+          border: none !important;
+          height: 36px;
+          margin-bottom: 4px;
+          background-color: transparent;
+          backdrop-filter: blur(0);
+
+          th {
+            border-bottom: none;
+            font-weight: 500;
+            color: white;
+          }
+
+          .mat-cell {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background-color: #ffffff3d;
+            backdrop-filter: blur(0);
+            color: white;
+          }
+
+          .cdk-column-date {
+            width: 15%;
+          }
+
+          .cdk-column-action {
+            width: 25%;
+          }
+
+          .cdk-column-who {
+            width: 25%;
+          }
+
+          .cdk-column-details {
+            width: 35%;
+          }
+        }
+      }
+
+      ::ng-deep tbody {
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: block;
+
+
+        .flex-align-center {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+          }
+        }
+
+        tr {
+          display: table;
+          width: 100%;
+          table-layout: fixed;
+          border: none !important;
+          background: transparent;
+          //backdrop-filter: blur(8px);
+          color: white;
+
+          .mat-cell {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: white;
+          }
+
+          .cdk-column-date {
+            width: 15%;
+          }
+
+          .cdk-column-action {
+            width: 25%;
+          }
+
+          .cdk-column-who {
+            width: 25%;
+          }
+
+          .cdk-column-details {
+            width: 35%;
+          }
+        }
+      }
+
+      tr.box-expanded-row {
+        cursor: pointer;
+        height: 36px;
+        margin-bottom: 4px;
+        background-color: #ffffff3d;
+        //backdrop-filter: blur(8px);
+        color: white;
+
+        td {
+          border-bottom: none;
+          font-size: 15px !important;
+          color: white;
+
+          .three-dots-actions-btn {
+            display: none;
+            float: right;
+          }
+        }
+      }
+
+      tr.box-expanded-row:hover {
+        background-color: #0000003d;
+        //backdrop-filter: blur(8px);
+        color: white;
+
+        td .three-dots-actions-btn {
+          display: initial;
+        }
+      }
+
+      tr.box-expanded-row.active {
+        background-color: #0000003d;
+        //backdrop-filter: blur(8px);
+        color: white;
+      }
+
+      th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+  }
+}
+
+

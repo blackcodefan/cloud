@@ -1,0 +1,11 @@
+::ng-deep .image-preview .mat-dialog-container{
+  padding: 0!important;
+  border-radius: 0!important;
+  background: transparent;
+}
+
+.fit-image{
+  width: 400px;
+  height: 600px;
+  object-fit: contain;
+}

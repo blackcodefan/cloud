@@ -1,0 +1,20 @@
+<div [attr.id]="'action-bar-list-left'" class="breadcrumb-list">
+    <ng-container *ngIf="!actionBarEllipsis">
+        <ng-container *ngFor="let breadCrumb of breadCrumbList; let i = index">
+                        <span (click)="navigateToFolderFromPath(breadCrumb,i)" *ngIf="breadCrumb.box"
+                              [attr.id]="breadCrumb.itemId+'breadcrumb'"
+                              [attr.item-id]="breadCrumb.itemId"
+                              [attr.item-type]="'breadcrumb'"
+                              class="clickable collapsable">Root
+                        </span>
+            <span (click)="navigateToFolderFromPath(breadCrumb,i)" *ngIf="!breadCrumb.box"
+                  [attr.id]="breadCrumb.itemId+'breadcrumb'"
+                  [attr.item-id]="breadCrumb.itemId"
+                  [attr.item-type]="'breadcrumb'"
+                  class="clickable collapsable">{{breadCrumb.name}}
+                        </span>
+        </ng-container>
+        <span *ngIf="breadCrumbObj?.parent !== null"
+              class="clickable collapsable my-class">{{currentFolderName}}</span>
+    </ng-container>
+</div>

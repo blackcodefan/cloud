@@ -1,0 +1,18 @@
+.note-layout-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-element {
+    border-radius: 50% !important;
+    background: #0000003d;
+    color: #FFFFFF;
+    text-align: center;
+    margin: 16px 0;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

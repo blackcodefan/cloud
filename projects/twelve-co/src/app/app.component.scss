@@ -1,0 +1,174 @@
+.main-root-container {
+    width: 100%;
+    display: flex;
+    background-color: white;
+    background-size: cover;
+    background-position: center center;
+
+    .app-sidebar-68 {
+        background: #ffffff3d;
+        position: relative;
+        height: 100vh !important;
+        min-width: 68px !important;
+        padding: 0 16px;
+        overflow: hidden;
+
+        .app-sidebar-68-logo {
+            height: 36px;
+            width: 36px;
+            color: #FFFFFF;
+            text-align: center;
+            margin: 16px 0;
+            cursor: pointer;
+            border-radius: 50% !important;
+            background: #0000003d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .unicode_font {
+                width: 16px;
+                height: 16px;
+                line-height: 16px;
+            }
+
+            .encrypted_symbol {
+                color: WHITE;
+            }
+
+            .decrypted_symbol {
+                color: #00ff00;
+            }
+
+            span {
+                height: 16px;
+                line-height: 16px;
+            }
+        }
+
+        .app-sidebar-68-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            width: 36px;
+            padding-bottom: 16px;
+
+            img {
+                width: 36px;
+                height: 36px;
+                cursor: pointer;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            .app-sidebar-68-bottom-item {
+                border-radius: 50% !important;
+                background: #0000003d;
+                color: #FFFFFF;
+                text-align: center;
+                margin: 16px 0;
+                cursor: pointer;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+
+    .mat-drawer-container {
+        background: transparent;
+        width: 100%;
+        height: 100%;
+    }
+
+    .mat-bg-img {
+        .mat-drawer-side {
+            border-right: none !important;
+        }
+
+        .contact-sidebar {
+            display: flex;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+
+            .app-sidebar-flex {
+                display: flex;
+                height: 100%;
+            }
+
+            ::ng-deep .mat-drawer-inner-container {
+                overflow-x: hidden !important;
+            }
+        }
+
+        .box-shadow-none {
+            box-shadow: none !important;
+        }
+
+        .mat-sidebar-width {
+            width: 20%;
+            min-width: 368px;
+        }
+
+        .w-68 {
+            width: 68px !important;
+            min-width: 68px !important;
+        }
+    }
+
+    .ml-68 {
+        margin-left: 68px !important;
+    }
+
+    .app-content {
+        width: 100%;
+        height: 100vw;
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    .right-side-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-around;
+    }
+}
+
+#sidenavTopInjectionPoint {
+    width: 100%;
+}
+
+.overlay-sidebar-content {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    inset: 0;
+    pointer-events: initial;
+    opacity: 1;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.32);
+}
+
+.overlay-sidebar-popup {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    overflow-x: hidden;
+    transition: 0.2s;
+}
+
+
+.upload-NotificationList {
+    position: fixed;
+    bottom: calc(var(--generalPadding) * 2);
+    right: calc(var(--generalPadding) * 2);
+}

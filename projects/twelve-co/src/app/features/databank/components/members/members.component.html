@@ -1,0 +1,106 @@
+<div *ngIf="selectedBox" class="members-list-content">
+    <div class="members-list-header">
+        <div class="members-list-header-left">
+            <span class="m-r-8">{{selectedBox.name}}</span>
+            <span>Members: {{members.length || 0}}</span>
+        </div>
+    </div>
+    <div class="members-list-body">
+        <!--    <ng-container *ngIf="!dataService.dataBankInvitePeopleStatus">-->
+        <ng-container *ngIf="members.length>0">
+            <table [dataSource]="dataSource" class="invitation-members-list-table" mat-table matSort
+                   matSortDisableClear>
+
+                <!-- Avartar Column -->
+                <ng-container matColumnDef="avatar">
+                    <th *matHeaderCellDef class="year" mat-header-cell></th>
+                    <ng-container *matCellDef="let element">
+                        <td class="year" mat-cell>
+                            <div class="flex-align-center">
+                                <img [src]="element.id | fetchUserIcon | async">
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Member Column -->
+                <ng-container matColumnDef="member">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Member</th>
+                    <ng-container *matCellDef="let element">
+                        <td mat-cell> {{element.member}} </td>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Date Column -->
+                <ng-container matColumnDef="startDate">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ "DATE" | translate }}</th>
+                    <ng-container *matCellDef="let element">
+                        <td mat-cell> {{element.startDate | date:'dd/MM/yyyy HH:mm'}} </td>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+                    <ng-container *matCellDef="let element">
+                        <td mat-cell> {{element.status}} </td>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Permission Column -->
+                <ng-container matColumnDef="permission">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Permission</th>
+                    <ng-container *matCellDef="let element">
+                        <td mat-cell> {{element.permission}} </td>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Actions</th>
+                    <ng-container *matCellDef="let element">
+                        <td mat-cell> {{element.actions}} <span
+                            [matMenuTriggerData]="{'data':element}"
+                            [matMenuTriggerFor]="element.status=='ACTIVE'?activeMemberActionMenu:pendingMemberActionMenu"
+                            class="three-dots-actions-btn">&#x22EE;</span>
+                        </td>
+                        <mat-menu #activeMemberActionMenu="matMenu">
+                            <ng-template let-data="data" matMenuContent>
+                                <button (click)="handleChangePersmission(data)" mat-menu-item>
+                                    <span>Change permission</span>
+                                </button>
+                                <button (click)="handleAddExpiration(data)" mat-menu-item>
+                                    <span>Add expiration</span>
+                                </button>
+                                <button (click)="handleRevokeMembership(data)" mat-menu-item>
+                                    <span>Revoke membership</span>
+                                </button>
+                            </ng-template>
+
+                        </mat-menu>
+                        <mat-menu #pendingMemberActionMenu="matMenu">
+                            <ng-template let-data="data" matMenuContent>
+                                <button (click)="handleChangePersmission(data)" mat-menu-item>
+                                    <span>Change permission</span>
+                                </button>
+                                <button (click)="handleAddExpiration(data)" mat-menu-item>
+                                    <span>Add expiration</span>
+                                </button>
+                                <button (click)="handleUninvite(data)" mat-menu-item>
+                                    <span>Uninvite</span>
+                                </button>
+                            </ng-template>
+                        </mat-menu>
+                    </ng-container>
+                </ng-container>
+
+
+                <tr *matHeaderRowDef="displayedColumns" class="mat-table-header-row-border-top" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns;"
+                    class="clickable box-expanded-row"
+                    mat-row>
+                </tr>
+            </table>
+        </ng-container>
+    </div>
+</div>

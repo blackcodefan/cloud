@@ -1,0 +1,70 @@
+<div class="add-member-container">
+    <div class="add-member-header">
+        <div class="add-member-subject">
+            Add Members
+        </div>
+        <div class="add-member-header-action-buttons">
+            <mat-icon (click)="matDialogRef.close()">close</mat-icon>
+        </div>
+    </div>
+    <div class="add-member-activity-bar">
+        <div class="add-member-activity-bar-right">
+            <div class="add-member-sending-btn-menu">
+                <button (click)="addEmailChainMembers()" color="primary" mat-fab>
+                    <mat-icon>arrow_upward</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div [attr.id]="'add-member-submit-form'" class="add-member-submit-form">
+        <div class="email-scroll-content">
+            <div (focusin)="focusInMemberToInput()"
+                 (focusout)="focusOutMemberToInput()"
+                 class="add-member-to-container">
+                <div class="add-member-to-container-label">Add<sup>*</sup>:</div>
+                <div #receiverToSearchContainer class="add-member-to-search-container">
+                       <mat-form-field appearance="fill">
+                        <mat-chip-list #searchChipList>
+                            <mat-chip (removed)="removeReceiver(user)" *ngFor="let user of receivers"
+                                      [class.mat-chip-invalid]="!validateEmail(user)"
+                                      class="zhang-mat-chip">
+                                {{displayName(user)}}
+                                <button matChipRemove>
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip>
+                            <input
+                                #searchReceiverInput
+                                (matChipInputTokenEnd)="addReceiver($event)"
+                                [formControl]="receiverCtrl"
+                                [matAutocomplete]="auto"
+                                [matChipInputFor]="searchChipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedReceiver($event)"
+                                          [panelWidth]="receiverToSearchContainer.offsetWidth/2"
+                                          class="zhang-autocomplete">
+                            <mat-option *ngFor="let user of filteredReceivers ;let i = index" [value]="user">
+                                {{user.accountName}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-icon (menuClosed)="memberToRightMenuClosed()" (menuOpened)="memberToRightMenuOpened()"
+                                  *ngIf="isToGroupIcon"
+                                  [matMenuTriggerFor]="memberToRightMenu"
+                                  [ngStyle]="{bottom: newToChipListCreated?'4px':'11px'}"
+                                  matSuffix>group
+                        </mat-icon>
+                        <mat-menu #memberToRightMenu="matMenu"
+                                  class="member-to-right-menu" yPosition="below">
+                            <button mat-menu-item>Family</button>
+                            <button mat-menu-item>Enemies</button>
+                            <button mat-menu-item>Friends</button>
+                            <button mat-menu-item>People from 12co</button>
+                            <button mat-menu-item>IBM</button>
+                        </mat-menu>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

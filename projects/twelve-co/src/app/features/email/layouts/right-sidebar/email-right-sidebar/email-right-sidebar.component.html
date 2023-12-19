@@ -1,0 +1,99 @@
+<div class="right-content">
+    <div class="right-content-top-buttons">
+        <!-- <button class="right-sidebar-button" mat-raised-button (click)="showSearchBar()">
+            <mat-icon>search</mat-icon>
+        </button> -->
+        <button class="right-sidebar-button" mat-raised-button  (click)="returnToLabels()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button class="right-sidebar-button" mat-raised-button [matMenuTriggerFor]="filterListRightMenu">
+            <mat-icon>filter_list</mat-icon>
+        </button>
+        <mat-menu #filterListRightMenu="matMenu" class="email-filter-list-right-menu">
+            <button mat-menu-item (click)="onFilter('All')">
+                <div class="email-filter-list-right-menu-item-checked">
+                    <mat-icon *ngIf="filter=='All'">done</mat-icon>
+                </div>
+                All emails
+            </button>
+            <button mat-menu-item (click)="onFilter('Unread')">
+                <div class="email-filter-list-right-menu-item-checked">
+                    <mat-icon *ngIf="filter=='Unread'">done</mat-icon>
+                </div>
+                Unread
+            </button>
+            <button mat-menu-item (click)="onFilter('Starred')">
+                <div class="email-filter-list-right-menu-item-checked">
+                    <mat-icon *ngIf="filter=='Starred'">done</mat-icon>
+                </div>
+                Starred
+            </button>
+            <button mat-menu-item (click)="onFilter('CircleMails')">
+                <div class="email-filter-list-right-menu-item-checked">
+                    <mat-icon *ngIf="filter=='CircleMails'">done</mat-icon>
+                </div>
+                Only emails with attachments
+            </button>
+            <button mat-menu-item (click)="onFilter('ToMe')">
+                <div class="email-filter-list-right-menu-item-checked">
+                    <mat-icon *ngIf="filter=='ToMe'">done</mat-icon>
+                </div>
+                To: me
+            </button>
+            <button mat-menu-item (click)="onFilter('CcMe')">
+                <div class="email-filter-list-right-menu-item-checked">
+                    <mat-icon *ngIf="filter=='CcMe'">done</mat-icon>
+                </div>
+                Cc: me
+            </button>
+            <button mat-menu-item (click)="onFilter('BccMe')">
+                <div class="email-filter-list-right-menu-item-checked">
+                    <mat-icon *ngIf="filter=='BccMe'">done</mat-icon>
+                </div>
+                Bcc: me
+            </button>
+        </mat-menu>
+        <button class="right-sidebar-button" mat-raised-button [matMenuTriggerFor]="sortListRightMenu">
+            <mat-icon>sort</mat-icon>
+        </button>
+        <mat-menu #sortListRightMenu="matMenu" class="email-sort-list-right-menu">
+            <button mat-menu-item (click)="onSort('Date')">
+                <div class="email-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sort=='Date'">done</mat-icon>
+                </div>
+                Date
+            </button>
+            <button mat-menu-item (click)="onSort('Size')">
+                <div class="email-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sort=='Size'">done</mat-icon>
+                </div>
+                Size
+            </button>
+            <button mat-menu-item (click)="onSort('From')">
+                <div class="email-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sort=='From'">done</mat-icon>
+                </div>
+                From
+            </button>
+            <button mat-menu-item (click)="onSort('Attachments')">
+                <div class="email-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sort=='Attachments'">done</mat-icon>
+                </div>
+                Attachments
+            </button>
+            <mat-divider class="divider-fields"></mat-divider>
+            <button mat-menu-item (click)="onSortMessage('Oldest')">
+                <div class="email-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sortMessage=='Oldest'">done</mat-icon>
+                </div>
+                Oldest messages on top
+            </button>
+            <button mat-menu-item (click)="onSortMessage('Newest')">
+                <div class="email-sort-list-right-menu-item-checked">
+                    <mat-icon *ngIf="sortMessage=='Newest'">done</mat-icon>
+                </div>
+                Newest messages on Top
+            </button>
+        </mat-menu>
+    </div>
+</div>

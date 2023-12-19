@@ -1,0 +1,48 @@
+<div class="device-group-wrapper">
+    <div class="device-page-wrapper">
+        <ng-container *ngFor="let device of deviceList">
+            <mat-card class="device-card-wrapper">
+                <img height="60" src="./assets/images/icons/deviceIcon.svg">
+                <div class="device-wrapper">
+                    <div class="device-property">
+                        <mat-label class="device-property-key">Device name:</mat-label>
+                        <span class="device-property-value">{{device.deviceName}}</span>
+                    </div>
+                    <div class="device-property">
+                        <mat-label class="device-property-key">Active:</mat-label>
+                        <mat-icon *ngIf="device.active" class="small-icon">check</mat-icon>
+                        <mat-icon *ngIf="!device.active" class="small-icon">close</mat-icon>
+                    </div>
+                    <div class="device-property">
+                        <mat-label class="device-property-key">Enabled:</mat-label>
+                        <mat-icon *ngIf="device.enabled" class="small-icon">check</mat-icon>
+                        <mat-icon *ngIf="!device.enabled" class="small-icon">close</mat-icon>
+                    </div>
+                    <div class="device-property">
+                        <mat-label class="device-property-key">Enroll date:</mat-label>
+                        <span class="device-property-value">{{device.createDate |date}}</span>
+                    </div>
+                </div>
+            </mat-card>
+        </ng-container>
+
+    </div>
+    <button (click)="addDevice()" class="add-device-button-wrapper" ullaButton mat-flat-button>Add
+        another device
+    </button>
+
+    <div *ngIf="qrData" class="otp-wrapper">
+        <mat-label style="align-self: center">Scan this code from the 12co app</mat-label>
+        <button class="button-wrapper" mat-button>
+            <mat-icon (click)="addDevice()">redo</mat-icon>
+        </button>
+        <ngx-qrcode-styling [backgroundOptions]="{ color: 'rgba(125,0,0,0)' }"
+                            [data]="qrData.data"
+                            [height]="300"
+                            [shape]="'circle'"
+                            [width]="300">
+        </ngx-qrcode-styling>
+    </div>
+
+</div>
+

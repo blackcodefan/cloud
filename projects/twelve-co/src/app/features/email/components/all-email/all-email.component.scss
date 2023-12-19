@@ -1,0 +1,135 @@
+.all-labels{
+  margin-top: 64px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100% - 64px);
+  display: grid;
+  justify-content: center;
+  gap: 16px;
+  min-width: 592px;
+  .email-label {
+    width: 260px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: rgba(255,255,255,0.8);
+    justify-content: space-between;
+    cursor: pointer;
+    overflow: hidden;
+
+    .email-label-container {
+      padding: 16px 16px 0 16px;
+      .title {
+        font-family: "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        font-size: 1rem;
+        letter-spacing: 0.1em;
+        color: #111;
+        line-height: 1.3em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        display: flex;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+      }
+    }
+
+    .email-footer {
+      padding: 0 24px 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      z-index: 2;
+      .email-footer-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 0 0 0;
+        .email-footer-item {
+          background-color: rgba(255, 255, 255, 0.6);
+          display: flex;
+          justify-content: space-between;
+          height: 24px;
+          align-items: center;
+          .email-footer-item-label {
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding-left: 8px;
+            color: #111111;
+          }
+        .email-footer-item-number {
+          font-family: "Helvetica Neue", "Roboto Regular";
+          font-size: 1rem;
+          letter-spacing: 0.1em;
+          padding-left: 8px;
+          padding-right: 8px;
+          background-color: #111;
+          height: 24px;
+          min-width: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+        }
+
+      }
+    }
+    }
+
+  }
+  .email-label:hover .email-label-container {
+    height: 150px;
+  }
+}
+
+:host{
+  width: 100%;
+  overflow-x: hidden;
+}
+
+:host[min-width~="592px"] {
+  .all-labels {
+    grid-template-columns: 260px 260px;
+  }
+}
+
+:host[min-width~="868px"] {
+  .all-labels {
+    grid-template-columns: 260px 260px 260px;
+  }
+}
+
+:host[min-width~="1144px"] {
+  .all-labels {
+    grid-template-columns: 260px 260px 260px 260px;
+  }
+}
+
+:host[min-width~="1420px"] {
+  .all-labels {
+    grid-template-columns: 260px 260px 260px 260px 260px;
+  }
+}
+
+
+::ng-deep .label-right-menu {
+  border-radius: 0 !important;
+  padding: 8px;
+
+  .mat-menu-item {
+    font-family: "IBM Plex Mono Light", monospace;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+  }
+}
+

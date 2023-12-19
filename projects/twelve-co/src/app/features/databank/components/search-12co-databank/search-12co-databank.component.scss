@@ -1,0 +1,138 @@
+::ng-deep .search-12co-databank-popup .mat-dialog-container {
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+    padding: 0 !important;
+    border: none;
+}
+
+.search-12co-databank {
+    /* width: 400px;*/
+
+    .search-12co-databank-header {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(8px);
+        box-sizing: border-box;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 48px;
+
+        .search-12co-databank-input {
+            margin-right: 8px;
+
+            input {
+                background: transparent;
+                border: none;
+                outline: none;
+                color: white;
+                width: 350px;
+            }
+
+            ::placeholder {
+                color: white;
+                opacity: 0.7;
+                text-indent: 2px;
+            }
+        }
+
+        .search-12co-databank-action {
+            color: #ffffff;
+            cursor: pointer;
+        }
+    }
+
+    .search-12co-databank-gap {
+        height: 4px;
+        background: transparent;
+    }
+
+    .search-12co-databank-result {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(8px);
+        box-sizing: border-box;
+        padding: 16px 0;
+        height: 480px;
+        max-height: 480px;
+        overflow-y: auto;
+
+        .search-12co-databank-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 8px 10px;
+            cursor: pointer;
+
+            .search-12co-databank-info {
+                display: flex;
+                align-items: center;
+
+
+                .search-12co-databank-avatar {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    margin-right: 16px;
+                }
+
+                .search-12co-databank-details {
+                    display: block;
+                    color: #FFFFFF;
+
+                    div {
+                        font-size: 13px;
+                        height: 18px;
+                        line-height: 18px;
+
+                    }
+                }
+            }
+
+            .search-12co-databank-action {
+                color: #ffffff;
+                font-size: 12px;
+                cursor: pointer;
+            }
+        }
+
+        .search-12co-databank-item:hover {
+            background-color: red;
+        }
+
+        .search-12co-databank-item-added {
+
+            .search-12co-databank-avatar {
+                opacity: 0.3;
+            }
+
+            .search-12co-databank-info .search-12co-databank-details {
+                color: rgba(255, 255, 255, 0.3);
+            }
+
+            .search-12co-databank-action {
+                color: rgba(255, 255, 255, 0.3);
+                cursor: initial;
+            }
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+    }
+
+    .mh-480 {
+        height: 480px;
+    }
+
+    .spinner-content {
+        min-height: 480px;
+        box-sizing: border-box;
+        overflow-y: auto;
+
+        ::ng-deep .ngx-spinner-overlay {
+            position: relative !important;
+        }
+    }
+}
+

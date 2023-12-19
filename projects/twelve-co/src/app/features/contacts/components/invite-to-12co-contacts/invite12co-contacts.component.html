@@ -1,0 +1,63 @@
+<div class="popup">
+  <!--invite-to-12co system-notifications header-->
+  <div class="popup-header">
+    <mat-label class="popup-label-title">Invitation</mat-label>
+  </div>
+  <!--invite-to-12co system-notifications body-->
+  <ng-container *ngIf="count_email==1">
+    <div class="popup-body">
+      <div class="popup-body-item">Invite "{{email}}" to join 12co.</div>
+      <div class="popup-body-item">
+        <span>The notification will be send in:</span>
+        <span [matMenuTriggerFor]="matHandleMenu" class="clickable">_language</span>
+        <mat-menu #matHandleMenu="matMenu" class="language-list-menu">
+          <button (click)="setLanguage('English')" mat-menu-item>English</button>
+          <button (click)="setLanguage('Spanish')" mat-menu-item>Spanish</button>
+          <button (click)="setLanguage('Chinese')" mat-menu-item>Chinese</button>
+          <button (click)="setLanguage('Romanian')" mat-menu-item>Romanian</button>
+          <button (click)="setLanguage('English')" mat-menu-item>English</button>
+          <button (click)="setLanguage('Spanish')" mat-menu-item>Spanish</button>
+          <button (click)="setLanguage('Chinese')" mat-menu-item>Chinese</button>
+          <button (click)="setLanguage('Romanian')" mat-menu-item>Romanian</button>
+        </mat-menu>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="count_email>1">
+    <div class="popup-body">
+      <div class="popup-body-item">You are going to invite to join 12co:</div>
+      <div class="popup-body-item">
+        <mat-checkbox [checked]="true">example1@email.com</mat-checkbox>
+      </div>
+      <div class="popup-body-item">
+        <mat-checkbox [checked]="true">example2@email.com</mat-checkbox>
+      </div>
+      <div class="popup-body-item">
+        <span>Invitation will send in: </span>
+        <span [matMenuTriggerFor]="matHandleMenu" class="clickable">_language</span>
+        <mat-menu #matHandleMenu="matMenu" class="language-list-menu">
+          <button (click)="setLanguage('English')" mat-menu-item>English</button>
+          <button (click)="setLanguage('Spanish')" mat-menu-item>Spanish</button>
+          <button (click)="setLanguage('Chinese')" mat-menu-item>Chinese</button>
+          <button (click)="setLanguage('Romanian')" mat-menu-item>Romanian</button>
+          <button (click)="setLanguage('English')" mat-menu-item>English</button>
+          <button (click)="setLanguage('Spanish')" mat-menu-item>Spanish</button>
+          <button (click)="setLanguage('Chinese')" mat-menu-item>Chinese</button>
+          <button (click)="setLanguage('Romanian')" mat-menu-item>Romanian</button>
+        </mat-menu>
+      </div>
+    </div>
+  </ng-container>
+  <!--invite-to-12co system-notifications footer-->
+  <div class="popup-footer invite-footer">
+
+    <div class="popup-footer-btnList">
+      <button (click)="matDialogRef.close()" mat-button>
+        Cancel
+      </button>
+      <button mat-flat-button>
+        Invite
+      </button>
+    </div>
+  </div>
+</div>

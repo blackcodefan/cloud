@@ -1,0 +1,62 @@
+<div class="popup">
+    <!--duplication system-notifications body-->
+    <span style="padding: 16px!important;display: flex;justify-content: center;flex-direction: row">
+        {{'databank.duplication.ITEMS_ALREADY_EXIST'|translate}}
+    </span>
+    <div class="popup-body">
+
+        <mat-list>
+            <div class="mat-list-item">
+                <div class="file-upload-line-wrapper">
+                    <div class="file-upload-name-wrapper">
+
+                    </div>
+                    <div class="file-upload-checkbox-wrapper">
+                        {{'databank.duplication.REPLACE'|translate}}
+                    </div>
+                    <div class="file-upload-checkbox-wrapper">
+                        {{'databank.duplication.ADD_VERSION'|translate}}
+                    </div>
+                </div>
+                <mat-list-item *ngFor="let file of files;let idx =index" class="mat-line-item">
+                    <div class="file-upload-line-wrapper">
+                        <div class="file-upload-name-wrapper">
+                            <span class="file-name-wrapper"> {{file.fileName}} </span>
+                            <span class="file-size-wrapper">{{file.fileBlobs.size | fileSize : 2}}</span>
+                        </div>
+                        <div class="file-upload-checkbox-wrapper">
+                            <mat-checkbox (change)="handleChangeForFile(idx,DuplicationHandleTypeEnum.REPLACE)"
+                                          [checked]="selectionGroup.at(idx).value === DuplicationHandleTypeEnum.REPLACE">
+                            </mat-checkbox>
+                        </div>
+                        <div class="file-upload-checkbox-wrapper">
+                            <mat-checkbox (change)="handleChangeForFile(idx,DuplicationHandleTypeEnum.ADD_VERSION)"
+                                          [checked]="selectionGroup.at(idx).value === DuplicationHandleTypeEnum.ADD_VERSION">
+                            </mat-checkbox>
+                        </div>
+                    </div>
+
+                </mat-list-item>
+            </div>
+        </mat-list>
+    </div>
+    <!--duplication system-notifications footer-->
+    <div class="popup-footer">
+        <div class="popup-footer-btnList">
+            <button (click)="handleReplaceAll()" [attr.id]="'cancelButton'" mat-button>
+                Replace all files
+            </button>
+            <button (click)="handleAddVersionAll()" [attr.id]="'cancelButton'" mat-button>
+                Add version for all
+            </button>
+            <button (click)="handleCancel()" [attr.id]="'cancelButton'" mat-button>
+                {{'databank.duplication.CANCEL'|translate}}
+            </button>
+            <button (click)="handleSubmit()" [disabled]="submitDisabled" mat-button>
+                {{'databank.duplication.SUBMIT'|translate}}
+            </button>
+
+        </div>
+    </div>
+</div>
+

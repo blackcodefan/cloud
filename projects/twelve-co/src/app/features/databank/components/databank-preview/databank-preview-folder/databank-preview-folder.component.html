@@ -1,0 +1,50 @@
+<div class="databank-preview-folder">
+    <div class="folder-info-content">
+        <div class="folder-info">
+            <div class="folder-title-wrapper">
+                <div class="folder-title-label-container">
+                    <span class="folder-title-label">{{'DATABANK.FOLDER_INFORMATION' | translate}}</span>
+                    <span class="change-button">{{'DATABANK.FOLDER_RENAME' | translate}}</span>
+                </div>
+                <div class="folder-title">{{selectedFolder?.name}}</div>
+            </div>
+            <div class="folder-description-wrapper">
+                <div class="folder-description-label-container">
+                    <span class="folder-description-label">{{'DATABANK.DESCRIPTION' | translate}}</span>
+                    <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>
+                </div>
+                <div class="folder-description">{{selectedFolder?.description || ''}}
+                </div>
+            </div>
+            <div class="folder-created-wrapper">
+                <div class="folder-created-label-container">
+                    <span class="folder-created-label">{{'DATABANK.FOLDER_CREATED' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>-->
+                </div>
+                <div class="folder-created">{{selectedFolder?.created  | date : 'dd MMMM yyyy\' at\' HH:mm'}}</div>
+            </div>
+            <div class="folder-modified-wrapper">
+                <div class="folder-modified-label-container">
+                    <span class="folder-modified-label">{{'DATABANK.FOLDER_MODIFIED' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>-->
+                </div>
+                <div class="folder-modified">{{selectedFolder?.created  | date : 'dd MMMM yyyy\' at\' HH:mm'}}</div>
+            </div>
+            <div class="folder-size-wrapper">
+                <div class="folder-size-label-container">
+                    <span class="folder-size-label">{{'DATABANK.FOLDER_SIZE' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>-->
+                </div>
+                <div class="folder-size">{{selectedFolder?.usedSpace | fileSize:2}}</div>
+            </div>
+            <div class="folder-creator-wrapper">
+                <div class="folder-creator-label-container">
+                    <span class="folder-creator-label">{{'DATABANK.FOLDER_CREATOR' | translate}}</span>
+                    <!--                            <span class="change-button">{{'DATABANK.FOLDER_DESCRIPTION_ADD' | translate}}</span>-->
+                </div>
+                <div class="creator-description" *ngIf="selectedFolder">{{selectedFolder?.ownerName}}
+                    @{{((selectedFolder.ownerAccountId  | account_details) | async)?.name}}</div>
+            </div>
+        </div>
+    </div>
+</div>

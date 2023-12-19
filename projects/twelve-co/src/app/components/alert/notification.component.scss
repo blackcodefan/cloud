@@ -1,0 +1,85 @@
+::ng-deep .notification-popup .mat-dialog-container {
+  padding: 0 !important;
+}
+
+::ng-deep .cdk-overlay-dark-backdrop {
+  background-color: rgba(9, 30, 66, 0.54);
+}
+
+/* manage tag list scss */
+
+.notification {
+
+  /* manage header */
+
+  .notification-header {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    padding: 16px 24px;
+  }
+
+
+  /*manage tag list body css*/
+  .notification-body {
+    width: 600px;
+    padding: 0 24px;
+
+    .notification-item {
+      position: relative;
+
+      .notification-item-content {
+        display: flex;
+        align-items: flex-start;
+
+        .notification-img {
+          margin-right: 20px;
+
+          img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+
+        .notification-content {
+
+        }
+      }
+
+      /* manage notificatino item footer */
+
+      .notification-item-footer {
+        padding: 16px 24px;
+        display: flex;
+        justify-content: flex-end;
+
+        .notification-footer-btnList {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .mat-button {
+            margin-right: 8px;
+            font-weight: 400 !important;
+          }
+        }
+      }
+
+    }
+
+  }
+
+
+}
+
+.notification-progress {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: darkgray;
+}

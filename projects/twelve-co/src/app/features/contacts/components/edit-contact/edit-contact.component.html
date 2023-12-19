@@ -1,0 +1,353 @@
+<div class="new-contact-context">
+    <div class="new-contact-context-content">
+        <div class="grid-align">
+            <div [formGroup]="contactFormGroup" class="new-contact-form">
+                <div class="scrollable">
+                    <div class="new-contact-form-block">
+                        <div class="new-contact-form-field new-contact-edit-button">
+                            <div class="field-name"></div>
+                            <div class="field-value">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-contact-form-block">
+                        <div [attr.id]="'firstName'" class="new-contact-form-field">
+                            <div class="field-name">{{"contacts.FIRST_NAME" | translate}}</div>
+                            <ng-container *ngIf="current_focused=='firstName'">
+                                <input (keydown.tab)="setNextElementCurrentFocus('firstName')"
+                                       (keyup.enter)="setNextElementCurrentFocus('firstName')"
+                                       class="new-contact-form-input"
+                                       formControlName="firstName">
+                            </ng-container>
+                            <div (click)="setCurrentFocus('firstName')" *ngIf="current_focused!='firstName'"
+                                 class="field-value">
+                <span
+                    *ngIf="contactFormGroup.controls['firstName'].value!=''">{{contactFormGroup.controls['firstName'].value}}</span>
+                                <span *ngIf="contactFormGroup.controls['firstName'].value==''"
+                                      class="new-contact-placeholder">John</span>
+                            </div>
+                        </div>
+                        <div [attr.id]="'middleName'" class="new-contact-form-field">
+                            <div class="field-name">{{"contacts.MIDDLE_NAME" | translate}}</div>
+                            <ng-container *ngIf="current_focused=='middleName'">
+                                <input (keydown.tab)="setNextElementCurrentFocus('middleName')"
+                                       (keyup.enter)="setNextElementCurrentFocus('middleName')"
+                                       class="new-contact-form-input"
+                                       formControlName="middleName">
+                            </ng-container>
+                            <div (click)="setCurrentFocus('middleName')" *ngIf="current_focused!='middleName'"
+                                 class="field-value">
+                <span
+                    *ngIf="contactFormGroup.controls['middleName'].value!=''">{{contactFormGroup.controls['middleName'].value}}</span>
+                                <span *ngIf="contactFormGroup.controls['middleName'].value==''"
+                                      class="new-contact-placeholder">Fitzgerald</span>
+                            </div>
+                        </div>
+                        <div [attr.id]="'lastName'" class="new-contact-form-field">
+                            <div class="field-name">{{"contacts.LAST_NAME" | translate}}</div>
+                            <ng-container *ngIf="current_focused=='lastName'">
+                                <input (keydown.tab)="setNextElementCurrentFocus('lastName')"
+                                       (keyup.enter)="setNextElementCurrentFocus('lastName')"
+                                       class="new-contact-form-input"
+                                       formControlName="lastName">
+                            </ng-container>
+                            <div (click)="setCurrentFocus('lastName')" *ngIf="current_focused!='lastName'"
+                                 class="field-value">
+                <span
+                    *ngIf="contactFormGroup.controls['lastName'].value!=''">{{contactFormGroup.controls['lastName'].value}}</span>
+                                <span *ngIf="contactFormGroup.controls['lastName'].value==''"
+                                      class="new-contact-placeholder">Kennedy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-contact-form-block">
+                        <div [attr.id]="'company'" class="new-contact-form-field">
+                            <div class="field-name">{{"contacts.COMPANY" | translate}}</div>
+                            <ng-container *ngIf="current_focused=='company'">
+                                <input (keydown.tab)="setNextElementCurrentFocus('company')"
+                                       (keyup.enter)="setNextElementCurrentFocus('company')"
+                                       class="new-contact-form-input"
+                                       formControlName="company">
+                            </ng-container>
+                            <div (click)="setCurrentFocus('company')" *ngIf="current_focused!='company'"
+                                 class="field-value">
+                <span
+                    *ngIf="contactFormGroup.controls['company'].value!=''">{{contactFormGroup.controls['company'].value}}</span>
+                                <span *ngIf="contactFormGroup.controls['company'].value==''"
+                                      class="new-contact-placeholder">Company Inc.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="statusList.isDepartment" [attr.id]="'department'" class="new-contact-form-field">
+                            <div class="field-name">{{"contacts.DEPARTMENT" | translate}}</div>
+                            <ng-container *ngIf="current_focused=='department'">
+                                <input (keydown.tab)="setNextElementCurrentFocus('department')"
+                                       (keyup.enter)="setNextElementCurrentFocus('department')"
+                                       class="new-contact-form-input"
+                                       formControlName="department">
+                            </ng-container>
+                            <div (click)="setCurrentFocus('department')" *ngIf="current_focused!='department'"
+                                 class="field-value">
+                <span
+                    *ngIf="contactFormGroup.controls['department'].value!=''">{{contactFormGroup.controls['department'].value}}</span>
+                                <span *ngIf="contactFormGroup.controls['department'].value==''"
+                                      class="new-contact-placeholder">Department 1.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="statusList.isJobTitle" [attr.id]="'jobTitle'" class="new-contact-form-field">
+                            <div class="field-name">{{"contacts.JOB_TITLE" | translate}}</div>
+                            <ng-container *ngIf="current_focused=='jobTitle'">
+                                <input (keydown.tab)="setNextElementCurrentFocus('jobTitle')"
+                                       (keyup.enter)="setNextElementCurrentFocus('jobTitle')"
+                                       class="new-contact-form-input"
+                                       formControlName="jobTitle">
+                            </ng-container>
+                            <div (click)="setCurrentFocus('jobTitle')" *ngIf="current_focused!='jobTitle'"
+                                 class="field-value">
+                <span
+                    *ngIf="contactFormGroup.controls['jobTitle'].value!=''">{{contactFormGroup.controls['jobTitle'].value}}</span>
+                                <span *ngIf="contactFormGroup.controls['jobTitle'].value==''"
+                                      class="new-contact-placeholder">Web developer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-contact-form-block" formArrayName="emails">
+                        <ng-container *ngFor="let email of getFormGroups('emails').controls; let i = index">
+                            <div [attr.id]="'email'+i" [formGroupName]="i" class="new-contact-form-field">
+                                <ng-container *ngIf="getFormGroups('emails').controls.length==1">
+                                    <div class="field-name">{{"contacts.EMAIL" | translate}}<span>*</span></div>
+                                </ng-container>
+                                <ng-container *ngIf="getFormGroups('emails').controls.length>1">
+                                    <div class="field-name">{{"contacts.EMAIL" | translate}}  #{{i + 1}}<span>*</span>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="current_focused=='email'+i">
+                                    <input (keydown.tab)="setNextElementCurrentFocus('email'+i)"
+                                           (keyup.enter)="setNextElementCurrentFocus('email'+i)"
+                                           class="new-contact-form-input"
+                                           formControlName="email">
+                                </ng-container>
+                                <div (click)="setCurrentFocus('email'+i)" *ngIf="current_focused!='email'+i"
+                                     class="field-value">
+                                    <span *ngIf="email.get('email')!.value!=''">{{email.get('email')!.value}}</span>
+                                    <span *ngIf="email.get('email')!.value==''" class="new-contact-placeholder">example@email.com</span>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="new-contact-form-block" formArrayName="phones">
+                        <ng-container *ngFor="let phone of phones.controls; let i = index">
+                            <div [attr.id]="'phone'+i" [formGroupName]="i" class="new-contact-form-field">
+                                <ng-container *ngIf="getFormGroups('phones').controls.length==1">
+                                    <div class="field-name">{{"contacts.PHONE" | translate}}</div>
+                                </ng-container>
+                                <ng-container *ngIf="getFormGroups('phones').controls.length>1">
+                                    <div class="field-name">{{"contacts.PHONE" | translate}} #{{i + 1}}<span>*</span>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="current_focused=='phone'+i">
+                                    <input (keydown.tab)="setNextElementCurrentFocus('phone' + i)"
+                                           (keyup.enter)="setNextElementCurrentFocus('phone'+i)"
+                                           class="new-contact-form-input"
+                                           [formControlName]="i">
+                                </ng-container>
+                                <div (click)="setCurrentFocus('phone'+i)" *ngIf="current_focused!='phone'+i"
+                                     class="field-value">
+                                    <span *ngIf="phone.get('phone')!.value!=''">{{phone.get('phone')!.value}}</span>
+                                    <span *ngIf="phone.get('phone')!.value==''" class="new-contact-placeholder">+44 7388482478</span>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div formArrayName="addresses">
+                        <ng-container *ngFor="let address of getFormGroups('addresses').controls; let i =index">
+                            <div [formGroupName]="i" class="new-contact-form-block">
+                                <div [attr.id]="'address' + i" class="new-contact-form-field">
+                                    <ng-container *ngIf="getFormGroups('addresses').controls.length==1">
+                                        <div class="field-name">{{"contacts.ADDRESS" | translate}}</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="getFormGroups('addresses').controls.length>1">
+                                        <div class="field-name">{{"contacts.ADDRESS" | translate}} #{{i + 1}}</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="current_focused=='address' + i">
+                                        <input (keydown.tab)="setNextElementCurrentFocus('address' + i)"
+                                               (keyup.enter)="setNextElementCurrentFocus('address' + i)"
+                                               class="new-contact-form-input"
+                                               formControlName="address">
+                                    </ng-container>
+                                    <div (click)="setCurrentFocus('address' + i)" *ngIf="current_focused!='address' + i"
+                                         class="field-value">
+                                        <span
+                                            *ngIf="address.get('address')!.value!=''">{{address.get('address')!.value}}</span>
+                                        <span *ngIf="address.get('address')!.value==''" class="new-contact-placeholder">Home</span>
+                                    </div>
+                                </div>
+                                <div [attr.id]="'street' + i" class="new-contact-form-field">
+                                    <div class="field-name">{{"contacts.STREET" | translate}}</div>
+                                    <ng-container *ngIf="current_focused=='street' + i">
+                                        <input (keyup.enter)="setNextElementCurrentFocus('street' + i)"
+                                               class="new-contact-form-input"
+                                               formControlName="street">
+                                    </ng-container>
+                                    <div (click)="setCurrentFocus('street' + i)" *ngIf="current_focused!='street' + i"
+                                         class="field-value">
+                                        <span
+                                            *ngIf="address.get('street')!.value!=''">{{address.get('street')!.value}}</span>
+                                        <span *ngIf="address.get('street')!.value==''" class="new-contact-placeholder">London street</span>
+                                    </div>
+                                </div>
+                                <div [attr.id]="'line_2' + i" class="new-contact-form-field">
+                                    <div class="field-name">{{"contacts.LINE_2" | translate}}</div>
+                                    <ng-container *ngIf="current_focused=='line_2' + i">
+                                        <input (keydown.tab)="setNextElementCurrentFocus('line_2' + i)"
+                                               (keyup.enter)="setNextElementCurrentFocus('line_2' + i)"
+                                               class="new-contact-form-input"
+                                               formControlName="street">
+                                    </ng-container>
+                                    <div (click)="setCurrentFocus('line_2' + i)" *ngIf="current_focused!='line_2' + i"
+                                         class="field-value">
+                                        <span
+                                            *ngIf="address.get('line_2')!.value!=''">{{address.get('line_2')!.value}}</span>
+                                        <span *ngIf="address.get('line_2')!.value==''"
+                                              class="new-contact-placeholder">1 Herbert Mansions</span>
+                                    </div>
+                                </div>
+                                <div [attr.id]="'city' + i" class="new-contact-form-field">
+                                    <div class="field-name">{{"contacts.CITY" | translate}}</div>
+                                    <ng-container *ngIf="current_focused=='city' + i">
+                                        <input (keydown.tab)="setNextElementCurrentFocus('city' + i)"
+                                               (keyup.enter)="setNextElementCurrentFocus('city' + i)"
+                                               class="new-contact-form-input"
+                                               formControlName="city">
+                                    </ng-container>
+                                    <div (click)="setCurrentFocus('city' + i)" *ngIf="current_focused!='city' + i"
+                                         class="field-value">
+                                        <span
+                                            *ngIf="address.get('city')!.value!=''">{{address.get('city')!.value}}</span>
+                                        <span *ngIf="address.get('city')!.value==''"
+                                              class="new-contact-placeholder">1 Herbert Mansions</span>
+                                    </div>
+                                </div>
+                                <div [attr.id]="'postal_code' + i" class="new-contact-form-field">
+                                    <div class="field-name">{{"contacts.POSTAL_CODE" | translate}}</div>
+                                    <ng-container *ngIf="current_focused=='postal_code' + i">
+                                        <input (keydown.tab)="setNextElementCurrentFocus('postal_code' + i)"
+                                               (keyup.enter)="setNextElementCurrentFocus('postal_code' + i)"
+                                               class="new-contact-form-input"
+                                               formControlName="postal_code">
+                                    </ng-container>
+                                    <div (click)="setCurrentFocus('postal_code' + i)"
+                                         *ngIf="current_focused!='postal_code' + i"
+                                         class="field-value">
+                                        <span
+                                            *ngIf="address.get('postal_code')!.value!=''">{{address.get('postal_code')!.value}}</span>
+                                        <span *ngIf="address.get('postal_code')!.value==''"
+                                              class="new-contact-placeholder">SW1X 9LP</span>
+                                    </div>
+                                </div>
+                                <div [attr.id]="'region' + i" class="new-contact-form-field">
+                                    <div class="field-name">{{"contacts.REGION" | translate}}</div>
+                                    <ng-container *ngIf="current_focused=='region' + i">
+                                        <input (keydown.tab)="setNextElementCurrentFocus('region' + i)"
+                                               (keyup.enter)="setNextElementCurrentFocus('region' + i)"
+                                               class="new-contact-form-input"
+                                               formControlName="region">
+                                    </ng-container>
+                                    <div (click)="setCurrentFocus('region' + i)" *ngIf="current_focused!='region' + i"
+                                         class="field-value">
+                                        <span
+                                            *ngIf="address.get('region')!.value!=''">{{address.get('region')!.value}}</span>
+                                        <span *ngIf="address.get('region')!.value==''"
+                                              class="new-contact-placeholder">1 Herbert Mansions</span>
+                                    </div>
+                                </div>
+                                <div [attr.id]="'country' + i" class="new-contact-form-field">
+                                    <div class="field-name">{{"contacts.COUNTRY" | translate}}</div>
+                                    <ng-container *ngIf="current_focused=='country' + i">
+                                        <input (keydown.tab)="setNextElementCurrentFocus('country' + i)"
+                                               (keyup.enter)="setNextElementCurrentFocus('country' + i)"
+                                               class="new-contact-form-input"
+                                               formControlName="country">
+                                    </ng-container>
+                                    <div (click)="setCurrentFocus('country' + i)" *ngIf="current_focused!='country' + i"
+                                         class="field-value">
+                                        <span
+                                            *ngIf="address.get('country')!.value!=''">{{address.get('country')!.value}}</span>
+                                        <span *ngIf="address.get('country')!.value==''"
+                                              class="new-contact-placeholder">United Kingdom</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="statusList.isBirthday" class="new-contact-form-block">
+                        <div [attr.id]="'birthdate'" class="new-contact-form-field">
+                            <div class="field-name">{{"contacts.BIRTHDATE" | translate}}</div>
+                            <ng-container *ngIf="current_focused=='birthdate'">
+                                <input (keydown.tab)="setNextElementCurrentFocus('birthdate')"
+                                       (keyup.enter)="setNextElementCurrentFocus('birthdate')"
+                                       class="new-contact-form-input"
+                                       formControlName="birthdate">
+                            </ng-container>
+                            <div (click)="setCurrentFocus('birthdate')" *ngIf="current_focused!='birthdate'"
+                                 class="field-value">
+                <span
+                    *ngIf="contactFormGroup.controls['birthdate'].value!=''">{{contactFormGroup.controls['birthdate'].value}}</span>
+                                <span *ngIf="contactFormGroup.controls['birthdate'].value==''"
+                                      class="new-contact-placeholder">16 March 1996</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="statusList.isNote" class="new-contact-form-block">
+                        <div [attr.id]="'note'" class="new-contact-form-field">
+                            <div class="field-name">{{"contacts.NOTE" | translate}}</div>
+                            <ng-container *ngIf="current_focused=='note'">
+                                <input (keydown.tab)="setNextElementCurrentFocus('note')"
+                                       (keyup.enter)="setNextElementCurrentFocus('note')"
+                                       class="new-contact-form-input"
+                                       formControlName="note">
+                            </ng-container>
+                            <div (click)="setCurrentFocus('note')" *ngIf="current_focused!='note'" class="field-value">
+                <span
+                    *ngIf="contactFormGroup.controls['note'].value!=''">{{contactFormGroup.controls['note'].value}}</span>
+                                <span *ngIf="contactFormGroup.controls['note'].value==''"
+                                      class="new-contact-placeholder">very awesome</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="new-contact-form-block">
+                    <div class="new-contact-form-field">
+                        <div (click)="setCurrentFocus('none')" [matMenuTriggerFor]="contact_setting_menu"
+                             class="field-name field-setting">
+                            /…
+                        </div>
+                        <mat-menu #contact_setting_menu="matMenu" class="new-contacts-setting-menu">
+                            <button (click)="addAddress()" *ngIf="getFormGroups('addresses').controls.length==0"
+                                    mat-menu-item>{{"contacts.ADD_ADDRESS" | translate}}</button>
+                            <button (click)="addField('isNote')"
+                                    mat-menu-item>{{"contacts.ADD_NOTE" | translate}}</button>
+                            <button (click)="addField('isBirthday')"
+                                    mat-menu-item>{{"contacts.ADD_BIRTHDAY" | translate}}</button>
+                            <button (click)="addField('isDepartment')"
+                                    mat-menu-item>{{"contacts.ADD_DEPARTMENT" | translate}}</button>
+                            <button (click)="addField('isJobTitle')"
+                                    mat-menu-item>{{"contacts.ADD_JOB_TITLE" | translate}}</button>
+                            <div *ngIf="getFormGroups('emails').controls[0]?.get('email')?.value!=''
+                                      ||getFormGroups('phones').controls[0]?.get('phone')?.value!=''
+                                      ||getFormGroups('addresses').controls.length>=1" class="divider">
+                            </div>
+                            <button (click)="addEmail()" *ngIf="emailArrayValid()"
+                                    mat-menu-item>{{"contacts.ADD_NEW_EMAIL" | translate}}</button>
+                            <button (click)="addPhoneNumber()" *ngIf="phoneArrayValid()"
+                                    mat-menu-item>{{"contacts.ADD_NEW_PHONE" | translate}}</button>
+                            <button (click)="addAddress()" *ngIf="getFormGroups('addresses').controls.length>=1"
+                                    mat-menu-item>{{"contacts.ADD_NEW_ADDRESS" | translate}}</button>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

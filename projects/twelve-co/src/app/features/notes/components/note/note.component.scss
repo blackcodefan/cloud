@@ -1,0 +1,33 @@
+.note-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    max-height: 400px;
+    border: 1px black solid;
+    overflow: hidden;
+    margin: 8px;
+    padding: 4px;
+
+    .note-header {
+        display: flex;
+        flex-direction: row;
+        height: 60px;
+        padding: 4px;
+        color: black;
+        background: lightgrey;
+    }
+
+    .note-body {
+        overflow-y: scroll;
+        padding-bottom: 16px;
+        display: flex;
+        height: 380px;
+
+    }
+
+    .note-actions {
+        display: flex;
+        flex-direction: row;
+        height: 40px;
+    }
+}

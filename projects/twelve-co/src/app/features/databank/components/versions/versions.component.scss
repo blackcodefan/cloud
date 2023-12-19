@@ -1,0 +1,40 @@
+// remove default mat dialog container padding
+::ng-deep .version-popup .mat-dialog-container{
+  padding: 0!important;
+}
+.version{
+  width: 400px;
+  .version-header{
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .version-body{
+    padding: 24px 0;
+    .version-item{
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .version-item-detail{
+        display: block;
+      }
+      .version-action{
+        display: none;
+      }
+    }
+    .version-item:hover{
+      background: whitesmoke;
+    }
+    .version-item:hover .version-action{
+      display: block;
+    }
+  }
+
+  .version-footer{
+    padding: 24px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

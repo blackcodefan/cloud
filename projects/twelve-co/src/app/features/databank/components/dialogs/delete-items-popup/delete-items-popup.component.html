@@ -1,0 +1,14 @@
+<div class="popup">
+  <!--delete items body-->
+  <div class="popup-body">
+    {{'databank.DELETE_BOX_MODAL_BODY'|translate:{boxName: itemsDetail} }}
+  </div>
+  <!--delete items footer-->
+  <div class="popup-footer">
+    <div class="popup-footer-btnList">
+      <button mat-button (click)="matDialog.close()">{{'CANCEL'|translate}}</button>
+      <button mat-button (click)="matDialog.close({action: true})">{{'DELETE'|translate}}</button>
+    </div>
+  </div>
+</div>
+

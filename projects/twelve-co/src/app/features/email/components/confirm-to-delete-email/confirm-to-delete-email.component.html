@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>{{'EMAIL.email_removed' | translate}}</div>
+<div mat-dialog-actions class="cdm-button-list">
+    <button mat-flat-button color="warn" class="delete-button" (click)="closeActionModal()">{{'DELETE' | translate}}</button>
+    <button mat-stroked-button class="cancel-button" mat-dialog-close>{{'CANCEL' | translate}}</button>
+</div>

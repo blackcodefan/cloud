@@ -1,0 +1,34 @@
+<div class="page-container">
+    <h1>Hey Authenticity here !</h1>
+
+    <div class="file-to-check-container">
+        <span class="file-name-wrapper">{{file ? file.name : ''}}</span>
+        <input type="file" #itemTocheck class="hidden" (change)="handleFileUpload($event)">
+        <button mat-button (click)="itemTocheck.click()">{{!file ? 'Upload file to check' : 'Change file'}}</button>
+    </div>
+    <div class="file-signature-container">
+        <span class="file-name-wrapper">{{signatureFile ? signatureFile.name : ''}}</span>
+        <input type="file" #signaturefileToCheck class="hidden" (change)="handleSignatureFileUpload($event)">
+        <button mat-button
+                (click)="signaturefileToCheck.click()">{{!signatureFile ? 'upload certificate' : 'Change file'}}</button>
+    </div>
+    <div class="check-button">
+        <button mat-button color="primary" (click)="validate()"
+                [disabled]="signatureFile==null || signatureFile === undefined || file==null || file === undefined ">
+            Check
+        </button>
+        <button mat-button color="primary" (click)="goBack()">
+            Back
+        </button>
+    </div>
+
+
+    <div class="check-result" *ngIf="result>0">
+        <span class="check-result-success" *ngIf="result==1">Document integrity confirmed</span>
+        <span class="check-result-failed" *ngIf="result==2">Document integrity invalid</span>
+        <span class="check-result-inconclusive" *ngIf="result==3">System error occurred</span>
+
+    </div>
+
+</div>
+

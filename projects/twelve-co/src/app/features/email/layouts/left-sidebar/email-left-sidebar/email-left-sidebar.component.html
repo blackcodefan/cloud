@@ -1,0 +1,71 @@
+<div class="left-content">
+    <div class="inline-block-container">
+        <div class="left-content-top-buttons">
+            <button (click)="composeEmail()" class="left-sidebar-button" mat-raised-button>
+                <label>{{"EMAIL.Compose" | translate}}</label>
+            </button>
+            <button class="left-sidebar-button" mat-raised-button (click)="reloadCurrentPage()">
+                <label>{{"EMAIL.Refresh" | translate}}</label>
+            </button>
+        </div>
+    </div>
+
+    <mat-list class="l" role="list" *ngIf="isFixedLabelsEmpty()">
+
+        <mat-list-item (click)="inboxEmail()"
+                       [class.email-left-sidebar-item-active]="pageLink == '/apps/emails/inbox'" class="li"
+                       role="listitem">
+            <label>{{fixedLabels[0].name | translate}}</label>
+            <div class="i-cc">
+                <label class="ni-c" *ngIf="getTotalUnreadEmailForLabel(fixedLabels[0].id)>0">{{getTotalUnreadEmailForLabel(fixedLabels[0].id)}}</label>
+                <label class="i-c" *ngIf="getTotalEmailForLabel(fixedLabels[0].id)>0">{{getTotalEmailForLabel(fixedLabels[0].id)}}</label>
+            </div>
+        </mat-list-item>
+        <mat-list-item (click)="draftEmail()"
+                       [class.email-left-sidebar-item-active]="pageLink == '/apps/emails/draft-email'"
+                       class="li">
+            <label>{{fixedLabels[1].name | translate}}</label>
+        </mat-list-item>
+        <mat-list-item (click)="sentEmail()"
+                       [class.email-left-sidebar-item-active]="pageLink == '/apps/emails/sent-email'"
+                       class="li">
+            <label>{{fixedLabels[2].name | translate}}</label>
+            <label class="s-c" *ngIf="getTotalEmailForLabel(fixedLabels[2].id)>0">{{getTotalEmailForLabel(fixedLabels[2].id)}}</label>
+        </mat-list-item>
+        <mat-list-item (click)="scheduledEmail()"
+                       [class.email-left-sidebar-item-active]="pageLink == '/apps/emails/scheduled-email'"
+                       class="li">
+            <label>{{fixedLabels[3].name | translate}}</label>
+        </mat-list-item>
+        <mat-list-item (click)="trashEmail()"
+                       [class.email-left-sidebar-item-active]="pageLink == '/apps/emails/trash-email'"
+                       class="li">
+            <label>{{fixedLabels[4].name | translate}}</label>
+        </mat-list-item>
+        <mat-list-item (click)="archiveEmail()"
+                       [class.email-left-sidebar-item-active]="pageLink == '/apps/emails/archive-email'"
+                       class="li">
+            <label>{{fixedLabels[5].name | translate}}</label>
+        </mat-list-item>
+
+        <mat-list-item (click)="createNewLabel()" class="li">
+            <label>{{"EMAIL.Create_new_label" | translate}}</label>
+        </mat-list-item>
+    </mat-list>
+    <mat-list class="la-l" role="list">
+        <mat-list-item class="li" *ngFor="let label of customLabels">
+            <label>{{label.name}}</label>
+            <mat-icon (click)="removeLabel(label.id)">close</mat-icon>
+        </mat-list-item>
+    </mat-list>
+
+
+    <div class="spinner-content">
+        <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                     color="#ffffff"
+                     size="medium"
+                     type="ball-spin-clockwise-fade">
+            <span style="color:#ffffff ">{{spinnerContent}}</span>
+        </ngx-spinner>
+    </div>
+</div>

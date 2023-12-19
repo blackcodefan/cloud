@@ -1,0 +1,102 @@
+.get-info {
+    width: 500px;
+    height: auto;
+
+    .get-info-header {
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .get-info-label-title {
+            padding: 24px;
+            font-weight: normal !important;
+            color: white !important;
+        }
+    }
+
+
+    .get-info-body {
+        padding: 24px;
+
+        .get-info-item {
+            min-height: 16px;
+            display: flex;
+            align-items: flex-end;
+
+            .pt-3 {
+                padding-top: 3px;
+            }
+
+            .pt-13 {
+                padding-top: 13px;
+            }
+
+            .get-info-item-field {
+                width: 30%;
+                margin-right: 16px;
+                font-size: 12px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                display: flex;
+                justify-content: flex-end;
+                color: #474747 !important;
+            }
+
+            .get-info-item-value {
+                width: 70%;
+                word-break: break-all;
+                color: white !important;
+
+                .get-info-version-item {
+                    padding: 10px;
+                    background-color: #F5F5F5;
+                    border-radius: 4px;
+                    margin-bottom: 4px;
+                    cursor: pointer;
+
+                    div {
+                        height: 20px;
+                        margin-bottom: 2px;
+                        width: 100%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                }
+
+                .get-info-version-item:hover {
+                    background-color: #D6D6D6
+                }
+            }
+        }
+
+        .flex-start {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .h-12 {
+            height: 12px;
+        }
+    }
+
+}
+
+
+.fixed-position {
+    position: fixed;
+}
+
+.white {
+    color: white;
+}
+
+mat-label {
+    color: white !important;
+}
+
+.black {
+    color: black;
+}

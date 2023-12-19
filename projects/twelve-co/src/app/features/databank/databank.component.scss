@@ -1,0 +1,52 @@
+.databank-app {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .databank-app-container {
+        border-radius: 10px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        padding: 0;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-backdrop-filter: blur(4px);
+
+        .databank-app-header {
+
+        }
+
+        .databank-app-body {
+            margin-top: 6px;
+            height: calc(100% - 98px);
+        }
+    }
+
+    .databank-app-preview {
+        //width: 376px;
+        visibility: visible;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30vw;
+        min-width: 380px;
+        max-width: 480px;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 10px;
+
+        ::ng-deep mat-icon {
+            width: 18px;
+            height: 18px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    }
+}
+.side-container {
+    width: calc(100vw - 600px) !important;
+}

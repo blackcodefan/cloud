@@ -1,0 +1,21 @@
+<div class="all-email-header-container">
+    <div class="all-email-header-left">
+        <div class="app-title">Circlemail for {{account.accountName}} - {{account.fullName}}</div>
+<!--        <div class="email-account">jaimedelburgo@outlook.com</div>-->
+    </div>
+    <div class="all-email-header-right">
+        <button><mat-icon class="material-icons" (click)="showSearchBar()">search</mat-icon></button>
+        <div class="add-new-button-container" (click)="createNewLabel()">
+            <button class="add-new-button">
+                <mat-icon class="material-icons">add</mat-icon>
+            </button>
+            <div class="add-label-button">Add label</div>
+        </div>
+        <div class="add-new-button-container" (click)="composeEmail()">
+            <button class="add-new-button">
+                <mat-icon class="material-icons">add</mat-icon>
+            </button>
+            <span class="add-label-button">Compose</span>
+        </div>
+    </div>
+</div>

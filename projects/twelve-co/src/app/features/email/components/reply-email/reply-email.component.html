@@ -1,0 +1,329 @@
+<input #uploadFilesInput (change)="uploadFiles($event, uploadFilesInput)" accept="*" hidden multiple type="file">
+<div class="reply-email-container">
+    <div class="reply-email-header">
+        <div class="reply-email-subject">
+            {{newBoxEmailItem.subject}}
+        </div>
+        <mat-icon (click)="closeNewReplyEmail()">close</mat-icon>
+    </div>
+    <div class="reply-email-activity-bar">
+        <div class="reply-email-activity-bar-right">
+            <mat-icon (click)="setEditStatus()" [class.isEdit]="editNewEmail">text_format</mat-icon>
+            <mat-icon [matMenuTriggerFor]="attachmentMenu">attach_file
+            </mat-icon>
+            <mat-menu #attachmentMenu="matMenu" class="attachment-menu" yPosition="below">
+                <button mat-menu-item>12CO</button>
+                <button mat-menu-item>{{'EMAIL.Photos' | translate}}</button>
+                <button mat-menu-item>{{'EMAIL.Add_video' | translate}}</button>
+                <button mat-menu-item>{{'EMAIL.Add_audio' | translate}}</button>
+                <button (click)="uploadFilesInput.click()" mat-menu-item>PC/Mac</button>
+            </mat-menu>
+            <mat-icon [matMenuTriggerFor]="signatureMenu">edit</mat-icon>
+            <mat-menu #signatureMenu="matMenu" class="attachment-menu" yPosition="below">
+                <button (click)="manageSignatures()" mat-menu-item>{{'Manage_signatures' | translate}}</button>
+                <button mat-menu-item>Signature 1</button>
+                <button mat-menu-item>Signature 2</button>
+            </mat-menu>
+            <div class="reply-email-sending-btn-menu">
+                <button [matMenuTriggerFor]="aboveMenu" color="primary" mat-fab>
+                    <mat-icon>arrow_upward</mat-icon>
+                </button>
+                <mat-menu #aboveMenu="matMenu" class="reply-email-send-menu" yPosition="below">
+                    <button (click)="sendMessage()" mat-menu-item>
+                        <mat-icon>send</mat-icon>
+                        <span>{{'EMAIL.Send' | translate}}</span>
+                    </button>
+                    <button (click)="sendScheduleMessage()" mat-menu-item>
+                        <mat-icon>schedule_send</mat-icon>
+                        <span>{{'EMAIL.Schedule_send' | translate}}</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+    <div [attr.id]="'reply-email-submit-form'" class="reply-email-submit-form">
+        <div class="email-scroll-content">
+            <div (click)="focusInBoxEmailInput()" *ngIf="!boxEmailRecipientFocused"
+                 class="reply-email-ellipse-recipients-container">
+                <span class="reply-email-to-ellipse-label">{{'EMAIL.Recipients' | translate}}</span>
+                <div class="reply-email-to-ellipse-recipients">
+                    <ng-container *ngIf="receivers.length>0">
+                        <div [attr.id]="'boxEmailEllipseRecipientsList'" class="reply-email-to-ellipse-recipients-list">
+                            <ng-container *ngFor="let receiver of mergedReceivers;let i=index">
+                                {{displayName(receiver)}}
+                                <ng-container *ngIf="(i+1)<mergedReceivers.length"> ,</ng-container>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="isShowMore" class="reply-email-to-ellipse-recipients-action-button">
+                            {{mergedReceivers.length}}
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div (focusin)="focusInEmailToInput()" (focusout)="focusOutEmailToInput()"
+                 [ngStyle]="{display: boxEmailRecipientFocused?'':'none'}"
+                 class="reply-email-to-container">
+                <div class="reply-email-to-container-label">{{'EMAIL.To' | translate}}<sup>*</sup>:</div>
+                <div #receiverToSearchContainer class="reply-email-to-search-container">
+                    <!--                    <mat-form-field appearance="fill" (resized)="ChipListResized('to',$event)">-->
+                    <mat-form-field appearance="fill">
+                        <mat-chip-list #searchChipList>
+                            <ng-container *ngFor="let user of receivers;let i = index">
+                                <mat-chip (removed)="removeReceiver(user)"
+                                          [class.mat-chip-invalid]="!validateEmail(user)"
+                                          [disabled]="i==0"
+                                          class="zhang-mat-chip">
+                                    {{displayName(user)}}
+                                    <!-- <button *ngIf="i!=0" matChipRemove>
+                                        <mat-icon>cancel</mat-icon>
+                                    </button> -->
+                                </mat-chip>
+                            </ng-container>
+                            <input
+                                #searchReceiverInput
+                                (matChipInputTokenEnd)="addReceiver($event)"
+                                [formControl]="receiverCtrl"
+                                [matAutocomplete]="auto"
+                                [matChipInputFor]="searchChipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" readonly>
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedReceiver($event)"
+                                          [panelWidth]="receiverToSearchContainer.offsetWidth/2"
+                                          class="zhang-autocomplete">
+                            <mat-option *ngFor="let user of filteredReceivers;let i = index" [value]="user">
+                                {{user.accountName}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <!-- <mat-icon (menuClosed)="emailToRightMenuClosed()" (menuOpened)="emailToRightMenuOpened()"
+                                  *ngIf="isToGroupIcon"
+                                  [matMenuTriggerFor]="emailToRightMenu"
+                                  [ngStyle]="{bottom: newToChipListCreated?'4px':'11px'}"
+                                  matSuffix>group
+                        </mat-icon>
+                        <mat-menu #emailToRightMenu="matMenu"
+                                  class="email-to-right-menu" yPosition="below">
+                            <button mat-menu-item>Family</button>
+                            <button mat-menu-item>Enemies</button>
+                            <button mat-menu-item>Friends</button>
+                            <button mat-menu-item>People from 12co</button>
+                            <button mat-menu-item>IBM</button>
+                        </mat-menu> -->
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div (focusin)="focusInEmailCcInput()"
+                 (focusout)="focusOutEmailCcInput()"
+                 [ngStyle]="{display: boxEmailRecipientFocused?'':'none'}"
+                 class="reply-email-cc-container">
+                <div class="reply-email-cc-container-label">{{'EMAIL.Cc' | translate}}:</div>
+                <div #receiverCcSearchContainer class="reply-email-cc-search-container">
+                    <!--                    <mat-form-field (resized)="ChipListResized('cc',$event)" appearance="fill">-->
+                    <mat-form-field appearance="fill">
+                        <mat-chip-list #searchCCChipList>
+                            <mat-chip (removed)="removeCCReceiver(user)" *ngFor="let user of ccReceivers"
+                                      [class.mat-chip-invalid]="!validateEmail(user)"
+                                      class="zhang-mat-chip">
+                                {{displayName(user)}}
+                                <!-- <button matChipRemove>
+                                    <mat-icon>cancel</mat-icon>
+                                </button> -->
+                            </mat-chip>
+                            <input
+                                #searchCCReceiverInput
+                                (matChipInputTokenEnd)="addCCReceiver($event)"
+                                [formControl]="ccReceiverCtrl"
+                                [matAutocomplete]="autoCC"
+                                [matChipInputFor]="searchCCChipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" readonly>
+                        </mat-chip-list>
+                        <mat-autocomplete #autoCC="matAutocomplete" (optionSelected)="selectedCCReceiver($event)"
+                                          [panelWidth]="receiverCcSearchContainer.offsetWidth/2"
+                                          class="zhang-autocomplete">
+                            <mat-option *ngFor="let user of filteredReceivers;let i = index" [value]="user">
+                                {{user.accountName}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <!-- <mat-icon (menuClosed)="emailCcRightMenuClosed()" (menuOpened)="emailCcRightMenuOpened()"
+                                  *ngIf="isCcGroupIcon"
+                                  [matMenuTriggerFor]="emailCcRightMenu"
+                                  [ngStyle]="{bottom: newCcChipListCreated?'4px':'11px'}"
+                                  matSuffix>group
+                        </mat-icon>
+                        <mat-menu #emailCcRightMenu="matMenu"
+                                  class="email-cc-right-menu" yPosition="below">
+                            <button mat-menu-item>Family</button>
+                            <button mat-menu-item>Enemies</button>
+                            <button mat-menu-item>Friends</button>
+                            <button mat-menu-item>People from 12co</button>
+                            <button mat-menu-item>IBM</button>
+                        </mat-menu> -->
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!--    <div class="reply-email-bcc-container"
+                             [ngStyle]="{display: boxEmailRecipientFocused?'':'none'}"
+                             (focusin)="focusInEmailBccInput()"
+                             (focusout)="focusOutEmailBccInput()">
+                            <div class="reply-email-bcc-container-label">Bcc:</div>
+                            <div class="reply-email-bcc-search-container"  #receiverBccSearchContainer>
+                                <mat-form-field appearance="fill" (resized)="ChipListResized('bcc',$event)">
+                                    <mat-chip-list #searchBccChipList>
+                                        <mat-chip class="zhang-mat-chip" (removed)="removeBccReceiver(user)" [class.mat-chip-invalid]="!validateEmail(user)"
+                                                  *ngFor="let user of bccReceivers">
+                                            {{displayName(user)}}
+                                            <button matChipRemove>
+                                                <mat-icon>cancel</mat-icon>
+                                            </button>
+                                        </mat-chip>
+                                        <input
+                                            #searchBccReceiverInput
+                                            (matChipInputTokenEnd)="addBccReceiver($event)"
+                                            [formControl]="bccReceiverCtrl"
+                                            [matAutocomplete]="autoBCC"
+                                            [matChipInputFor]="searchBccChipList"
+                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                                    </mat-chip-list>
+                                    <mat-autocomplete class="zhang-autocomplete" #autoBCC="matAutocomplete" (optionSelected)="selectedBccReceiver($event)"
+                                                      [panelWidth]="receiverBccSearchContainer.offsetWidth/2">
+                                        <mat-option *ngFor="let user of filteredBccReceivers | async;let i=index" [value]="user">
+                                            {{user}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-icon *ngIf="isBccGroupIcon" matSuffix
+                                              (menuOpened)="emailBccRightMenuOpened()"
+                                              (menuClosed)= "emailBccRightMenuClosed()"
+                                              [ngStyle]="{bottom: newBccChipListCreated?'4px':'11px'}"
+                                              [matMenuTriggerFor]="emailBccRightMenu">group</mat-icon>
+                                    <mat-menu #emailBccRightMenu="matMenu"
+                                              yPosition="below" class="email-bcc-right-menu">
+                                        <button mat-menu-item>Family</button>
+                                        <button mat-menu-item>Enemies</button>
+                                        <button mat-menu-item>Friends</button>
+                                        <button mat-menu-item>People from 12co</button>
+                                        <button mat-menu-item>IBM</button>
+                                    </mat-menu>
+                                </mat-form-field>
+                            </div>
+                        </div>-->
+
+            <div [ngStyle]="{height: !boxEmailRecipientFocused? 'calc(60vh - ' + (78 + attachmentListHeight) + 'px)' : 'calc(60vh - '
+                 + (receiverToSearchContainer.offsetHeight + receiverCcSearchContainer.offsetHeight + attachmentListHeight + 40) + 'px)'}"
+                 class="reply-email-quill-editor">
+                <quill-editor
+                    (focusin)="focusOutToInput()"
+                    (onContentChanged)="contentChange($event)"
+                    [(ngModel)]="newBoxEmailItem.content[0].content"
+
+                    [sanitize]="false"
+                    customToolbarPosition="top">
+                    <div [ngStyle]="{display: editNewEmail ? '' : 'none' }" quill-editor-toolbar>
+                            <span class="ql-formats">
+                                <button [title]="'Bold'" class="ql-bold" type="button">
+                                </button>
+                                <button [title]="'Italic'" class="ql-italic" type="button">
+                                </button>
+                                <button [title]="'Underline'" class="ql-underline" type="button">
+                                </button>
+                                <button [title]="'Strikethrough'" class="ql-strike" type="button">
+                                </button>
+                            </span>
+                        <span class="ql-formats">
+                                  <select [title]="'quill.font_color' | translate" class="ql-color">
+                                  </select>
+                                  <select [title]="'quill.background_color' | translate" class="ql-background">
+                                  </select>
+                            </span>
+                        <span class="ql-formats">
+                                    <button [title]="'quill.Subscript' | translate" class="ql-script" type="button"
+                                            value="sub">
+                                    </button>
+                                    <button [title]="'quill.Superscript' | translate" class="ql-script" type="button"
+                                            value="super">
+                                    </button>
+                            </span>
+                        <span class="ql-formats">
+                                    <button [title]="'quill.ordered_list' | translate" class="ql-list" type="button"
+                                            value="ordered">
+                                    </button>
+                                    <button [title]="'quill.bullet_list' | translate" class="ql-list" type="button"
+                                            value="bullet">
+                                    </button>
+                            </span>
+                        <span class="ql-formats">
+                                    <button [title]="'quill.decrease_indent' | translate" class="ql-indent"
+                                            type="button" value="-1">
+                                    </button>
+                                    <button [title]="'quill.increase_indent' | translate" class="ql-indent"
+                                            type="button" value="+1">
+                                    </button>
+                            </span>
+                        <span class="ql-formats">
+                                <select [title]="'quill.Size' | translate" class="ql-size">
+                                    <option value="small"></option>
+                                    <option selected></option>
+                                    <option value="large"></option>
+                                    <option value="huge"></option>
+                                </select>
+                            </span>
+                    </div>
+                </quill-editor>
+            </div>
+            <div *ngIf="newBoxEmailItem.attachmentList.length > 0" class="reply-email-body-divider"></div>
+            <div *ngIf="newBoxEmailItem.attachmentList.length > 0" class="reply-email-body-attachmentCounter">
+                <button (click)="setAttachmentStatus()" class="reply-email-body-attachmentCounter-button"
+                        mat-flat-button>
+                    <ng-container *ngIf="!isAttachment">
+                        {{newBoxEmailItem.attachmentList.length}} attachment
+                        <ng-container *ngIf="newBoxEmailItem.attachmentList.length > 0">s</ng-container>
+                        (detailed)
+                    </ng-container>
+                    <ng-container *ngIf="isAttachment">
+                        {{newBoxEmailItem.attachmentList.length}} attachment
+                        <ng-container *ngIf="newBoxEmailItem.attachmentList.length > 0">s</ng-container>
+                        (hidden)
+                    </ng-container>
+                </button>
+                <span>{{totalStringSize}}</span>
+            </div>
+            <div (click)="focusOutToInput()"
+                 *ngIf="isAttachment"
+                 [attr.id]="'reply-email-body-attachment-container'" class="reply-email-body-attachment-container">
+                <ng-container *ngFor="let attachmentFile of newBoxEmailItem.attachmentList; let i = index;">
+                    <ng-container *ngIf="i >= 0">
+                        <div class="reply-email-upload-file">
+                            <div class="reply-email-upload-file-header">
+                                <span>{{attachmentFile.attachmentFileExtension}}</span>
+                                <div (click)="removeUploadFile(i)" class="reply-email-upload-file-cancel">
+                                    <mat-icon>cancel</mat-icon>
+                                </div>
+                                <div *ngIf="progress != 100" class="reply-email-upload-progress">
+                                    <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
+                                </div>
+                            </div>
+
+                            <div class="reply-email-upload-file-detail">
+                                <div
+                                    class="reply-email-upload-file-name">{{attachmentFile.attachmentFileName}}</div>
+                                <div
+                                    class="reply-email-upload-file-size">{{attachmentFile.attachmentFileSize}}</div>
+                            </div>
+                        </div>
+
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="spinner-content">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                 color="#ffffff"
+                 size="medium"
+                 type="ball-spin-clockwise-fade">
+        <span style="color:#ffffff ">Sending a new message</span>
+    </ngx-spinner>
+</div>

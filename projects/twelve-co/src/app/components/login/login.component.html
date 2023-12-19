@@ -1,0 +1,76 @@
+<video playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true" [autoplay]="true" loop muted
+       id="loginVideo">
+    <source [src]="loginBackground" type="video/mp4">
+</video>
+
+<div #loginPage class="login-page">
+    <mat-card *ngIf="loadingCard" class="{{backgroundType}}">
+        <div class="logo-login">
+            <ng-container
+                *ngIf="backgroundType=='login-card-center-white'||backgroundType=='login-card-left-white'">
+                <img alt="logo" src="./assets/logo/black-logo.svg" style="width: 100px">
+            </ng-container>
+        </div>
+        <mat-card-header>
+            <mat-card-title>
+                <ng-container *ngIf="status=='qrcode'">{{'LOGIN.WELCOME'|translate}}</ng-container>
+                <ng-container *ngIf="status=='addDevice'">{{'LOGIN.ADD_DEVICE'|translate}}</ng-container>
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="status!='login'">
+                <ng-container *ngIf="status=='qrcode'">{{'LOGIN.PLEASE_LOGIN'|translate}}</ng-container>
+                <ng-container
+                    *ngIf="status=='addDevice'">{{'LOGIN.PLEASE_CAPTURE_WITH_APP'|translate}}</ng-container>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div *ngIf="status=='qrcode'" class="qr-code-container">
+                <ngx-qrcode-styling *ngIf="qrData"
+                                    [backgroundOptions]="{color: 'rgba(255,0,0,0)'}"
+                                    [data]="qrData.data"
+                                    [dotsOptions]="{color: (backgroundType=='login-card-center-white'||backgroundType=='login-card-left-white')?'#000':'#FFFFFF', type:'square'}"
+                                    [height]="200"
+                                    [shape]="'square'"
+                                    [width]="200">
+                </ngx-qrcode-styling>
+            </div>
+
+            <div *ngIf="status==='forgot' || status==='addDevice'" class="forgot-container">
+                <input class="jaime-input" placeholder="{{'LOGIN.PLACEHOLDER_EMAIL'|translate}}" type="email"
+                       [formControl]="emailInputFormControl">
+            </div>
+        </mat-card-content>
+
+        <mat-card-footer *ngIf="status=='forgot' || status==='addDevice'">
+            <button (click)="status='qrcode'"
+                    class="cancel-button"
+                    mat-flat-button
+                    type="button">{{'LOGIN.CANCEL'|translate}}
+            </button>
+            <button (click)="handleOtherOption()" [class.button-spinner]="loading || processing"
+                    [disabled]="!emailInputFormControl.valid || processing"
+                    mat-flat-button
+                    type="button">{{'LOGIN.SUBMIT'|translate}}
+            </button>
+        </mat-card-footer>
+
+        <div class="lost-device" *ngIf="status=='qrcode'">
+            <div (click)="status='addDevice'" class="text-underline"
+                 style="cursor: pointer">{{'LOGIN.LOST_DEVICES' | translate}}</div>
+        </div>
+
+    </mat-card>
+
+    <div class="login-footer">
+        <div class="copyright"
+             [class.copyright-black]="backgroundType=='login-card-center-black'||backgroundType=='login-card-left-black'">
+            <span>{{'LOGIN.COPYRIGHT' | translate}}</span>
+        </div>
+        <div class="copyright-pointy"
+             routerLink="/validator"
+             [class.copyright-black]="backgroundType=='login-card-center-black'||backgroundType=='login-card-left-black'">
+            <span>{{'LOGIN.ORACLE' | translate}}</span>
+        </div>
+    </div>
+</div>
+
+

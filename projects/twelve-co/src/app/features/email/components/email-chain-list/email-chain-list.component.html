@@ -1,0 +1,197 @@
+<div *ngIf="loading" class="email-chain-list-container">
+    <ng-container *ngFor="let emailItem of emailList;let i=index;">
+        <ng-container *ngIf="emailItem.inviteStatus!='i'&&emailItem.inviteStatus=='a'">
+            <div class="chain-invite"
+                 [class.accepted-invite]="emailItem.inviteStatus=='a'">
+                <div class="chain-invite-header">
+                    <div class="chain-invite-header__info">
+                        <img [src]="'../../../assets/apps/IMG_0510 copy.jpg'" alt="avatar" class="chain-invite-header__avatar">
+                        <div class="chain-invite-header__container">
+                            <div class="chain-invite-header__date">
+                                <ng-container *ngIf="emailItem.inviteStatus=='a'">
+                                    <span class="chain-invite-header__in">Accepted Invitation&nbsp;</span>
+                                </ng-container>
+                                {{showFormattedDate(emailItem.date)}}
+                            </div>
+                            <div class="chain-invite-header__sender"><span *ngFor="let receiver of emailItem.receivers">{{receiver.name}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="emailItem.invite">
+            <ng-container *ngIf="emailItem.inviteStatus=='i'">
+                <div class="chain-invite">
+                    <div class="chain-invite-header">
+                        <div class="chain-invite-header__info">
+                            <img [src]="'../../../assets/apps/IMG_0510 copy.jpg'" alt="avatar" class="chain-invite-header__avatar">
+                            <div class="chain-invite-header__container">
+                                <div class="chain-invite-header__date">
+                                    <span class="chain-invite-header__in">Add Members&nbsp;</span>{{showFormattedDate(emailItem.date)}}
+                                </div>
+                                <div class="chain-invite-header__sender">{{emailItem.senderUserName}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chain-invite-recipients">
+                        <div class="chain-invite-header__recipients__to"> To:&nbsp;<span *ngFor="let receiver of emailItem.receivers">{{receiver.name}} </span></div>
+                        <mat-divider class="line-header-divider"></mat-divider>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!emailItem.invite">
+            <div *ngIf="userEmail!=emailItem.sender" class="chain-inbox">
+                <div class="chain-inbox-header">
+                    <div class="chain-inbox-header__info">
+                        <img [src]="(emailItem.senderId | avatarFetcher) | async" alt="avatar" class="chain-inbox-header__avatar">
+                        <div class="chain-inbox-header__container">
+                            <div class="chain-inbox-header__date"><span
+                                    class="chain-inbox-header__in">in {{crtLabelName}}&nbsp;</span>{{showFormattedDate(emailItem.date)}}
+                            </div>
+                            <div class="chain-inbox-header__sender">{{emailItem.senderUserName}}</div>
+                        </div>
+                    </div>
+                    <div class="chain-inbox-header__icons" [ngStyle]="{display: cimt.menuOpen?'flex':''}">
+                        <button class="email-chain-button">
+                            <mat-icon (click)="onForward(emailItem)">forward</mat-icon>
+                        </button>
+                        <button class="email-chain-button">
+                            <mat-icon (click)="reverseEmailDetailStatus(emailItem.id)">
+                                <ng-container *ngIf="!emailItem.showDetail">
+                                    expand_more
+                                </ng-container>
+                                <ng-container *ngIf="emailItem.showDetail">
+                                    expand_less
+                                </ng-container>
+                            </mat-icon>
+                        </button>
+                        <button class="email-chain-button">
+                            <mat-icon (click)="onDeleteVirtual(emailItem)">delete_outline</mat-icon>
+                        </button>
+                        <button [matMenuTriggerFor]="moreVertRightMenu" #cimt="matMenuTrigger"  class="right-sidebar-button" mat-raised-button>
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #moreVertRightMenu="matMenu" class="attachment-menu" xPosition="after" yPosition="below">
+                            <button mat-menu-item (click)="onPrint(emailItem)">{{'EMAIL.print' | translate}}</button>
+                            <button mat-menu-item (click)="setReadFlag(emailItem)" *ngIf="emailItem.isRead;else notRead">{{'EMAIL.mark_unread' | translate}}</button>
+                            <ng-template #notRead>
+                                <button mat-menu-item (click)="setReadFlag(emailItem)">{{'EMAIL.mark_read' | translate}}</button>
+                            </ng-template>
+                            <button mat-menu-item  [matMenuTriggerFor]="label" *ngIf="showMoveToAction">Move to</button>
+                            <button mat-menu-item (click)="onAuthenticityCheck(emailItem)">{{'EMAIL.authenticity' | translate}}</button>
+                        </mat-menu>
+                        <mat-menu #label="matMenu" [hasBackdrop]="false" [overlapTrigger]="false" class="email-list-right-sub-menu">
+                            <button mat-menu-item *ngFor="let label of labelList" (click)="onMoveToLabel(emailItem, label)">{{label.name | translate}}</button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <ng-container *ngIf="showAllDetail&&emailItem.showDetail">
+                    <div class="chain-inbox-recipients">
+                        <div class="chain-inbox-recipients-container" [ngStyle]="{whiteSpace: emailItem.showReceiversDetail?'normal':'nowrap'}">
+                        <span class="chain-inbox-header__recipients__to" [ngStyle]="{display: emailItem.showReceiversDetail?'block':'inline'}">To:
+                            <span *ngFor="let receiver of emailItem.receivers">{{receiver.name}}, </span>
+                        </span>
+                            <span class="chain-inbox-header__recipients__cc">{{'EMAIL.Cc' | translate}}:
+                            <span *ngFor="let receiver of emailItem.ccReceivers">{{receiver.name}}, </span>
+                        </span>
+                        </div>
+                        <div (click)="reverseEmailReceiversDetailStatus(emailItem.id)" class="chain-inbox-recipients__detail-hide">
+                            <span *ngIf="emailItem.showReceiversDetail">{{'EMAIL.hide' | translate}}</span>
+                            <span *ngIf="!emailItem.showReceiversDetail">{{'EMAIL.details' | translate}}</span>
+                        </div>
+                    </div>
+                    <mat-divider class="line-header-divider"></mat-divider>
+                    <div [innerHTML]="emailItem.content" class="chain-inbox-content"></div>
+                    <div class="chain-inbox-attachments">
+                        <div *ngIf="emailItem.attachmentList!=undefined">
+                            <div class="chain-inbox-attachments__files"><span
+                                    class="chain-inbox-attachments__label">{{'EMAIL.Attachment' | translate}}</span>
+                                ({{emailItem.attachmentList.length}})
+                            </div>
+                            <div *ngFor="let att of emailItem.attachmentList"
+                                 class="email-chain-attachment-download">
+                                 {{att.attachmentFileName}} {{att.attachmentFileSize | fileSize:2}}
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div *ngIf="userEmail==emailItem.sender" class="chain-sent"> <!-- mat-elevation-z2 alternative to outline -->
+                <div class="chain-sent-header">
+                    <div class="chain-sent-header__info">
+                        <img [src]="'../../../assets/apps/IMG_0510 copy.jpg'" alt="avatar" class="chain-sent-header__avatar">
+                        <div class="chain-sent-header__container">
+                            <div class="chain-sent-header__date">
+                                <span class="chain-sent-header__in">in Sent&nbsp;</span>{{showFormattedDate(emailItem.date)}}
+                            </div>
+                            <div class="chain-sent-header__sender">{{emailItem.senderUserName}}</div>
+                        </div>
+                    </div>
+                    <div class="chain-sent-header__icons" [ngStyle]="{display: csmt.menuOpen?'flex':''}">
+                        <button class="email-chain-button">
+                            <mat-icon>forward</mat-icon>
+                        </button>
+                        <button class="email-chain-button">
+                            <mat-icon (click)="reverseEmailDetailStatus(emailItem.id)">
+                                <ng-container *ngIf="!emailItem.showDetail">
+                                    expand_more
+                                </ng-container>
+                                <ng-container *ngIf="emailItem.showDetail">
+                                    expand_less
+                                </ng-container>
+                            </mat-icon>
+                        </button>
+                        <button class="email-chain-button" (click)="onDeleteVirtual(emailItem)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                        <button class="email-chain-button">
+                            <mat-icon>history</mat-icon>
+                        </button>
+                        <button [matMenuTriggerFor]="moreVertRightMenu" #csmt="matMenuTrigger" class="right-sidebar-button" mat-raised-button>
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #moreVertRightMenu="matMenu" class="attachment-menu" xPosition="after"
+                                  yPosition="below">
+                            <button mat-menu-item>Print</button>
+                            <button mat-menu-item>Mark as unread</button>
+                            <button mat-menu-item>Move to</button>
+                            <button mat-menu-item>Authenticate</button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <ng-container *ngIf="showAllDetail&&emailItem.showDetail">
+                    <div class="chain-sent-recipients">
+                        <div class="chain-sent-recipients-container" [ngStyle]="{whiteSpace: emailItem.showReceiversDetail?'normal':'nowrap'}">
+                        <span class="chain-sent-header__recipients__to" [ngStyle]="{display: emailItem.showReceiversDetail?'block':'inline'}">To:
+                            <span *ngFor="let receiver of emailItem.receivers">{{receiver.name}}, </span>
+                        </span>
+                            <span class="chain-sent-header__recipients__cc">Cc:
+                            <span *ngFor="let receiver of emailItem.ccReceivers">{{receiver.name}}, </span>
+                        </span>
+                        </div>
+                        <div (click)="reverseEmailReceiversDetailStatus(emailItem.id)" class="chain-sent-recipients__detail-hide">
+                            <span *ngIf="emailItem.showReceiversDetail">Hide</span>
+                            <span *ngIf="!emailItem.showReceiversDetail">Details</span>
+                        </div>
+                    </div>
+                    <mat-divider class="line-header-divider"></mat-divider>
+                    <div [innerHTML]="emailItem.content" *ngIf="emailItem.showDetail" class="chain-sent-content"></div>
+                    <div class="chain-inbox-attachments">
+                        <div *ngIf="emailItem.attachmentList!=undefined">
+                            <div class="chain-inbox-attachments__files">
+                                <span class="chain-inbox-attachments__label">Attachment</span>
+                                ({{emailItem.attachmentList.length}})
+                            </div>
+                            <div *ngFor="let att of emailItem.attachmentList" class="email-chain-attachment-download">
+                               {{att.attachmentFileName}} {{att.attachmentFileSize | fileSize:2}}
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>
+
+

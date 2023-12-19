@@ -1,0 +1,49 @@
+<div class="activity-list-content">
+  <div class="activity-list-header">
+    <div class="activity-list-header-left">
+      <!--      <span>{{'databank.blockchain_activity.ACTIONS'|translate : {actionCount: this.activityData.length ?? 0} }}</span>-->
+      <span>{{'databank.blockchain_activity.ACTIONS'|translate : {actionCount: activityData.length || 0} }}</span>
+    </div>
+  </div>
+  <div class="activity-list-body">
+    <table [dataSource]="dataSource" class="activity-list-table" mat-table matSort matSortDisableClear>
+      <!-- Date Column -->
+      <ng-container matColumnDef="timestamp">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ "DATE" | translate }}</th>
+        <ng-container *matCellDef="let element">
+          <td mat-cell> {{element.timestamp | date:' dd/MM/yyyy  HH:mm'}} </td>
+        </ng-container>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="activityTypeEnum">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ "ACTION" | translate }}</th>
+        <ng-container *matCellDef="let element">
+          <td mat-cell> {{element.activityTypeEnum}} </td>
+        </ng-container>
+      </ng-container>
+
+      <!-- Who Column -->
+      <ng-container matColumnDef="activityUser">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ "WHO?" | translate }}</th>
+        <ng-container *matCellDef="let element">
+          <td mat-cell> {{element.activityUser.name}}</td>
+        </ng-container>
+      </ng-container>
+
+      <!-- Details Column -->
+      <ng-container matColumnDef="metadataDto">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ "DETAILS" | translate }}</th>
+        <ng-container *matCellDef="let element">
+          <td mat-cell> {{element.metadataDto}} </td>
+        </ng-container>
+      </ng-container>
+
+
+      <tr *matHeaderRowDef="displayedColumns" class="mat-table-header-row-border-top" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;"
+          class="clickable box-expanded-row"
+          mat-row></tr>
+    </table>
+  </div>
+</div>

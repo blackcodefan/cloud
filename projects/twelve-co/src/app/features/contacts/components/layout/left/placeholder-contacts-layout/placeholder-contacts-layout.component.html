@@ -1,0 +1,53 @@
+<div class="left-content">
+    <div class="inline-block-container">
+        <div class="left-content-top-buttons">
+            <button class="left-sidebar-button" mat-raised-button
+                    routerLink="/apps">
+                <label>{{"EMAIL.Home" | translate}}</label>
+            </button>
+            <button class="left-sidebar-button" mat-raised-button [mat-menu-trigger-for]="menu">
+                <label>{{"NEW" | translate}}</label>
+            </button>
+
+            <mat-menu #menu="matMenu" xPosition="after">
+                <button (click)="handleCreateNewContact()" mat-menu-item>New contact</button>
+                <button (click)="handleCreateNewGroup()" mat-menu-item>New group</button>
+            </mat-menu>
+
+            <button class="left-sidebar-button" mat-raised-button (click)="handleImportContacts()">
+                <label>{{"Import contacts" | translate}}</label>
+            </button>
+        </div>
+    </div>
+    <mat-list class="l" role="list">
+        <mat-list-item (click)="setCurrentGroup(GROUP_TYPE.MY_CONTACTS)"
+                       [class.email-left-sidebar-item-active]="selectedGroupId===GROUP_TYPE.MY_CONTACTS" class="li"
+                       role="listitem">
+            <label>{{'My contacts' | translate}}</label>
+            <div class="i-cc">
+                <label class="ni-c" *ngIf="myContactsCount>0">{{myContactsCount}}</label>
+            </div>
+        </mat-list-item>
+        <mat-list-item (click)="setCurrentGroup(GROUP_TYPE.BLOCKED)"
+                       [class.email-left-sidebar-item-active]="selectedGroupId===GROUP_TYPE.BLOCKED" class="li"
+                       role="listitem">
+            <label>{{'Blocked contacts' | translate}}</label>
+            <div class="i-cc">
+                <label class="ni-c" *ngIf="blockedContactsCount>0">{{blockedContactsCount}}</label>
+            </div>
+        </mat-list-item>
+        <ng-container *ngFor="let group of groups | sortGroupsBy : sortKey ">
+            <mat-list-item (click)="setCurrentGroup(group)"
+                           [class.email-left-sidebar-item-active]="selectedGroupId===group.id" class="li"
+                           role="listitem">
+                <label>{{group.name}}</label>
+            </mat-list-item>
+        </ng-container>
+        <mat-list-item (click)="handleCreateNewGroup()"
+                       class="li"
+                       role="listitem">
+            <label>{{'Create new group' | translate}}</label>
+
+        </mat-list-item>
+    </mat-list>
+</div>

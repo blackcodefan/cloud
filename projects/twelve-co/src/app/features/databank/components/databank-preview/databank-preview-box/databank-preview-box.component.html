@@ -1,0 +1,142 @@
+<div class="databank-preview-box">
+    <div class="box-info-content">
+        <div class="box-info">
+            <div class="box-title-wrapper" #box_title_wrapper>
+                <div class="box-title-label-container">
+                    <span class="box-title-label">{{'DATABANK.TITLE' | translate}}</span>
+                    <div class="save-cancel-button" *ngIf="isEditTitle">
+                        <span (click)="cancelTitleEdit()">Cancel</span>
+                        <span (click)="saveNewTitle()">Save</span>
+                    </div>
+                    <span class="change-button" (click)="enableTitleEdit()" *ngIf="!isEditTitle">Change</span>
+                </div>
+                <div class="box-title">
+                    <span *ngIf="!isEditTitle">{{selectedBox.name}}</span>
+                    <input *ngIf="isEditTitle" #titleEditForm [formControl]="titleInputFormControl">
+                </div>
+            </div>
+            <div class="box-description-wrapper" #box_description_wrapper>
+                <div class="box-description-label-container">
+                    <span class="box-description-label">{{'DATABANK.DESCRIPTION' | translate}}</span>
+                    <div class="save-cancel-button" *ngIf="isEditDescription">
+                        <span (click)="discardSaveDescription()">Cancel</span>
+                        <span (click)="saveDescription()">Save</span>
+                    </div>
+                    <span class="change-button" (click)="handleDescriptionEdit()"
+                          *ngIf="!isEditDescription">Change</span>
+                </div>
+                <div class="box-description">
+                    <span *ngIf="!isEditDescription">{{selectedBox.description}}</span>
+                    <input *ngIf="isEditDescription" #descriptionFc [formControl]="boxDescriptionFc">
+                </div>
+            </div>
+            <div class="box-activity-wrapper" #box_activity_wrapper>
+                <div class="box-activity-label-container">
+                    <span class="box-activity-label">{{'DATABANK.ACTIVITY' | translate}}</span>
+                    <mat-icon [matMenuTriggerFor]="actionMenu">more_vert</mat-icon>
+                    <mat-menu #actionMenu="matMenu"
+                              xPosition="before"
+                              yPosition="below"
+                              class="add-contact-menu">
+                        <button mat-menu-item (click)="handlePrintBlockChain()">
+                            Blockhain printing
+                        </button>
+                        <button mat-menu-item [matMenuTriggerFor]="filterInsideActivity">
+                            Filter by
+                        </button>
+                        <mat-menu #filterInsideActivity="matMenu"
+                                  xPosition="after"
+                                  yPosition="below"
+                                  class="add-contact-menu">
+                            <button mat-menu-item>
+                                Date
+                            </button>
+                            <button mat-menu-item>
+                                Action
+                            </button>
+                            <button mat-menu-item>
+                                Who?
+                            </button>
+                        </mat-menu>
+                        <button mat-menu-item>
+                            Search in Activity
+                        </button>
+                    </mat-menu>
+                    <mat-icon (click)="setBoxActivityPreviewStatus()">
+                        <ng-container *ngIf="!isBoxActivityPreview">
+                            expand_more
+                        </ng-container>
+                        <ng-container *ngIf="isBoxActivityPreview">
+                            expand_less
+                        </ng-container>
+                    </mat-icon>
+                </div>
+
+                <div class="box-activity-item-list" *ngIf="isBoxActivityPreview"
+                     [ngStyle]="{height: 'calc(100vh - ' + (120 + 27 + 16 + box_title_wrapper.offsetHeight + box_description_wrapper.offsetHeight + box_member_wrapper.offsetHeight) + 'px)'}">
+                    <div class="box-activity-item" *ngFor="let activity of activities">
+                        <span
+                            class="box-activity-item-date">{{ activity.timestamp | date : 'dd MMMM yyyy\' at\' HH:mm'}}</span>
+                        <span class="box-activity-item-action">{{activity.activityTypeEnum | translate}}</span>
+                        <span class="box-activity-item-who">  {{activity.activityUser.name}}
+                            @{{activity.activityUser.accountName}}</span>
+                        <span class="box-activity-item-detail">{{activity.metadataDto}}</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="box-members-wrapper" #box_member_wrapper>
+                <mat-form-field *ngIf="isAddMember">
+                    <mat-chip-list #searchBoxMemberList>
+                        <input #searchMemberInput
+                               class="searchMemberInput"
+                               (focusout)="focusOut()"
+                               (matChipInputTokenEnd)="addMember($event)"
+                               [formControl]="memberCtrl"
+                               [matAutocomplete]="auto"
+                               [matChipInputFor]="searchBoxMemberList"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                    </mat-chip-list>
+                    <mat-autocomplete class="_12co-autocomplete mt-9" #auto="matAutocomplete"
+                                      (optionSelected)="selectMember($event)">
+                        <mat-option *ngFor="let user of _members ;let i = index" [value]="user">
+                            {{user}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <div class="box-members-label-container" *ngIf="!isAddMember">
+                    <span class="box-members-label">{{'DATABANK.MEMBERS' | translate}}</span>
+                    <mat-icon (click)="setIsAddMember(true)">add</mat-icon>
+                    <mat-icon (click)="setBoxMemberPreviewStatus()">
+                        <ng-container *ngIf="!isBoxMemberPreview">
+                            expand_more
+                        </ng-container>
+                        <ng-container *ngIf="isBoxMemberPreview">
+                            expand_less
+                        </ng-container>
+                    </mat-icon>
+                </div>
+                <div class="box-member-list" *ngIf="isBoxMemberPreview"
+                     [ngStyle]="{height: 'calc(100vh - ' + (120 + 27 + box_title_wrapper.offsetHeight + box_description_wrapper.offsetHeight + box_activity_wrapper.offsetHeight) + 'px)'}">
+                    <div class="box-member-item" *ngFor="let member of _members">
+                        <div class="box-member-grid-info">
+                            <div class="box-member-avatar">
+                                <img [src]="member.id | fetchUserIcon | async">
+                            </div>
+                            <div class="box-member-detail" *ngIf="((member.id | account_details) | async) as account">
+                                <div class="box-member-grid-name">{{account.personal.firstName}}</div>
+                                <div class="box-member-grid-name">{{account.personal.lastName}}</div>
+                                <div class="box-member-grid-alias">
+                                    &nbsp;@{{account?.name}}</div>
+                            </div>
+                        </div>
+                        <div class="box-member-action" (click)="removeMembers(member)">
+                            <span class="box-member-status">{{member.status}}</span>
+                            <span class="box-member-remove" *ngIf="member.permission!==RoleEnum.OWNER">Remove</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="album-list-container">
+    <div class="album-list-header" *ngIf="!searchStatus">
+        <button class="album-list-header-dummy-button" mat-raised-button>
+            <mat-icon>settings</mat-icon>
+        </button>
+        <button class="album-list-header-dummy-button" mat-raised-button>
+            <mat-icon>settings</mat-icon>
+        </button>
+        <button class="album-list-header-dummy-button" mat-raised-button>
+            <mat-icon>settings</mat-icon>
+        </button>
+    </div>
+
+    <div class="album-list-search" *ngIf="searchStatus">
+        <input class="album-list-search-container" placeholder="Search" [attr.id]="'searchAlbum'">
+        <mat-icon (click)="hideSearchAlbumContainer()">close</mat-icon>
+    </div>
+    <div class="album-list-body"
+         (dragenter)="onAreaDragEnter($event)"
+         (dragleave)="onAreaDragLeave($event)"
+         (dragover)="onAreaDragOver($event)"
+         (drop)="onAreaDrop($event)">
+        <div class="album-list" *ngIf="mediaList.length>0;else emptyList">
+            <ng-container *ngFor="let mediaItem of mediaList;let i = index">
+                <ng-container *ngIf="mediaItem.mediaType=='image'">
+                    <div (dblclick)="openImage(mediaItem)" class="album-grid-image-item"
+                         (contextmenu)="showAlbumItemRightMenuOpen($event)">
+                        <img [src]="mediaItem.mediaUrl">
+                    </div>
+                </ng-container>
+                <!--     <ng-container *ngIf="mediaItem.mediaType=='video'">
+                         <video class="album-grid-video-item" playsinline>
+                             <source [src]=" mediaItem.mediaUrl">
+                         </video>
+                     </ng-container>-->
+            </ng-container>
+        </div>
+        <ng-template #emptyList>
+    <!--        <ng-container *ngFor="let progress of progressInfos">
+                <mat-progress-bar value="{{progress.value}}"></mat-progress-bar><br/>
+            </ng-container>-->
+            <div class="album-list-empty">
+                Drop file here to upload
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+
+<div #albumItemRightMenuTrigger="matMenuTrigger"
+     [matMenuTriggerFor]="albumItemRightMenu"
+     [style.left]="contextMenuPosition.x"
+     [style.top]="contextMenuPosition.y"
+     class="fixed-position">
+</div>
+
+<!-- mat-menu styles.scss 495 -->
+
+<mat-menu #albumItemRightMenu="matMenu" [hasBackdrop]="false" [overlapTrigger]="false" class="album-right-menu">
+    <button mat-menu-item>I like it</button>
+    <button mat-menu-item>Write a comment</button>
+    <button mat-menu-item>Add Tag</button>
+</mat-menu>
+
+<div class="spinner-content">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)"
+                 color="#ffffff"
+                 size="medium"
+                 type="ball-spin-clockwise-fade">
+        <span style="color:#ffffff ">{{spinnerMessage}}</span>
+    </ngx-spinner>
+</div>
+
+

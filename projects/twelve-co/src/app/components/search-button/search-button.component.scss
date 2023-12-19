@@ -1,0 +1,72 @@
+:host {
+  height: var(--headerButtonSize);
+  display: flex;
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 18px;
+  }
+
+  .search-button-container {
+    position: relative;
+    height: var(--headerButtonSize);
+    visibility: hidden;
+    width: 0;
+    background-color: rgba(255,255,255,0.4);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .search-button {
+      background-color: #111111;
+      min-width:  var(--headerButtonSize);
+      height:  var(--headerButtonSize);
+      cursor: pointer;
+      border: none;
+      mat-icon{
+        color: white;
+      }
+    }
+    .search-input {
+      padding-left: 10px;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 12px;
+    }
+    .search-action-button {
+      position: absolute;
+      right: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      mat-icon {
+        color: #111111;
+      }
+    }
+  }
+
+  .search-container-transition {
+    visibility: visible;
+    transition: all 0.1s linear;
+    width: 380px;
+  }
+
+  button {
+    background-color: rgba(255,255,255,0.4);
+    -webkit-backdrop-filter: blur(4px);
+    width: var(--headerButtonSize);
+    height: var(--headerButtonSize);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    mat-icon {
+      color: #111111;
+    }
+  }
+}
+

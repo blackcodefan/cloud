@@ -1,0 +1,34 @@
+<div class="email">
+    <div class="email-container">
+        <div class="email-header" [attr.id]="'email-header'"></div>
+        <div class="email-body">
+            <div class="email-content">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="email-right-side-bar" [attr.id]="'email-right-side-bar'"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="collapsed-email-list">
+    <ng-container *ngFor="let emailItem of emailDraftList">
+        <ng-container *ngIf="emailItem.status=='Minimize' || emailItem.status == 'ZoomOut'">
+            <div class="collapsed-email-item">
+                <div class="collapsed-email-item-header">
+                    <div class="collapsed-email-item-subject">
+                        <span *ngIf="emailItem.subject!==''">{{emailItem.subject}}</span>
+                        <span *ngIf="emailItem.subject==''">Subject <sup>*</sup></span>
+                    </div>
+                    <div class="collapsed-email-item-action-icons">
+                        <mat-icon (click)="maximizeEmail(emailItem.id)">maximize</mat-icon>
+                        <mat-icon (click)="hideEmail(emailItem.id)">close</mat-icon>
+                    </div>
+                </div>
+                <div class="collapsed-email-item-body">
+
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>
